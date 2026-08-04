@@ -1,23 +1,14 @@
 #!/usr/bin/env bash
+source "$(dirname "${BASH_SOURCE[0]}")/inventory_metadata.sh"
 
 ptk_inventory_library() {
     local path="$1"
     [[ -d "$path" ]] || return 1
 
-    echo "== Inventory: $path =="
-
     find "$path" -type f | while read -r file; do
-        echo "[FILE] $file"
+        IFS='|' read -r name ext size mtime fullpath <<EOF
+$(ptk_inventory_metadata "$file")
+EOF
+        echo "[FILE] $name | $ext | $size bytes | $mtime"
     done
-}
-
-ptk_inventory() {
-    if [[ $# -eq 0 ]]; then
-        while IFS='|' read -r name path; do
-            echo "== $name =="
-            ptk_inventory_library "$path"
-        done < <(ptk_load_libraries)
-    else
-        ptk_inventory_library "$1"
-    fi
 }

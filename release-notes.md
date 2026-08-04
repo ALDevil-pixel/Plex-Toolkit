@@ -1,5 +1,4 @@
-# Sprint 1.7.0 - Partie 1
+# Sprint 1.7.0 - Partie 2
 
-- Nouvelle commande inventory
-- Moteur de parcours des bibliothèques
-- Préparation des exports
+- Ajout du moteur de collecte des métadonnées
+- Préparation des exports CSV et JSON

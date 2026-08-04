@@ -1,11 +1,13 @@
 # inventory
 
-## Nouvelle commande
+## Métadonnées
 
-```bash
-plex-toolkit inventory
-plex-toolkit inventory /media/Movies
-```
+Chaque fichier retourne désormais :
 
-Cette première version parcourt les bibliothèques et liste les fichiers.
-Les exports CSV et JSON seront ajoutés dans les prochains lots.
+- nom
+- extension
+- taille
+- date de modification
+- chemin complet
+
+Ces informations serviront aux exports CSV et JSON.
