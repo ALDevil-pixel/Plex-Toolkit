@@ -1,10 +1,10 @@
 Sprint: 1.5.0
-Partie: 4
+Partie: 5
 
 Modified:
-- lib/cleanup.sh
+- commands/cleanup
 - docs/CLI.md
 
 New:
-- lib/cleanup_orphan_subtitles.sh
-- tests/test-cleanup-orphan-subtitles.sh
+- lib/cleanup_fix.sh
+- tests/test-cleanup-fix.sh

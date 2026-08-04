@@ -1,12 +1,17 @@
 # cleanup
 
-## Détection des sous-titres orphelins
+## Mode --fix
 
-Extensions prises en charge :
+```bash
+plex-toolkit cleanup
+```
 
-- .srt
-- .ass
-- .ssa
-- .sub
+Analyse uniquement.
 
-Les sous-titres sans vidéo associée sont signalés.
+```bash
+plex-toolkit cleanup --fix
+```
+
+Active le nettoyage réel.
+
+Cette première version prépare le moteur de suppression sécurisé qui sera enrichi dans les prochains sprints.
