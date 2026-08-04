@@ -1,5 +1,4 @@
-# Sprint 1.6.0 - Partie 1
+# Sprint 1.6.0 - Partie 2
 
-- Nouvelle commande check
-- Moteur de parcours des bibliothèques
-- Préparation des contrôles de cohérence
+- Détection des fichiers de 0 octet
+- Intégration dans la commande check

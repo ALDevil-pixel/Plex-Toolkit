@@ -1,10 +1,11 @@
 # check
 
-## Nouvelle commande
+## Détection des fichiers de 0 octet
+
+La commande détecte désormais les fichiers vides :
 
 ```bash
 plex-toolkit check
-plex-toolkit check /media/Movies
 ```
 
-Cette première version parcourt les bibliothèques et prépare les futurs contrôles de cohérence.
+Les fichiers sont uniquement signalés.
