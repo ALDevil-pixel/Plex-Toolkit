@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Plex-Toolkit - commands/info
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/../lib/system.sh"
+
+cmd_info() {
+    ptk_collect_system_info
+}

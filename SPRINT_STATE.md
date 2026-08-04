@@ -1,16 +1,14 @@
 Sprint: 1.2.4
-Lot: 1.2
-Integrated prerequisites:
-- Lot 1.1
+Lot: 1.3
 
-Modified:
-- lib/common.sh
-- lib/display.sh
-- commands/help
+Integrated:
+- Lot 1.1
+- Lot 1.2
 
 New:
-- lib/cli.sh
-- tests/test-cli.sh
+- commands/info
+- lib/system.sh
+- tests/test-info.sh
 
-Removed:
+Modified:
 - None
