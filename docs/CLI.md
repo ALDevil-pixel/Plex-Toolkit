@@ -1,11 +1,14 @@
 # cleanup
 
-## Détection des dossiers vides
+## Détection des fichiers indésirables
 
-La commande signale désormais les dossiers vides :
+La commande détecte maintenant :
 
-```bash
-plex-toolkit cleanup
-```
+- Thumbs.db
+- .DS_Store
+- desktop.ini
+- *.tmp
+- *.bak
+- *.old
 
-Les dossiers sont uniquement signalés, jamais supprimés à ce stade.
+Ces fichiers sont uniquement signalés.

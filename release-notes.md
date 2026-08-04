@@ -1,4 +1,5 @@
-# Sprint 1.5.0 - Partie 2
+# Sprint 1.5.0 - Partie 3
 
-- Détection des dossiers vides
-- Préparation du futur mode --fix
+## Ajouts
+- Détection des fichiers indésirables
+- Préparation du nettoyage automatique
