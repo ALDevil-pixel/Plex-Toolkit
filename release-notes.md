@@ -1,3 +1,2 @@
-# Sprint 1.3.0 - Partie 2
-
-Ajout du mode --deep basé sur SHA-256.
+# Sprint 1.3.0 - Partie 3
+Ajout des filtres.

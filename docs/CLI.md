@@ -1,8 +1,4 @@
 # duplicates
 
-```
-plex-toolkit duplicates /media
-plex-toolkit duplicates --deep /media
-```
-
-`--deep` compare également le hash SHA-256 lorsque disponible.
+plex-toolkit duplicates --extensions mkv,mp4
+plex-toolkit duplicates --min-size 104857600

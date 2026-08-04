@@ -1,7 +1,3 @@
 #!/usr/bin/env bash
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${SCRIPT_DIR}/../lib/duplicates.sh"
-
-cmd_duplicates() {
-    ptk_find_duplicates "$@"
-}
+source "$(dirname "${BASH_SOURCE[0]}")/../lib/duplicates.sh"
+cmd_duplicates(){ ptk_find_duplicates "$@"; }
