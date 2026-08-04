@@ -1,10 +1,10 @@
 Sprint:1.4.0
-Partie:4
+Partie:5
 
 Modified:
-- commands/rename
 - lib/rename.sh
 - docs/CLI.md
 
 New:
-- tests/test-rename-fix.sh
+- lib/rename_conflicts.sh
+- tests/test-rename-conflicts.sh

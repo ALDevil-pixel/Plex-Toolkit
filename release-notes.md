@@ -1,5 +1,4 @@
-# Sprint 1.4.0 - Partie 4
+# Sprint 1.4.0 - Partie 5
 
-- Activation du mode `--fix`
-- Renommage réel des fichiers
-- Vérification qu'un fichier cible n'existe pas déjà
+- Détection des conflits de renommage
+- Première stratégie de résolution (`skip` / `suffix`)

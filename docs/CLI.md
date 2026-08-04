@@ -1,10 +1,10 @@
 # rename
 
-## Nouveau
+## Gestion des conflits
 
-```bash
-plex-toolkit rename --fix /media/Movies
-```
+Le moteur détecte maintenant les conflits de noms.
 
-- Sans `--fix` : simulation (`dry-run`)
-- Avec `--fix` : renommage réel des fichiers.
+Stratégies disponibles (préparation des prochaines versions) :
+
+- skip (défaut)
+- suffix
