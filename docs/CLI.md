@@ -1,11 +1,15 @@
 # check
 
-## Détection des extensions non conformes
+## Configuration
 
-Extensions actuellement acceptées :
+Les extensions autorisées sont désormais définies dans :
 
-- mkv
-- mp4
-- ts
+```text
+config/check.conf
+```
 
-Les autres extensions sont signalées.
+Exemple :
+
+```bash
+VIDEO_EXTENSIONS="mkv mp4 ts m2ts"
+```

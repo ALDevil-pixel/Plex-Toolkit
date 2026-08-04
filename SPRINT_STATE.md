@@ -1,10 +1,10 @@
 Sprint: 1.6.0
-Partie: 3
+Partie: 4
 
 Modified:
-- lib/check.sh
+- lib/check_extensions.sh
 - docs/CLI.md
 
 New:
-- lib/check_extensions.sh
-- tests/test-check-extensions.sh
+- config/check.conf
+- tests/test-check-config.sh

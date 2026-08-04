@@ -1,4 +1,5 @@
-# Sprint 1.6.0 - Partie 3
+# Sprint 1.6.0 - Partie 4
 
-- Détection des extensions non conformes
-- Intégration dans la commande check
+## Ajouts
+- Configuration des extensions autorisées
+- Suppression des valeurs en dur
