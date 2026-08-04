@@ -3,7 +3,7 @@
 ## Nouvelle option
 
 ```bash
-plex-toolkit duplicates --stats
+plex-toolkit duplicates --csv
 ```
 
-Affiche un résumé du nombre de groupes de doublons et du nombre de fichiers concernés.
+Exporte les doublons au format CSV dans `logs/duplicates.csv`.

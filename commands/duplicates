@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/../lib/duplicates.sh"
-source "${SCRIPT_DIR}/../lib/duplicates_stats.sh"
+source "${SCRIPT_DIR}/../lib/duplicates_export.sh"
 
 cmd_duplicates() {
-    local stats=0
+    local csv=0
     local args=()
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            --stats) stats=1 ;;
+            --csv) csv=1 ;;
             *) args+=("$1") ;;
         esac
         shift
@@ -18,9 +18,8 @@ cmd_duplicates() {
     tmp=$(mktemp)
     ptk_find_duplicates "${args[@]}" | tee "$tmp"
 
-    if [[ $stats -eq 1 ]]; then
-        echo
-        ptk_duplicates_stats "$tmp"
+    if [[ $csv -eq 1 ]]; then
+        ptk_export_duplicates_csv "$tmp"
     fi
 
     rm -f "$tmp"

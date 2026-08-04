@@ -1,5 +1,5 @@
-# Sprint 1.3.0 - Partie 7
+# Sprint 1.3.0 - Partie 8
 
 ## Ajouts
-- Option --stats
-- Résumé des groupes de doublons
+- Option --csv
+- Export CSV des doublons
