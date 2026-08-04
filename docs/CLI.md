@@ -1,9 +1,11 @@
-# duplicates
+# rename
 
-## Nouvelle option
+## Nouvelle commande
 
 ```bash
-plex-toolkit duplicates --summary
+plex-toolkit rename
+plex-toolkit rename /media/Movies
 ```
 
-Affiche un résumé du dernier rapport de doublons.
+Pour le moment, la commande fonctionne uniquement en **mode simulation (dry-run)**.
+Aucun fichier n'est renommé.

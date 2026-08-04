@@ -1,4 +1,6 @@
-# Sprint 1.3.0 - Partie 10
+# Sprint 1.4.0 - Partie 1
 
-Fin du sprint 1.3.0.
-Préparation de la version v0.1.0-beta1.
+## Ajouts
+- Nouvelle commande `rename`
+- Moteur de parcours des bibliothèques
+- Mode dry-run

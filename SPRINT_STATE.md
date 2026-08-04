@@ -1,5 +1,10 @@
-Sprint: 1.3.0
-Partie: 10
+Sprint: 1.4.0
+Partie: 1
 
-Status: COMPLETE
-Version: 0.1.0-beta1
+New:
+- commands/rename
+- lib/rename.sh
+- tests/test-rename.sh
+
+Modified:
+- docs/CLI.md
