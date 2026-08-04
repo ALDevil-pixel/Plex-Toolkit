@@ -1,8 +1,6 @@
-# Sprint 1.2.4 - Lot 1.5
+# Sprint 1.2.4 - Partie 6
 
-## Added
-- Smoke test for doctor
-- Initial developer guide
-
-## Updated
-- version command
+## Ajouts
+- Vérification de plusieurs dépendances
+- Résumé des contrôles
+- Mode --json

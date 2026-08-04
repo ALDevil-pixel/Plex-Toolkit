@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Basic smoke test
 source lib/doctor.sh
-ptk_doctor_run >/dev/null
-echo "doctor: OK"
+ptk_doctor_run text >/dev/null
+ptk_doctor_run json >/dev/null
+echo "doctor tests OK"

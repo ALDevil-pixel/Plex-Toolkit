@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Enhanced doctor command
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/../lib/doctor.sh"
 
 cmd_doctor() {
-    ptk_doctor_run
+    local format="text"
+    [[ "$1" == "--json" ]] && format="json"
+    ptk_doctor_run "$format"
 }

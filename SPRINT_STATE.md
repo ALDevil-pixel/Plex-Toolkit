@@ -1,15 +1,8 @@
 Sprint: 1.2.4
-Lot: 1.5
-
-Integrated:
-- 1.1
-- 1.2
-- 1.3
-- 1.4
+Partie: 6
 
 Modified:
-- commands/version
-
-New:
+- commands/doctor
+- lib/doctor.sh
 - tests/test-doctor.sh
-- docs/DeveloperGuide.md
+- docs/CLI.md

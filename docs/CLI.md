@@ -2,11 +2,9 @@
 
 ## doctor
 
-Vérifie rapidement l'environnement d'exécution :
-- dépendances
-- dossiers requis
-- outils multimédia
+```bash
+plex-toolkit doctor
+plex-toolkit doctor --json
+```
 
-Commande :
-
-    plex-toolkit doctor
+Le mode JSON est destiné aux futurs rapports automatisés.
