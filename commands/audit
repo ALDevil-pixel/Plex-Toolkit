@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
-set -euo pipefail
-echo "Audit module not yet implemented."
-exit 0
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/../lib/library_audit.sh"
+
+cmd_audit() {
+    ptk_library_audit "$@"
+}

@@ -1,8 +1,10 @@
 Sprint: 1.2.4
-Partie: 6
+Partie: 7
 
 Modified:
-- commands/doctor
-- lib/doctor.sh
-- tests/test-doctor.sh
+- commands/audit
 - docs/CLI.md
+
+New:
+- lib/library_audit.sh
+- tests/test-library-audit.sh

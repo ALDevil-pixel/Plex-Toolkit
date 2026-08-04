@@ -1,10 +1,8 @@
-# CLI
-
-## doctor
+# Audit
 
 ```bash
-plex-toolkit doctor
-plex-toolkit doctor --json
+plex-toolkit audit
+plex-toolkit audit config/library.conf
 ```
 
-Le mode JSON est destiné aux futurs rapports automatisés.
+Analyse les bibliothèques déclarées dans `config/library.conf`.

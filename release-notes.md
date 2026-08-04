@@ -1,6 +1,3 @@
-# Sprint 1.2.4 - Partie 6
+# Sprint 1.2.4 - Partie 7
 
-## Ajouts
-- Vérification de plusieurs dépendances
-- Résumé des contrôles
-- Mode --json
+Ajout du premier moteur d'audit des bibliothèques Plex.
