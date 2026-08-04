@@ -1,8 +1,5 @@
-# Audit
+# CLI
 
-```bash
-plex-toolkit audit
-plex-toolkit audit config/library.conf
-```
+## audit
 
-Analyse les bibliothèques déclarées dans `config/library.conf`.
+Analyse les bibliothèques puis effectue un premier contrôle des extensions de fichiers vidéo.

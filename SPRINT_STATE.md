@@ -1,10 +1,13 @@
 Sprint: 1.2.4
-Partie: 7
+Partie: 8
+
+Integrated:
+- Parties 1 à 7
 
 Modified:
 - commands/audit
 - docs/CLI.md
 
 New:
-- lib/library_audit.sh
-- tests/test-library-audit.sh
+- lib/media_analyzer.sh
+- tests/test-media-analyzer.sh

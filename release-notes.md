@@ -1,3 +1,6 @@
-# Sprint 1.2.4 - Partie 7
+# Sprint 1.2.4 - Partie 8
 
-Ajout du premier moteur d'audit des bibliothèques Plex.
+Ajouts :
+- Premier moteur d'analyse des médias
+- Contrôle des extensions
+- Détection des fichiers vides
