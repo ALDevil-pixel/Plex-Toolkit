@@ -1,2 +1,2 @@
-# Sprint 1.2.4 - Lot 1.1
-Ajout des bibliothèques communes.
+# Sprint 1.2.4 Lot1.2
+CLI framework foundations.

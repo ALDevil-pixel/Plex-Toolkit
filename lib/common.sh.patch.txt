@@ -1,0 +1,3 @@
+
+require_file(){ [[ -f "$1" ]] || { ptk_error "Missing file: $1"; return 1; }; }
+require_directory(){ [[ -d "$1" ]] || { ptk_error "Missing directory: $1"; return 1; }; }

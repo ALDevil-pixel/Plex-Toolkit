@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
-echo "Plex Toolkit
+cmd_help() {
+cat <<EOF
+Plex-Toolkit Help
+
+Usage:
+  plex-toolkit <command>
+
 Commands:
- help
- list
- version
- self-check
- anime rename
- anime audit
- movies duplicates
- plex verify"
+  doctor
+  info
+  help
+EOF
+}
