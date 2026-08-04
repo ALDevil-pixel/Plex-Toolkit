@@ -1,9 +1,15 @@
 # duplicates
 
-## Nouveau
+Sans argument :
 
 ```bash
-plex-toolkit duplicates --report /media
+plex-toolkit duplicates
 ```
 
-Génère un rapport texte dans `logs/duplicates-report.txt`.
+Analyse automatiquement toutes les bibliothèques définies dans `config/library.conf`.
+
+Avec un chemin :
+
+```bash
+plex-toolkit duplicates /media/Movies
+```

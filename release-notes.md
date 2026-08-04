@@ -1,5 +1,5 @@
-# Sprint 1.3.0 - Partie 4
+# Sprint 1.3.0 - Partie 5
 
 ## Ajouts
-- Option `--report`
-- Génération d'un rapport texte des doublons
+- Lecture automatique de `config/library.conf`
+- Analyse de toutes les bibliothèques sans argument
