@@ -1,13 +1,11 @@
 # inventory
 
-## Métadonnées
+## Export CSV
 
-Chaque fichier retourne désormais :
+L'inventaire peut désormais être exporté au format CSV.
 
-- nom
-- extension
-- taille
-- date de modification
-- chemin complet
+Fichier généré par défaut :
 
-Ces informations serviront aux exports CSV et JSON.
+```text
+logs/inventory.csv
+```
