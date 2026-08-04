@@ -1,24 +1,20 @@
 #!/usr/bin/env bash
-# Inventory statistics
+source "$(dirname "${BASH_SOURCE[0]}")/inventory_logger.sh"
 
 ptk_inventory_stats() {
     local input="$1"
 
-    awk -F'|' '
-    {
-        count++
-        size+=$3
-        ext[$2]++
-    }
-    END{
-        print "========== Inventory Summary =========="
-        print "Files :",count
-        print "Total size (bytes):",size
-        print "Average size (bytes):",(count?int(size/count):0)
-        print ""
-        print "Extensions:"
-        for(e in ext)
-            printf(" - %s : %d\n",e,ext[e])
-        print "======================================="
-    }' "$input"
+    local files total
+    files=$(wc -l < "$input")
+    total=$(awk -F'|' '{s+=$3} END{print s+0}' "$input")
+
+    ptk_inventory_log "Files: $files"
+    ptk_inventory_log "Total size: $total bytes"
+
+    cat <<EOF
+========== Inventory Summary ==========
+Files : $files
+Total size (bytes): $total
+=======================================
+EOF
 }

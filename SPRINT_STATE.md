@@ -1,10 +1,5 @@
 Sprint: 1.7.0
-Partie: 5
+Partie: 6
 
-Modified:
-- lib/inventory.sh
-- docs/CLI.md
-
-New:
-- lib/inventory_stats.sh
-- tests/test-inventory-stats.sh
+Status: COMPLETE
+Version: 0.2.0

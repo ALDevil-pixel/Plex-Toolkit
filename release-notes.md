@@ -1,5 +1,5 @@
-# Sprint 1.7.0 - Partie 5
+# Sprint 1.7.0 - Partie 6
 
-## Ajouts
-- Statistiques d'inventaire
-- Résumé automatique en fin d'analyse
+Fin du Sprint 1.7.0
+
+Version : v0.2.0

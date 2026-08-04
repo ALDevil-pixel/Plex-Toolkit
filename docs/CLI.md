@@ -1,12 +1,9 @@
 # inventory
 
-## Statistiques
+## Journalisation
 
-À la fin de l'inventaire, un résumé est affiché :
+Chaque exécution de `inventory` enregistre un résumé dans :
 
-- nombre de fichiers
-- taille totale
-- taille moyenne
-- répartition par extension
-
-Les statistiques sont calculées à partir des métadonnées déjà collectées, sans relire les fichiers.
+```
+logs/inventory.log
+```
