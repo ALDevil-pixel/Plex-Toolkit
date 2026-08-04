@@ -1,10 +1,9 @@
 # rename
 
-## Gestion des conflits
+## Journalisation
 
-Le moteur détecte maintenant les conflits de noms.
+Chaque renommage effectué avec `--fix` est enregistré dans :
 
-Stratégies disponibles (préparation des prochaines versions) :
-
-- skip (défaut)
-- suffix
+```
+logs/rename.log
+```

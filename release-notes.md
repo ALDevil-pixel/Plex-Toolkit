@@ -1,4 +1,6 @@
-# Sprint 1.4.0 - Partie 5
+# Sprint 1.4.0 - Partie 6
 
-- Détection des conflits de renommage
-- Première stratégie de résolution (`skip` / `suffix`)
+## Ajouts
+- Journalisation des renommages
+- Fichier logs/rename.log
+- Fin du Sprint 1.4.0
