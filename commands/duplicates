@@ -1,16 +1,26 @@
 #!/usr/bin/env bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${SCRIPT_DIR}/../lib/library_loader.sh"
 source "${SCRIPT_DIR}/../lib/duplicates.sh"
+source "${SCRIPT_DIR}/../lib/duplicates_cleanup.sh"
 
 cmd_duplicates() {
-    if [[ $# -eq 0 ]]; then
-        while IFS='|' read -r name path; do
-            echo "=== $name ==="
-            ptk_find_duplicates "$path"
-            echo
-        done < <(ptk_load_libraries)
-    else
-        ptk_find_duplicates "$@"
+    local cleanup=0
+    local args=()
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --cleanup-report) cleanup=1 ;;
+            *) args+=("$1") ;;
+        esac
+        shift
+    done
+
+    tmp=$(mktemp)
+    ptk_find_duplicates "${args[@]}" | tee "$tmp"
+
+    if [[ $cleanup -eq 1 ]]; then
+        ptk_cleanup_report "$tmp"
     fi
+
+    rm -f "$tmp"
 }

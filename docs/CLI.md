@@ -1,15 +1,9 @@
 # duplicates
 
-Sans argument :
+## Nouvelle option
 
 ```bash
-plex-toolkit duplicates
+plex-toolkit duplicates --cleanup-report
 ```
 
-Analyse automatiquement toutes les bibliothèques définies dans `config/library.conf`.
-
-Avec un chemin :
-
-```bash
-plex-toolkit duplicates /media/Movies
-```
+Génère un rapport de recommandations dans `logs/duplicates-cleanup.txt`.

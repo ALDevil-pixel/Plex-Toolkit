@@ -1,5 +1,5 @@
-# Sprint 1.3.0 - Partie 5
+# Sprint 1.3.0 - Partie 6
 
 ## Ajouts
-- Lecture automatique de `config/library.conf`
-- Analyse de toutes les bibliothèques sans argument
+- Option --cleanup-report
+- Génération d'un rapport de recommandations
