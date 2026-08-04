@@ -1,14 +1,12 @@
 # cleanup
 
-## Détection des fichiers indésirables
+## Détection des sous-titres orphelins
 
-La commande détecte maintenant :
+Extensions prises en charge :
 
-- Thumbs.db
-- .DS_Store
-- desktop.ini
-- *.tmp
-- *.bak
-- *.old
+- .srt
+- .ass
+- .ssa
+- .sub
 
-Ces fichiers sont uniquement signalés.
+Les sous-titres sans vidéo associée sont signalés.
