@@ -1,9 +1,11 @@
-# rename
+# cleanup
 
-## Journalisation
+## Nouvelle commande
 
-Chaque renommage effectué avec `--fix` est enregistré dans :
-
+```bash
+plex-toolkit cleanup
+plex-toolkit cleanup /media/Movies
 ```
-logs/rename.log
-```
+
+Cette première version effectue uniquement un parcours des bibliothèques et affiche les fichiers analysés.
+Aucune suppression n'est réalisée.

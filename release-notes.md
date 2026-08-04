@@ -1,6 +1,5 @@
-# Sprint 1.4.0 - Partie 6
+# Sprint 1.5.0 - Partie 1
 
-## Ajouts
-- Journalisation des renommages
-- Fichier logs/rename.log
-- Fin du Sprint 1.4.0
+- Nouvelle commande cleanup
+- Moteur de parcours des bibliothèques
+- Mode scan uniquement

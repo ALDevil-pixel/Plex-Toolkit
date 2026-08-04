@@ -1,13 +1,10 @@
-Sprint: 1.4.0
-Partie: 6
-
-Modified:
-- lib/rename.sh
-- docs/CLI.md
+Sprint: 1.5.0
+Partie: 1
 
 New:
-- lib/rename_logger.sh
-- tests/test-rename-logger.sh
+- commands/cleanup
+- lib/cleanup.sh
+- tests/test-cleanup.sh
 
-Status:
-- Sprint 1.4.0 terminé
+Modified:
+- docs/CLI.md
