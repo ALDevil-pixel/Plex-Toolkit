@@ -1,10 +1,10 @@
 Sprint: 1.5.0
-Partie: 1
-
-New:
-- commands/cleanup
-- lib/cleanup.sh
-- tests/test-cleanup.sh
+Partie: 2
 
 Modified:
+- lib/cleanup.sh
 - docs/CLI.md
+
+New:
+- lib/cleanup_empty_dirs.sh
+- tests/test-cleanup-empty-dirs.sh

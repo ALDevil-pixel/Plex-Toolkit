@@ -1,21 +1,16 @@
 #!/usr/bin/env bash
+source "$(dirname "${BASH_SOURCE[0]}")/cleanup_empty_dirs.sh"
 
 ptk_cleanup_library() {
     local path="$1"
     [[ -d "$path" ]] || return 1
 
+    echo "Scanning files..."
     find "$path" -type f | while read -r file; do
         echo "[SCAN] $file"
     done
-}
 
-ptk_cleanup() {
-    if [[ $# -eq 0 ]]; then
-        while IFS='|' read -r name path; do
-            echo "== $name =="
-            ptk_cleanup_library "$path"
-        done < <(ptk_load_libraries)
-    else
-        ptk_cleanup_library "$1"
-    fi
+    echo
+    echo "Searching empty directories..."
+    ptk_find_empty_dirs "$path"
 }

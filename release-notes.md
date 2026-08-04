@@ -1,5 +1,4 @@
-# Sprint 1.5.0 - Partie 1
+# Sprint 1.5.0 - Partie 2
 
-- Nouvelle commande cleanup
-- Moteur de parcours des bibliothèques
-- Mode scan uniquement
+- Détection des dossiers vides
+- Préparation du futur mode --fix
