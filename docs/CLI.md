@@ -3,7 +3,7 @@
 ## Nouvelle option
 
 ```bash
-plex-toolkit duplicates --cleanup-report
+plex-toolkit duplicates --stats
 ```
 
-Génère un rapport de recommandations dans `logs/duplicates-cleanup.txt`.
+Affiche un résumé du nombre de groupes de doublons et du nombre de fichiers concernés.
