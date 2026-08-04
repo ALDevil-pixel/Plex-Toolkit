@@ -1,6 +1,3 @@
-# Sprint 1.3.0 - Partie 1
+# Sprint 1.3.0 - Partie 2
 
-## Nouveau
-- Commande `duplicates`
-- Détection des doublons par nom + taille
-- Résumé des groupes de doublons
+Ajout du mode --deep basé sur SHA-256.

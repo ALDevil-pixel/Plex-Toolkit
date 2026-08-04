@@ -1,9 +1,8 @@
-# CLI
+# duplicates
 
-## duplicates
-
-```bash
-plex-toolkit duplicates /path/to/library
+```
+plex-toolkit duplicates /media
+plex-toolkit duplicates --deep /media
 ```
 
-Recherche des doublons par **nom de fichier + taille**.
+`--deep` compare également le hash SHA-256 lorsque disponible.
