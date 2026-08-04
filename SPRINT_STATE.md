@@ -1,10 +1,10 @@
 Sprint: 1.7.0
-Partie: 3
+Partie: 4
 
 Modified:
 - lib/inventory.sh
 - docs/CLI.md
 
 New:
-- lib/inventory_csv.sh
-- tests/test-inventory-csv.sh
+- lib/inventory_json.sh
+- tests/test-inventory-json.sh

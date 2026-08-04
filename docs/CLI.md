@@ -1,11 +1,11 @@
 # inventory
 
-## Export CSV
+## Export JSON
 
-L'inventaire peut désormais être exporté au format CSV.
+En plus du CSV, l'inventaire est désormais exporté au format JSON.
 
-Fichier généré par défaut :
+Fichier généré :
 
 ```text
-logs/inventory.csv
+logs/inventory.json
 ```
