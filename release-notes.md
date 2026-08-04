@@ -1,5 +1,4 @@
-# Sprint 1.6.0 - Partie 4
+# Sprint 1.6.0 - Partie 5
 
-## Ajouts
-- Configuration des extensions autorisées
-- Suppression des valeurs en dur
+- Ajout d'un rapport de synthèse
+- Résumé automatique en fin d'analyse

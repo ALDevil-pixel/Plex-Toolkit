@@ -1,15 +1,9 @@
 # check
 
-## Configuration
+## Rapport de synthèse
 
-Les extensions autorisées sont désormais définies dans :
+La commande affiche désormais un résumé de fin d'analyse :
 
-```text
-config/check.conf
-```
-
-Exemple :
-
-```bash
-VIDEO_EXTENSIONS="mkv mp4 ts m2ts"
-```
+- nombre de fichiers analysés
+- fichiers de 0 octet
+- extensions non conformes
