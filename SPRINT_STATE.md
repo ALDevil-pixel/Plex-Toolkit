@@ -1,10 +1,5 @@
 Sprint: 1.5.0
-Partie: 5
+Partie: 6
 
-Modified:
-- commands/cleanup
-- docs/CLI.md
-
-New:
-- lib/cleanup_fix.sh
-- tests/test-cleanup-fix.sh
+Status: COMPLETE
+Version: 0.1.0-beta2

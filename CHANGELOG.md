@@ -1,10 +1,11 @@
 # Changelog
 
-## v0.1.0-beta1
+## v0.1.0-beta2
 
-- Sprint 1.3.0 terminé
-- Détection de doublons
-- Rapports texte
-- Export CSV
-- Fichier d'exclusion
-- Résumé des rapports
+- Sprint 1.5.0 terminé
+- Nouvelle commande cleanup
+- Détection des dossiers vides
+- Détection des fichiers indésirables
+- Détection des sous-titres orphelins
+- Mode --fix
+- Journalisation des suppressions

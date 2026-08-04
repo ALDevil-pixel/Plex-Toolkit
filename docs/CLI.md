@@ -1,17 +1,9 @@
 # cleanup
 
-## Mode --fix
+## Journalisation
 
-```bash
-plex-toolkit cleanup
+Toutes les suppressions effectuées avec `--fix` sont enregistrées dans :
+
 ```
-
-Analyse uniquement.
-
-```bash
-plex-toolkit cleanup --fix
+logs/cleanup.log
 ```
-
-Active le nettoyage réel.
-
-Cette première version prépare le moteur de suppression sécurisé qui sera enrichi dans les prochains sprints.
