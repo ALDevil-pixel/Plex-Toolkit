@@ -1,11 +1,11 @@
 # rename
 
-## Nouvelle commande
+## Détection automatique
 
-```bash
-plex-toolkit rename
-plex-toolkit rename /media/Movies
-```
+La commande détecte désormais automatiquement le type de bibliothèque :
 
-Pour le moment, la commande fonctionne uniquement en **mode simulation (dry-run)**.
-Aucun fichier n'est renommé.
+- movie
+- series
+- anime
+
+Cette information sera utilisée dans les prochains lots pour appliquer les règles de renommage adaptées.
