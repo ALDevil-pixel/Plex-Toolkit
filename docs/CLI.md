@@ -1,11 +1,12 @@
 # inventory
 
-## Export JSON
+## Statistiques
 
-En plus du CSV, l'inventaire est désormais exporté au format JSON.
+À la fin de l'inventaire, un résumé est affiché :
 
-Fichier généré :
+- nombre de fichiers
+- taille totale
+- taille moyenne
+- répartition par extension
 
-```text
-logs/inventory.json
-```
+Les statistiques sont calculées à partir des métadonnées déjà collectées, sans relire les fichiers.

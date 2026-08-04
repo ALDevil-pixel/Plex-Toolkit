@@ -2,6 +2,7 @@
 source "$(dirname "${BASH_SOURCE[0]}")/inventory_metadata.sh"
 source "$(dirname "${BASH_SOURCE[0]}")/inventory_csv.sh"
 source "$(dirname "${BASH_SOURCE[0]}")/inventory_json.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/inventory_stats.sh"
 
 ptk_inventory_library() {
     local path="$1"
@@ -15,6 +16,7 @@ ptk_inventory_library() {
 
     ptk_inventory_export_csv "$tmp"
     ptk_inventory_export_json "$tmp"
+    ptk_inventory_stats "$tmp"
 
     rm -f "$tmp"
 }

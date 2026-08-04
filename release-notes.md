@@ -1,4 +1,5 @@
-# Sprint 1.7.0 - Partie 4
+# Sprint 1.7.0 - Partie 5
 
-- Ajout de l'export JSON
-- Génération de logs/inventory.json
+## Ajouts
+- Statistiques d'inventaire
+- Résumé automatique en fin d'analyse
