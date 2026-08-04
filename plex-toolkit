@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")"&&pwd)"
+for f in constants colors errors logger config args display version;do
+# shellcheck source=/dev/null
+source "$ROOT/lib/$f.sh"
+done
+parse_args "$@"
+load_config
+set -- "${POSITIONAL[@]}"
+[[ $# -eq 0 ]]&&exec "$ROOT/commands/help"
+case "${1:-} ${2:-}" in
+"anime rename") exec "$ROOT/plugins/anime/rename.sh" "${@:3}";;
+"anime audit") exec "$ROOT/plugins/anime/audit.sh" "${@:3}";;
+"movies duplicates") exec "$ROOT/plugins/movies/duplicates.sh" "${@:3}";;
+"plex verify") exec "$ROOT/plugins/plex/verify.sh" "${@:3}";;
+"help "*) exec "$ROOT/commands/help";;
+"list "*) exec "$ROOT/commands/list";;
+"version "*) exec "$ROOT/commands/version";;
+"self-check "*) exec "$ROOT/commands/self-check";;
+*) echo "Unknown command"; exec "$ROOT/commands/help";;
+esac

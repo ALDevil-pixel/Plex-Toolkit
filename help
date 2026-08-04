@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+echo "Plex Toolkit
+Commands:
+ help
+ list
+ version
+ self-check
+ anime rename
+ anime audit
+ movies duplicates
+ plex verify"

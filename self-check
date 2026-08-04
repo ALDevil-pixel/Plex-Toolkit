@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+echo "Running self-check..."
+for c in bash find grep awk sed; do
+ command -v "$c" >/dev/null || { echo "Missing: $c"; exit 1; }
+done
+echo "OK"
