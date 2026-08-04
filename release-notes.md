@@ -1,4 +1,4 @@
-# Sprint 1.6.0 - Partie 5
+# Sprint 1.6.0 - Partie 6
 
-- Ajout d'un rapport de synthèse
-- Résumé automatique en fin d'analyse
+Fin du Sprint 1.6.0
+Version : v0.1.0-beta3

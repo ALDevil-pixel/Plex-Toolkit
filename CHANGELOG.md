@@ -1,11 +1,10 @@
 # Changelog
 
-## v0.1.0-beta2
+## v0.1.0-beta3
 
-- Sprint 1.5.0 terminé
-- Nouvelle commande cleanup
-- Détection des dossiers vides
-- Détection des fichiers indésirables
-- Détection des sous-titres orphelins
-- Mode --fix
-- Journalisation des suppressions
+- Sprint 1.6.0 terminé
+- Nouvelle commande check
+- Détection des fichiers de 0 octet
+- Détection des extensions non conformes
+- Rapport de synthèse
+- Journalisation

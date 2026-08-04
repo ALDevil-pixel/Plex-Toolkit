@@ -1,9 +1,9 @@
 # check
 
-## Rapport de synthèse
+## Journalisation
 
-La commande affiche désormais un résumé de fin d'analyse :
+Chaque exécution de `check` enregistre un résumé dans :
 
-- nombre de fichiers analysés
-- fichiers de 0 octet
-- extensions non conformes
+```
+logs/check.log
+```
