@@ -1,5 +1,10 @@
-Sprint: 1.6.0
-Partie: 6
+Sprint: 1.7.0
+Partie: 1
 
-Status: COMPLETE
-Version: 0.1.0-beta3
+New:
+- commands/inventory
+- lib/inventory.sh
+- tests/test-inventory.sh
+
+Modified:
+- docs/CLI.md

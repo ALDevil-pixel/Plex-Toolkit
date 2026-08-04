@@ -1,9 +1,11 @@
-# check
+# inventory
 
-## Journalisation
+## Nouvelle commande
 
-Chaque exécution de `check` enregistre un résumé dans :
-
+```bash
+plex-toolkit inventory
+plex-toolkit inventory /media/Movies
 ```
-logs/check.log
-```
+
+Cette première version parcourt les bibliothèques et liste les fichiers.
+Les exports CSV et JSON seront ajoutés dans les prochains lots.
