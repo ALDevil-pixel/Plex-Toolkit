@@ -1,13 +1,9 @@
 #!/usr/bin/env bash
-set -euo pipefail
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-source "$ROOT/lib/logger.sh"
-source "$ROOT/lib/validation.sh"
-source "$ROOT/lib/filesystem.sh"
-echo "== Plex Toolkit Doctor =="
-validate_config
-echo "Checking directories..."
-for d in "$ROOT/logs" "$ROOT/reports" "$ROOT/tmp"; do
-  require_dir "$d"
-done
-echo "Doctor finished."
+# Enhanced doctor command
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/../lib/doctor.sh"
+
+cmd_doctor() {
+    ptk_doctor_run
+}

@@ -1,22 +1,12 @@
 # CLI
 
-Examples
+## doctor
 
-```bash
-plex-toolkit help
-plex-toolkit list
-plex-toolkit doctor
-plex-toolkit anime rename Gintama
-plex-toolkit movies duplicates
-```
+Vérifie rapidement l'environnement d'exécution :
+- dépendances
+- dossiers requis
+- outils multimédia
 
-Common options
+Commande :
 
-```text
---dry-run
---verbose
---quiet
---json
---config <file>
---force
-```
+    plex-toolkit doctor

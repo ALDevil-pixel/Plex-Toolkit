@@ -1,14 +1,14 @@
 Sprint: 1.2.4
-Lot: 1.3
+Lot: 1.4
 
 Integrated:
-- Lot 1.1
-- Lot 1.2
-
-New:
-- commands/info
-- lib/system.sh
-- tests/test-info.sh
+- 1.1
+- 1.2
+- 1.3
 
 Modified:
-- None
+- commands/doctor
+
+New:
+- lib/doctor.sh
+- docs/CLI.md

@@ -1,6 +1,3 @@
-# Sprint 1.2.4 - Lot 1.3
+# Sprint 1.2.4 - Lot 1.4
 
-## New
-- Added 'info' command
-- Added system information library
-- Added basic integration test
+Ajout du moteur Doctor et documentation CLI.
