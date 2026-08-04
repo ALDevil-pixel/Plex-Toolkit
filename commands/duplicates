@@ -1,26 +1,14 @@
 #!/usr/bin/env bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/../lib/duplicates.sh"
-source "${SCRIPT_DIR}/../lib/duplicates_export.sh"
+source "${SCRIPT_DIR}/../lib/duplicates_ignore.sh"
 
 cmd_duplicates() {
-    local csv=0
-    local args=()
+    local ignore_patterns=()
+    mapfile -t ignore_patterns < <(ptk_load_ignore_file)
 
-    while [[ $# -gt 0 ]]; do
-        case "$1" in
-            --csv) csv=1 ;;
-            *) args+=("$1") ;;
-        esac
-        shift
-    done
-
-    tmp=$(mktemp)
-    ptk_find_duplicates "${args[@]}" | tee "$tmp"
-
-    if [[ $csv -eq 1 ]]; then
-        ptk_export_duplicates_csv "$tmp"
-    fi
-
-    rm -f "$tmp"
+    while IFS= read -r file; do
+        ptk_is_ignored "$file" "${ignore_patterns[@]}" && continue
+        echo "$file"
+    done < <(ptk_find_duplicates "$@")
 }

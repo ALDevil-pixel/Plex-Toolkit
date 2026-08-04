@@ -1,5 +1,5 @@
-# Sprint 1.3.0 - Partie 8
+# Sprint 1.3.0 - Partie 9
 
 ## Ajouts
-- Option --csv
-- Export CSV des doublons
+- Gestion d'un fichier d'exclusion `config/duplicates.ignore`
+- Filtrage des chemins ignorés lors de la recherche de doublons

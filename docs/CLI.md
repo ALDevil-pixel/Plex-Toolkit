@@ -1,9 +1,13 @@
 # duplicates
 
-## Nouvelle option
+## Fichier d'exclusion
 
-```bash
-plex-toolkit duplicates --csv
+Créer `config/duplicates.ignore` :
+
+```
+# Ignorer les sauvegardes
+Backup
+Recycle
 ```
 
-Exporte les doublons au format CSV dans `logs/duplicates.csv`.
+Les chemins contenant ces motifs seront ignorés.
