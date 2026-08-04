@@ -1,11 +1,13 @@
 # rename
 
-## Détection automatique
+Le moteur de renommage commence à normaliser les noms des films.
 
-La commande détecte désormais automatiquement le type de bibliothèque :
+Exemple :
 
-- movie
-- series
-- anime
+```
+Avatar.2009.1080p.x264.mkv
+↓
+Avatar (2009).mkv
+```
 
-Cette information sera utilisée dans les prochains lots pour appliquer les règles de renommage adaptées.
+Toujours en mode `--dry-run`.

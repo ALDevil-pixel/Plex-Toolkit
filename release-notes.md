@@ -1,5 +1,6 @@
-# Sprint 1.4.0 - Partie 2
+# Sprint 1.4.0 - Partie 3
 
 ## Ajouts
-- Détection automatique du type de média
-- Préparation des règles de renommage spécifiques
+- Premier moteur de normalisation des noms de films
+- Détection de l'année
+- Suppression de quelques tags techniques (résolution, x264/x265)
