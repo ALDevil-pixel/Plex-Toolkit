@@ -3,14 +3,12 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/../lib/library_audit.sh"
 source "${SCRIPT_DIR}/../lib/media_analyzer.sh"
 source "${SCRIPT_DIR}/../lib/mediainfo_analyzer.sh"
+source "${SCRIPT_DIR}/../lib/report.sh"
 
 cmd_audit() {
     local cfg="${1:-config/library.conf}"
+    local json=0
+    [[ "$1" == "--json" ]] && { json=1; cfg="${2:-config/library.conf}"; }
     ptk_library_audit "$cfg"
-    while IFS='=' read -r name path; do
-        [[ -z "$name" || "$name" =~ ^# ]] && continue
-        [[ -d "$path" ]] || continue
-        first=$(find "$path" -type f | head -n1)
-        [[ -n "$first" ]] && ptk_analyze_file "$first"
-    done < "$cfg"
+    ptk_report_summary "$json"
 }

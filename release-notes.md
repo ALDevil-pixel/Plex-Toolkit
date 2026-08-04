@@ -1,5 +1,4 @@
-# Sprint 1.2.4 - Partie 9
+# Sprint 1.2.4 - Partie 10
 
-- Ajout de l'analyse MediaInfo
-- Détection des codecs vidéo/audio
-- Détection de la résolution
+Fin du sprint.
+Préparation de la release v0.1.0-alpha4.

@@ -1,3 +1,10 @@
 # Audit
 
-Le moteur d'audit affiche désormais les premières informations MediaInfo du premier fichier de chaque bibliothèque (si MediaInfo est installé).
+Nouveautés :
+
+```bash
+plex-toolkit audit
+plex-toolkit audit --json
+```
+
+Le mode `--json` génère `logs/audit.json`.
