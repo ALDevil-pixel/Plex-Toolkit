@@ -1,4 +1,6 @@
-# Sprint 1.2.4 - Partie 10
+# Sprint 1.3.0 - Partie 1
 
-Fin du sprint.
-Préparation de la release v0.1.0-alpha4.
+## Nouveau
+- Commande `duplicates`
+- Détection des doublons par nom + taille
+- Résumé des groupes de doublons

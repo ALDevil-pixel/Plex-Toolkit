@@ -1,10 +1,9 @@
-# Audit
+# CLI
 
-Nouveautés :
+## duplicates
 
 ```bash
-plex-toolkit audit
-plex-toolkit audit --json
+plex-toolkit duplicates /path/to/library
 ```
 
-Le mode `--json` génère `logs/audit.json`.
+Recherche des doublons par **nom de fichier + taille**.
