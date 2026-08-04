@@ -1,9 +1,10 @@
-# cleanup
+# check
 
-## Journalisation
+## Nouvelle commande
 
-Toutes les suppressions effectuées avec `--fix` sont enregistrées dans :
-
+```bash
+plex-toolkit check
+plex-toolkit check /media/Movies
 ```
-logs/cleanup.log
-```
+
+Cette première version parcourt les bibliothèques et prépare les futurs contrôles de cohérence.

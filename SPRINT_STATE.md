@@ -1,5 +1,10 @@
-Sprint: 1.5.0
-Partie: 6
+Sprint: 1.6.0
+Partie: 1
 
-Status: COMPLETE
-Version: 0.1.0-beta2
+New:
+- commands/check
+- lib/check.sh
+- tests/test-check.sh
+
+Modified:
+- docs/CLI.md
