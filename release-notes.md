@@ -1,4 +1,4 @@
-# Sprint 1.6.0 - Partie 2
+# Sprint 1.6.0 - Partie 3
 
-- Détection des fichiers de 0 octet
+- Détection des extensions non conformes
 - Intégration dans la commande check

@@ -1,11 +1,11 @@
 # check
 
-## Détection des fichiers de 0 octet
+## Détection des extensions non conformes
 
-La commande détecte désormais les fichiers vides :
+Extensions actuellement acceptées :
 
-```bash
-plex-toolkit check
-```
+- mkv
+- mp4
+- ts
 
-Les fichiers sont uniquement signalés.
+Les autres extensions sont signalées.
