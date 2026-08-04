@@ -1,2 +1,8 @@
 #!/usr/bin/env bash
-cat "$(dirname "$0")/../VERSION"
+cmd_version() {
+    if [[ -f VERSION ]]; then
+        cat VERSION
+    else
+        echo "unknown"
+    fi
+}

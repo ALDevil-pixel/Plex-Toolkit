@@ -1,3 +1,8 @@
-# Sprint 1.2.4 - Lot 1.4
+# Sprint 1.2.4 - Lot 1.5
 
-Ajout du moteur Doctor et documentation CLI.
+## Added
+- Smoke test for doctor
+- Initial developer guide
+
+## Updated
+- version command

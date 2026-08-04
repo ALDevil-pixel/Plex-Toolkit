@@ -1,8 +1,11 @@
-# Developer Guide (Lot 1.1)
+# Developer Guide
 
-Ajout des bibliothèques :
-- lib/common.sh
-- lib/errors.sh
-- lib/logger.sh
+## Sprint 1.2.4 - Lot 1.5
 
-Ces fichiers constituent la base du framework interne.
+Ajout des tests de base pour `doctor`.
+
+Convention :
+- Les bibliothèques vont dans `lib/`
+- Les commandes dans `commands/`
+- Les tests dans `tests/`
+- Les commandes retournent un code de sortie cohérent.

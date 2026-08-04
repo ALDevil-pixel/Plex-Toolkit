@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
-set -e
-echo "Doctor test OK"
+# Basic smoke test
+source lib/doctor.sh
+ptk_doctor_run >/dev/null
+echo "doctor: OK"
