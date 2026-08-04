@@ -1,13 +1,10 @@
 # rename
 
-Le moteur de renommage commence à normaliser les noms des films.
+## Nouveau
 
-Exemple :
-
-```
-Avatar.2009.1080p.x264.mkv
-↓
-Avatar (2009).mkv
+```bash
+plex-toolkit rename --fix /media/Movies
 ```
 
-Toujours en mode `--dry-run`.
+- Sans `--fix` : simulation (`dry-run`)
+- Avec `--fix` : renommage réel des fichiers.

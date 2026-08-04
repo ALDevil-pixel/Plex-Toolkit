@@ -1,6 +1,5 @@
-# Sprint 1.4.0 - Partie 3
+# Sprint 1.4.0 - Partie 4
 
-## Ajouts
-- Premier moteur de normalisation des noms de films
-- Détection de l'année
-- Suppression de quelques tags techniques (résolution, x264/x265)
+- Activation du mode `--fix`
+- Renommage réel des fichiers
+- Vérification qu'un fichier cible n'existe pas déjà

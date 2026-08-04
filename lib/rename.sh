@@ -1,41 +1,49 @@
 #!/usr/bin/env bash
 source "$(dirname "${BASH_SOURCE[0]}")/media_type.sh"
 
-ptk_build_name() {
-    local file="$1"
-    local type="$2"
+ptk_apply_rename() {
+    local src="$1"
+    local dst="$2"
+    local dry="$3"
 
-    local name="${file##*/}"
-    local ext="${name##*.}"
-    local base="${name%.*}"
-
-    # Nettoyage simple
-    base=$(echo "$base" | sed -E 's/[._]+/ /g')
-    base=$(echo "$base" | sed -E 's/ +(1080p|720p|2160p|480p).*//I')
-    base=$(echo "$base" | sed -E 's/ +x26[45].*//I')
-
-    if [[ "$type" == "movie" ]]; then
-        if [[ "$base" =~ (19|20)[0-9]{2} ]]; then
-            year="${BASH_REMATCH[0]}"
-            title=$(echo "$base" | sed -E "s/$year.*//")
-            title=$(echo "$title" | sed -E 's/[[:space:]]+$//')
-            echo "${title} (${year}).${ext}"
-        else
-            echo "${base}.${ext}"
-        fi
+    if [[ "$dry" -eq 1 ]]; then
+        echo "[DRY-RUN] $(basename "$src") -> $(basename "$dst")"
     else
-        echo "${base}.${ext}"
+        if [[ -e "$dst" ]]; then
+            echo "[WARN] Target already exists: $dst"
+            return 2
+        fi
+        mv "$src" "$dst"
+        echo "[OK] Renamed: $(basename "$dst")"
     fi
 }
 
-ptk_rename_library() {
-    local path="$1"
-    [[ -d "$path" ]] || return 1
-    local type
-    type=$(ptk_detect_media_type "$path")
+ptk_build_name() {
+    local f="$1"
+    local name="${f##*/}"
+    local ext="${name##*.}"
+    local base="${name%.*}"
+    base=$(echo "$base"|sed -E 's/[._]+/ /g;s/ +(1080p|720p|2160p|480p).*//I;s/ +x26[45].*//I')
+    if [[ "$base" =~ (19|20)[0-9]{2} ]]; then
+      y="${BASH_REMATCH[0]}"
+      t=$(echo "$base"|sed -E "s/$y.*//;s/[[:space:]]+$//")
+      echo "${t} (${y}).${ext}"
+    else
+      echo "${base}.${ext}"
+    fi
+}
 
-    find "$path" -type f | while read -r file; do
-        new=$(ptk_build_name "$file" "$type")
-        echo "[DRY-RUN] $(basename "$file") -> $new"
+ptk_rename() {
+    local dry=1 path="."
+    while [[ $# -gt 0 ]]; do
+      case "$1" in
+        --fix) dry=0;;
+        *) path="$1";;
+      esac
+      shift
+    done
+    find "$path" -type f | while read -r f; do
+      new=$(ptk_build_name "$f")
+      ptk_apply_rename "$f" "$(dirname "$f")/$new" "$dry"
     done
 }
