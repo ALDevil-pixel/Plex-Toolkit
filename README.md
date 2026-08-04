@@ -1,14 +1,10 @@
-# Plex Toolkit
+# Sprint 1.2.3
 
-Plex Toolkit is a modular administration toolkit for Plex libraries.
+Adds the first operational command:
 
-## Goals
+- doctor
+- audit (placeholder)
 
-- Plugin-based architecture
-- No duplicated code
-- No hardcoded values
-- YAML driven configuration
-- Safe by default (`--dry-run`)
-- Linux-first
-
-See `docs/` for details.
+New libraries:
+- system.sh
+- report.sh
