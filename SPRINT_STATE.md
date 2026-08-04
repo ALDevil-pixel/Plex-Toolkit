@@ -1,13 +1,10 @@
-Sprint: 1.2.4
-Partie: 8
-
-Integrated:
-- Parties 1 à 7
+Sprint:1.2.4
+Partie:9
 
 Modified:
 - commands/audit
 - docs/CLI.md
 
 New:
-- lib/media_analyzer.sh
-- tests/test-media-analyzer.sh
+- lib/mediainfo_analyzer.sh
+- tests/test-mediainfo-analyzer.sh

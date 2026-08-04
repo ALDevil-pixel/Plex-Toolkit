@@ -2,16 +2,15 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/../lib/library_audit.sh"
 source "${SCRIPT_DIR}/../lib/media_analyzer.sh"
+source "${SCRIPT_DIR}/../lib/mediainfo_analyzer.sh"
 
 cmd_audit() {
     local cfg="${1:-config/library.conf}"
     ptk_library_audit "$cfg"
-    echo
-    echo "Media analysis"
     while IFS='=' read -r name path; do
         [[ -z "$name" || "$name" =~ ^# ]] && continue
         [[ -d "$path" ]] || continue
-        echo "-- $name --"
-        ptk_media_scan "$path"
+        first=$(find "$path" -type f | head -n1)
+        [[ -n "$first" ]] && ptk_analyze_file "$first"
     done < "$cfg"
 }

@@ -1,6 +1,5 @@
-# Sprint 1.2.4 - Partie 8
+# Sprint 1.2.4 - Partie 9
 
-Ajouts :
-- Premier moteur d'analyse des médias
-- Contrôle des extensions
-- Détection des fichiers vides
+- Ajout de l'analyse MediaInfo
+- Détection des codecs vidéo/audio
+- Détection de la résolution
