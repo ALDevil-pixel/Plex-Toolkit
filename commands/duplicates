@@ -1,3 +1,26 @@
 #!/usr/bin/env bash
-source "$(dirname "${BASH_SOURCE[0]}")/../lib/duplicates.sh"
-cmd_duplicates(){ ptk_find_duplicates "$@"; }
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/../lib/duplicates.sh"
+source "${SCRIPT_DIR}/../lib/duplicates_report.sh"
+
+cmd_duplicates() {
+    local report=0
+    local args=()
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --report) report=1 ;;
+            *) args+=("$1") ;;
+        esac
+        shift
+    done
+
+    tmp=$(mktemp)
+    ptk_find_duplicates "${args[@]}" | tee "$tmp"
+
+    if [[ $report -eq 1 ]]; then
+        ptk_duplicate_report "$tmp"
+    fi
+
+    rm -f "$tmp"
+}
