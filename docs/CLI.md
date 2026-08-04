@@ -1,13 +1,9 @@
 # duplicates
 
-## Fichier d'exclusion
+## Nouvelle option
 
-Créer `config/duplicates.ignore` :
-
-```
-# Ignorer les sauvegardes
-Backup
-Recycle
+```bash
+plex-toolkit duplicates --summary
 ```
 
-Les chemins contenant ces motifs seront ignorés.
+Affiche un résumé du dernier rapport de doublons.

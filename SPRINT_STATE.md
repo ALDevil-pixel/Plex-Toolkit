@@ -1,10 +1,5 @@
 Sprint: 1.3.0
-Partie: 9
+Partie: 10
 
-Modified:
-- commands/duplicates
-- docs/CLI.md
-
-New:
-- lib/duplicates_ignore.sh
-- tests/test-duplicates-ignore.sh
+Status: COMPLETE
+Version: 0.1.0-beta1

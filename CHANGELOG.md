@@ -1,7 +1,10 @@
 # Changelog
 
-## v0.1.0-alpha4
-- Sprint 1.2.4 terminé
-- Audit amélioré
-- Analyse MediaInfo
-- Export JSON
+## v0.1.0-beta1
+
+- Sprint 1.3.0 terminé
+- Détection de doublons
+- Rapports texte
+- Export CSV
+- Fichier d'exclusion
+- Résumé des rapports

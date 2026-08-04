@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/../lib/duplicates.sh"
-source "${SCRIPT_DIR}/../lib/duplicates_ignore.sh"
+source "${SCRIPT_DIR}/../lib/duplicates_summary.sh"
 
 cmd_duplicates() {
-    local ignore_patterns=()
-    mapfile -t ignore_patterns < <(ptk_load_ignore_file)
-
-    while IFS= read -r file; do
-        ptk_is_ignored "$file" "${ignore_patterns[@]}" && continue
-        echo "$file"
-    done < <(ptk_find_duplicates "$@")
+    if [[ "$1" == "--summary" ]]; then
+        ptk_duplicates_summary "${2:-logs/duplicates-report.txt}"
+        return
+    fi
+    ptk_find_duplicates "$@"
 }
