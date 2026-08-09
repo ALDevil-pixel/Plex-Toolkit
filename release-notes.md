@@ -1,8 +1,11 @@
-# Sprint 1.8.0 - Partie 6
+# Sprint 1.8.0 - Partie 7
 
-## CLI commun
+## Audit CLI
 
-- Ajout des helpers communs `ptk_is_dry_run` et `ptk_is_fix_enabled`.
-- Réduction de la duplication dans les wrappers CLI.
-- Conservation du comportement existant des commandes.
-- Ajout d'un test du mode d'exécution commun.
+- Intégration des options CLI communes.
+- Ajout de la journalisation commune.
+- Validation du fichier de configuration.
+- Codes de retour harmonisés.
+- `audit` reste volontairement strictement en lecture seule.
+- `--fix` est explicitement refusé.
+- Ajout d'un test CLI.

@@ -1,26 +1,21 @@
-# duplicates
+# audit
 
-## Options
-
-```bash
-plex-toolkit duplicates [options] [directory]
-```
-
-Options :
-
-- `--dry-run` : lecture seule, comportement par défaut.
-- `--fix` : supprime les doublons identifiés.
-- `--deep` : vérifie les doublons avec SHA-256.
-- `--min-size <octets>` : ignore les fichiers plus petits.
-- `--extensions mkv,mp4,ts` : limite l'analyse aux extensions indiquées.
-- `--summary [fichier]` : affiche le résumé du rapport.
-
-### Auto Fix
-
-Pour qu'une suppression soit autorisée, `--deep` est obligatoire :
+## Usage
 
 ```bash
-plex-toolkit duplicates --deep --fix /media/Movies
+plex-toolkit audit
+plex-toolkit audit --json
+plex-toolkit audit config/library.conf
 ```
 
-Sans `--deep`, les fichiers ne sont jamais supprimés.
+Options communes de lecture seule :
+
+```text
+--dry-run
+--verbose
+--quiet
+```
+
+`audit` est une commande d'analyse uniquement. Elle ne modifie jamais les bibliothèques.
+
+`--fix` est volontairement refusé afin d'éviter de présenter une commande sans correction automatique comme si elle pouvait modifier les fichiers.

@@ -1,14 +1,84 @@
 #!/usr/bin/env bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source "${SCRIPT_DIR}/../lib/exit_codes.sh"
+source "${SCRIPT_DIR}/../lib/cli_errors.sh"
+source "${SCRIPT_DIR}/../lib/cli_options.sh"
+source "${SCRIPT_DIR}/../lib/logger.sh"
 source "${SCRIPT_DIR}/../lib/library_audit.sh"
 source "${SCRIPT_DIR}/../lib/media_analyzer.sh"
 source "${SCRIPT_DIR}/../lib/mediainfo_analyzer.sh"
 source "${SCRIPT_DIR}/../lib/report.sh"
 
 cmd_audit() {
-    local cfg="${1:-config/library.conf}"
+    ptk_parse_common_options "$@"
+
+    local cfg="config/library.conf"
     local json=0
-    [[ "$1" == "--json" ]] && { json=1; cfg="${2:-config/library.conf}"; }
+    local -a args=("${PTK_POSITIONAL[@]}")
+    PTK_POSITIONAL=()
+
+    while [[ "${#args[@]}" -gt 0 ]]; do
+        case "${args[0]}" in
+            --json)
+                json=1
+                ;;
+            --)
+                args=("${args[@]:1}")
+                [[ "${#args[@]}" -gt 0 ]] && cfg="${args[0]}"
+                args=()
+                continue
+                ;;
+            -*)
+                ptk_usage_error "Unknown option: ${args[0]}"
+                local rc=$?
+                ptk_log_command_end "audit" "$rc"
+                return "$rc"
+                ;;
+            *)
+                if [[ "$cfg" == "config/library.conf" ]]; then
+                    cfg="${args[0]}"
+                else
+                    ptk_usage_error "Too many positional arguments."
+                    local rc=$?
+                    ptk_log_command_end "audit" "$rc"
+                    return "$rc"
+                fi
+                ;;
+        esac
+        args=("${args[@]:1}")
+    done
+
+    if [[ ! -f "$cfg" ]]; then
+        ptk_error "Missing configuration: $cfg"
+        ptk_log_command_end "audit" "$PTK_EXIT_ERROR"
+        return "$PTK_EXIT_ERROR"
+    fi
+
+    ptk_log_command_start "audit"
+    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Configuration: $cfg"
+    [[ "$json" -eq 1 ]] && ptk_log_verbose "JSON summary enabled"
+
+    # Audit is intentionally read-only. --fix is rejected rather than
+    # silently pretending to modify anything.
+    if ptk_is_fix_enabled; then
+        ptk_usage_error "audit does not support --fix."
+        local rc=$?
+        ptk_log_command_end "audit" "$rc"
+        return "$rc"
+    fi
+
     ptk_library_audit "$cfg"
+    local rc=$?
+    if [[ "$rc" -ne 0 ]]; then
+        ptk_log_command_end "audit" "$PTK_EXIT_ERROR"
+        return "$PTK_EXIT_ERROR"
+    fi
+
     ptk_report_summary "$json"
+    rc=$?
+    ptk_is_valid_exit_code "$rc" || rc="$PTK_EXIT_ERROR"
+
+    ptk_log_command_end "audit" "$rc"
+    return "$rc"
 }

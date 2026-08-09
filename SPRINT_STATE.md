@@ -1,19 +1,15 @@
 Sprint: 1.8.0
-Partie: 6
+Partie: 7
 
 Status: COMPLETE
 
 Objectif:
-- Finaliser la gestion commune du mode dry-run/fix.
+- Harmoniser audit avec l'interface CLI commune.
 
 Modified:
-- lib/cli_options.sh
-- commands/check
-- commands/cleanup
-- commands/rename
-- commands/inventory
-- commands/duplicates
-- docs/CONSOLIDATION.md
+- commands/audit
+- lib/library_audit.sh
+- docs/CLI.md
 
 New:
-- tests/test-common-fix-mode.sh
+- tests/test-audit-cli.sh
