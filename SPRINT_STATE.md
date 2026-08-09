@@ -1,16 +1,16 @@
 Sprint: 1.8.0
-Partie: 1
+Partie: 2
 
 Status: COMPLETE
 
 Objectif:
-- Première intégration réelle de l'Auto Fix sur cleanup.
-
-New:
-- lib/cleanup_fix.sh
-- tests/test-cleanup-fix-integration.sh
+- Auto Fix du renommage.
 
 Modified:
-- lib/cleanup.sh
-- commands/cleanup
+- lib/rename.sh
+- lib/rename_conflicts.sh
+- commands/rename
 - docs/CLI.md
+
+New:
+- tests/test-rename-fix-integration.sh

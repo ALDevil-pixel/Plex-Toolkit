@@ -1,11 +1,9 @@
-# Sprint 1.8.0 - Partie 1
+# Sprint 1.8.0 - Partie 2
 
-## Auto Fix
+## Auto Fix Rename
 
-- Intégration du mode `--fix` dans `cleanup`.
+- Intégration complète du mode `--fix` pour rename.
 - Conservation du mode lecture seule par défaut.
-- Suppression contrôlée des dossiers vides.
-- Suppression contrôlée des fichiers indésirables.
-- Suppression contrôlée des sous-titres orphelins.
-- Journalisation des suppressions existante conservée.
+- Protection contre l'écrasement de fichiers existants.
+- Gestion améliorée des conflits avec suffixes.
 - Ajout d'un test d'intégration.

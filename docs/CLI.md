@@ -1,23 +1,24 @@
-# cleanup
+# rename
 
 ## Modes
 
-Par défaut, `cleanup` fonctionne en lecture seule :
+Par défaut, `rename` fonctionne en lecture seule :
 
 ```bash
-plex-toolkit cleanup
+plex-toolkit rename
 ```
 
-Pour appliquer réellement les suppressions :
+Pour appliquer réellement les renommages :
 
 ```bash
-plex-toolkit cleanup --fix
+plex-toolkit rename --fix
 ```
 
 `--dry-run` force explicitement le mode lecture seule :
 
 ```bash
-plex-toolkit cleanup --dry-run
+plex-toolkit rename --dry-run
 ```
 
-Les suppressions effectuées en mode `--fix` sont journalisées dans le log de cleanup.
+Les conflits de destination sont ignorés afin d'éviter tout écrasement de fichier existant.
+Les renommages réellement effectués sont journalisés.

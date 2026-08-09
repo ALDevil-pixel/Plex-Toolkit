@@ -18,10 +18,20 @@ ptk_resolve_conflict() {
         suffix)
             local base="${target%.*}"
             local ext="${target##*.}"
-            echo "${base}_1.${ext}"
+            local index=1
+            local candidate="${base}_${index}.${ext}"
+
+            while [[ -e "$candidate" ]]; do
+                index=$((index + 1))
+                candidate="${base}_${index}.${ext}"
+            done
+
+            echo "$candidate"
+            return 0
             ;;
         *)
             echo "$target"
+            return 0
             ;;
     esac
 }
