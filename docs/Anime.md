@@ -14,6 +14,16 @@ Elle est chargée et validée par :
 lib/anime_config.sh
 ```
 
+Les modèles acceptent uniquement les variables connues :
+
+```text
+{title}
+{season}
+{season:02d}
+{episode}
+{episode:02d}
+```
+
 ## Scan
 
 ```bash
@@ -36,28 +46,24 @@ Le plan génère uniquement des propositions.
 ./plex-toolkit anime-rename <répertoire>
 ```
 
-Par défaut, la commande fonctionne en **dry-run** :
+Par défaut, la commande fonctionne en dry-run.
 
-```text
---dry-run
-```
-
-Aucun fichier n'est modifié.
-
-Pour appliquer réellement les changements :
+Pour appliquer les changements :
 
 ```bash
 ./plex-toolkit anime-rename --fix <répertoire>
 ```
 
-`--fix` est donc obligatoire pour toute modification.
+### Protections
 
-La commande :
+Le renommage :
 
-- détecte les destinations déjà existantes ;
 - ne remplace jamais un fichier existant ;
-- conserve l'extension du média ;
-- retourne une erreur si un renommage échoue ;
-- peut être relancée sans renommer à nouveau les fichiers déjà normalisés.
+- détecte les destinations identiques produites par plusieurs sources ;
+- valide les numéros de saison et d'épisode ;
+- conserve l'extension du fichier ;
+- refuse les placeholders de configuration inconnus ;
+- n'effectue ni déplacement ni suppression ;
+- est idempotent.
 
-Les opérations sont limitées au renommage des fichiers. Aucun déplacement ou suppression n'est effectué.
+Les cas ambigus sont signalés et ne sont pas modifiés automatiquement.

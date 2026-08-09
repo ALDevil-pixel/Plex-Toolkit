@@ -21,10 +21,18 @@ ptk_anime_format_pattern() {
 
 ptk_anime_sanitize_title() {
     local title="$1"
+
     title="${title//_/ }"
     title="${title//./ }"
     title="${title//-/ }"
-    printf '%s\n' "$title" | sed -E 's/[[:space:]]+/ /g; s/^ +//; s/ +$//'
+
+    # Characters which are unsafe or inconvenient in a filename are replaced.
+    title="${title//:/ -}"
+    title="${title//\// -}"
+    title="${title//\\/ -}"
+
+    printf '%s\n' "$title" |
+        sed -E 's/[[:space:]]+/ /g; s/^ +//; s/ +$//'
 }
 
 ptk_anime_extract_title() {
@@ -38,10 +46,20 @@ ptk_anime_extract_title() {
     ptk_anime_sanitize_title "$base"
 }
 
+ptk_anime_validate_episode_numbers() {
+    local season="$1"
+    local episode="$2"
+
+    [[ "$season" =~ ^[0-9]+$ && "$episode" =~ ^[0-9]+$ ]] || return 1
+    (( 10#$season >= 0 && 10#$episode >= 0 )) || return 1
+}
+
 ptk_anime_build_episode_name() {
     local file="$1"
     local season="$2"
     local episode="$3"
+
+    ptk_anime_validate_episode_numbers "$season" "$episode" || return 1
 
     local filename="${file##*/}"
     local extension=""
@@ -54,6 +72,8 @@ ptk_anime_build_episode_name() {
     local name
     name="$(ptk_anime_format_pattern \
         "$ANIME_EPISODE_PATTERN" "$title" "$season" "$episode")"
+
+    [[ -n "$name" ]] || return 1
 
     printf '%s%s\n' "$name" "$extension"
 }
@@ -82,10 +102,10 @@ ptk_anime_collect_renames() {
         episode_data="$(ptk_anime_extract_episode "$filename")"
         IFS='|' read -r season episode <<< "$episode_data"
 
-        [[ -n "$season" && -n "$episode" ]] || continue
+        ptk_anime_validate_episode_numbers "$season" "$episode" || continue
 
         local new_name new_path
-        new_name="$(ptk_anime_build_episode_name "$file" "$season" "$episode")"
+        new_name="$(ptk_anime_build_episode_name "$file" "$season" "$episode")" || continue
         new_path="$(dirname "$file")/$new_name"
 
         printf '%s|%s\n' "$file" "$new_path"
@@ -94,18 +114,35 @@ ptk_anime_collect_renames() {
 
 ptk_anime_rename_proposals() {
     local target="${1:-${ANIME_ROOT:-}}"
+    local -A planned_targets=()
+    local collision=0
 
     while IFS='|' read -r file new_path; do
         [[ -z "$file" ]] && continue
 
         if [[ "$file" == "$new_path" ]]; then
             printf '[ OK ] Already normalized: %s\n' "$file"
-        elif [[ -e "$new_path" ]]; then
+            continue
+        fi
+
+        if [[ -n "${planned_targets[$new_path]:-}" &&
+              "${planned_targets[$new_path]}" != "$file" ]]; then
+            printf '[WARN] Duplicate target: %s and %s -> %s\n' \
+                "${planned_targets[$new_path]}" "$file" "$new_path"
+            collision=1
+            continue
+        fi
+
+        planned_targets["$new_path"]="$file"
+
+        if [[ -e "$new_path" ]]; then
             printf '[WARN] Target exists: %s -> %s\n' "$file" "$new_path"
         else
             printf '[RENAME] %s -> %s\n' "$file" "$new_path"
         fi
     done < <(ptk_anime_collect_renames "$target")
+
+    return "$collision"
 }
 
 ptk_anime_apply_renames() {
@@ -114,6 +151,7 @@ ptk_anime_apply_renames() {
     local skipped=0
     local conflicts=0
     local errors=0
+    local -A planned_targets=()
 
     while IFS='|' read -r file new_path; do
         [[ -z "$file" ]] && continue
@@ -123,6 +161,14 @@ ptk_anime_apply_renames() {
             skipped=$((skipped + 1))
             continue
         fi
+
+        if [[ -n "${planned_targets[$new_path]:-}" &&
+              "${planned_targets[$new_path]}" != "$file" ]]; then
+            printf '[WARN] Duplicate target, skipped: %s -> %s\n' "$file" "$new_path"
+            conflicts=$((conflicts + 1))
+            continue
+        fi
+        planned_targets["$new_path"]="$file"
 
         if [[ -e "$new_path" ]]; then
             printf '[WARN] Target exists, skipped: %s -> %s\n' "$file" "$new_path"

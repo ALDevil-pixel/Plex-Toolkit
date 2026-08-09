@@ -1,12 +1,11 @@
-# Sprint 1.11.0 - Partie 4
+# Sprint 1.11.0 - Partie 5
 
-## Application du renommage Anime
+## Cas particuliers Anime
 
-- Ajout de la commande `anime-rename`.
-- Dry-run par défaut.
-- `--fix` obligatoire pour modifier les fichiers.
-- Détection des conflits avant renommage.
-- Aucun écrasement de fichier existant.
-- Conservation des extensions.
-- Renommage idempotent.
-- Ajout de tests du dry-run et du mode fix.
+- Détection des destinations produites par plusieurs sources.
+- Protection contre les conflits de destination.
+- Validation des numéros de saison et épisode.
+- Validation des placeholders de configuration.
+- Normalisation plus sûre des titres.
+- Ajout de tests dédiés aux cas limites.
+- Aucun écrasement automatique.
