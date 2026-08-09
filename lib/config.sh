@@ -72,17 +72,17 @@ ptk_validate_config() {
     ptk_config_validate_path PTK_LOG_DIR || return 1
     ptk_config_validate_path PTK_REPORT_DIR || return 1
 
-    ptk_config_bool "$PTK_DRY_RUN" >/dev/null || {
+    ptk_config_validate_bool "$PTK_DRY_RUN"  >/dev/null || {
         echo "[ERROR] Invalid boolean: PTK_DRY_RUN=$PTK_DRY_RUN" >&2
         return 1
     }
 
-    ptk_config_bool "$PTK_VERBOSE" >/dev/null || {
+    ptk_config_validate_bool "$PTK_VERBOSE"  >/dev/null || {
         echo "[ERROR] Invalid boolean: PTK_VERBOSE=$PTK_VERBOSE" >&2
         return 1
     }
 
-    ptk_config_bool "$PTK_COLOR" >/dev/null || {
+    ptk_config_validate_bool "$PTK_COLOR"  >/dev/null || {
         echo "[ERROR] Invalid boolean: PTK_COLOR=$PTK_COLOR" >&2
         return 1
     }
@@ -90,4 +90,34 @@ ptk_validate_config() {
     ptk_config_require_nonempty PTK_VIDEO_EXTENSIONS || return 1
 
     return 0
+}
+
+
+# Validate a boolean configuration value without using predicate semantics.
+# Returns 0 for both valid "true" and valid "false".
+ptk_config_validate_bool() {
+    local value="${1:-}"
+    case "${value,,}" in
+        true|false) return 0 ;;
+        1|0) return 0 ;;
+        yes|no) return 0 ;;
+        on|off) return 0 ;;
+        *) return 1 ;;
+    esac
+}
+
+ptk_config_bool_value() {
+    local value="${1:-}"
+    case "${value,,}" in
+        true|1|yes|on) printf 'true\n' ;;
+        false|0|no|off) printf 'false\n' ;;
+        *) return 1 ;;
+    esac
+}
+
+# Normalize common CLI booleans after configuration loading.
+ptk_normalize_common_booleans() {
+    PTK_DRY_RUN="${PTK_DRY_RUN:-1}"
+    PTK_VERBOSE="$(ptk_config_bool_value "${PTK_VERBOSE:-false}" 2>/dev/null || printf 'false')"
+    PTK_QUIET="$(ptk_config_bool_value "${PTK_QUIET:-false}" 2>/dev/null || printf 'false')"
 }

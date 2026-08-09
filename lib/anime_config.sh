@@ -44,12 +44,12 @@ ptk_validate_anime_pattern() {
 }
 
 ptk_validate_anime_config() {
-    ptk_config_bool "$ANIME_REQUIRE_SEASON" >/dev/null || {
+    ptk_config_validate_bool "$ANIME_REQUIRE_SEASON"  >/dev/null || {
         echo "[ERROR] Invalid boolean: ANIME_REQUIRE_SEASON=$ANIME_REQUIRE_SEASON" >&2
         return 1
     }
 
-    ptk_config_bool "$ANIME_REQUIRE_EPISODE" >/dev/null || {
+    ptk_config_validate_bool "$ANIME_REQUIRE_EPISODE"  >/dev/null || {
         echo "[ERROR] Invalid boolean: ANIME_REQUIRE_EPISODE=$ANIME_REQUIRE_EPISODE" >&2
         return 1
     }

@@ -28,12 +28,12 @@ ptk_validate_plex_sync_config() {
         return 1
     }
 
-    ptk_config_bool "$PLEX_SYNC_REQUIRE_YEAR" >/dev/null || {
+    ptk_config_validate_bool "$PLEX_SYNC_REQUIRE_YEAR"  >/dev/null || {
         echo "[ERROR] Invalid boolean: PLEX_SYNC_REQUIRE_YEAR=$PLEX_SYNC_REQUIRE_YEAR" >&2
         return 1
     }
 
-    ptk_config_bool "$PLEX_SYNC_ALLOW_PLEX_ONLY" >/dev/null || {
+    ptk_config_validate_bool "$PLEX_SYNC_ALLOW_PLEX_ONLY"  >/dev/null || {
         echo "[ERROR] Invalid boolean: PLEX_SYNC_ALLOW_PLEX_ONLY=$PLEX_SYNC_ALLOW_PLEX_ONLY" >&2
         return 1
     }

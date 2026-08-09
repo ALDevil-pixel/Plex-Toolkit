@@ -52,7 +52,7 @@ ptk_validate_plex_config() {
         return 1
     }
 
-    ptk_config_bool "$PLEX_VERIFY_TLS" >/dev/null || {
+    ptk_config_validate_bool "$PLEX_VERIFY_TLS"  >/dev/null || {
         echo "[ERROR] Invalid boolean: PLEX_VERIFY_TLS=$PLEX_VERIFY_TLS" >&2
         return 1
     }

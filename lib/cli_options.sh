@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-# Options CLI communes.
+# Common CLI options. Command-specific parsers may consume additional options
+# after this parser has handled the common ones.
 
 PTK_DRY_RUN=1
 PTK_VERBOSE=0
 PTK_QUIET=0
 PTK_POSITIONAL=()
 PTK_CONFIG_FILE=""
+PTK_COMMON_OPTIONS_REMAINING=()
 
 ptk_set_config_override() {
     local config_file="$1"
@@ -14,45 +16,18 @@ ptk_set_config_override() {
 
     PTK_CONFIG_FILE="$config_file"
     export PTK_CONFIG_FILE
-
-    case "$base" in
-        plex.conf|plex.yaml)
-            PTK_PLEX_CONFIG="$config_file"
-            export PTK_PLEX_CONFIG
-            ;;
-        plex-sync.conf|plex-sync.yaml)
-            PTK_PLEX_SYNC_CONFIG="$config_file"
-            export PTK_PLEX_SYNC_CONFIG
-            ;;
-        inventory.conf|inventory.yaml)
-            PTK_INVENTORY_CONFIG="$config_file"
-            export PTK_INVENTORY_CONFIG
-            ;;
-        anime.conf|anime.yaml)
-            PTK_ANIME_CONFIG="$config_file"
-            export PTK_ANIME_CONFIG
-            ;;
-        movies.conf|movies.yaml)
-            PTK_MOVIE_CONFIG="$config_file"
-            export PTK_MOVIE_CONFIG
-            ;;
-        report.conf|report.yaml)
-            PTK_REPORT_CONFIG="$config_file"
-            export PTK_REPORT_CONFIG
-            ;;
-        check.conf|check.yaml)
-            PTK_CHECK_CONFIG="$config_file"
-            export PTK_CHECK_CONFIG
-            ;;
-        *)
-            # Keep the generic override available to callers that need a
-            # command-specific configuration file.
-            ;;
-    esac
-
-    # Legacy compatibility for scripts that still consume PLEXTK_CONFIG.
     PLEXTK_CONFIG="$config_file"
     export PLEXTK_CONFIG
+
+    case "$base" in
+        plex.conf|plex.yaml) PTK_PLEX_CONFIG="$config_file"; export PTK_PLEX_CONFIG ;;
+        plex-sync.conf|plex-sync.yaml) PTK_PLEX_SYNC_CONFIG="$config_file"; export PTK_PLEX_SYNC_CONFIG ;;
+        inventory.conf|inventory.yaml) PTK_INVENTORY_CONFIG="$config_file"; export PTK_INVENTORY_CONFIG ;;
+        anime.conf|anime.yaml) PTK_ANIME_CONFIG="$config_file"; export PTK_ANIME_CONFIG ;;
+        movies.conf|movies.yaml) PTK_MOVIE_CONFIG="$config_file"; export PTK_MOVIE_CONFIG ;;
+        report.conf|report.yaml) PTK_REPORT_CONFIG="$config_file"; export PTK_REPORT_CONFIG ;;
+        check.conf|check.yaml) PTK_CHECK_CONFIG="$config_file"; export PTK_CHECK_CONFIG ;;
+    esac
 }
 
 ptk_parse_common_options() {
@@ -61,21 +36,14 @@ ptk_parse_common_options() {
     PTK_QUIET=0
     PTK_POSITIONAL=()
     PTK_CONFIG_FILE=""
+    PTK_COMMON_OPTIONS_REMAINING=()
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            --dry-run)
-                PTK_DRY_RUN=1
-                ;;
-            --fix)
-                PTK_DRY_RUN=0
-                ;;
-            --verbose|-v)
-                PTK_VERBOSE=1
-                ;;
-            --quiet|-q)
-                PTK_QUIET=1
-                ;;
+            --dry-run) PTK_DRY_RUN=1 ;;
+            --fix) PTK_DRY_RUN=0 ;;
+            --verbose|-v) PTK_VERBOSE=1 ;;
+            --quiet|-q) PTK_QUIET=1 ;;
             --config)
                 shift
                 if [[ $# -eq 0 ]]; then
@@ -86,37 +54,29 @@ ptk_parse_common_options() {
                 ;;
             --)
                 shift
-                while [[ $# -gt 0 ]]; do
-                    PTK_POSITIONAL+=("$1")
-                    shift
-                done
+                while [[ $# -gt 0 ]]; do PTK_POSITIONAL+=("$1"); shift; done
                 break
+                ;;
+            --deep|--min-size|--extensions|--summary)
+                PTK_COMMON_OPTIONS_REMAINING+=("$1")
                 ;;
             -*)
                 ptk_usage_error "Unknown option: $1"
                 return $?
                 ;;
-            *)
-                PTK_POSITIONAL+=("$1")
-                ;;
+            *) PTK_POSITIONAL+=("$1") ;;
         esac
         shift
     done
 }
 
-ptk_is_fix_enabled() {
-    [[ "$PTK_DRY_RUN" -eq 0 ]]
-}
-
-ptk_is_dry_run() {
-    [[ "$PTK_DRY_RUN" -eq 1 ]]
-}
+ptk_is_fix_enabled() { [[ "$PTK_DRY_RUN" -eq 0 ]]; }
+ptk_is_dry_run() { [[ "$PTK_DRY_RUN" -eq 1 ]]; }
 
 ptk_log_info() {
     [[ "$PTK_QUIET" -eq 1 ]] && return 0
     echo "[INFO] $*"
 }
-
 ptk_log_verbose() {
     [[ "$PTK_VERBOSE" -eq 1 && "$PTK_QUIET" -eq 0 ]] || return 0
     echo "[DEBUG] $*"

@@ -17,7 +17,7 @@ ptk_load_movie_config() {
 }
 
 ptk_validate_movie_config() {
-    ptk_config_bool "$MOVIES_INCLUDE_HIDDEN" >/dev/null || {
+    ptk_config_validate_bool "$MOVIES_INCLUDE_HIDDEN"  >/dev/null || {
         echo "[ERROR] Invalid boolean: MOVIES_INCLUDE_HIDDEN=$MOVIES_INCLUDE_HIDDEN" >&2
         return 1
     }

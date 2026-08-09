@@ -1,57 +1,52 @@
 # CLI
 
+Le point d'entrée du Toolkit est :
+
+```bash
+./plex-toolkit <commande> [options]
+```
+
+## Commandes
+
+```text
+audit
+check
+cleanup
+doctor
+duplicates
+help
+info
+inventory
+list
+rename
+self-check
+version
+```
+
 ## Options communes
 
-Les commandes utilisent les options communes :
+Les commandes qui les supportent utilisent :
 
 ```text
 --dry-run
 --fix
 --verbose
 --quiet
---config <fichier>
+--
 ```
 
-Le mode par défaut reste lecture seule.
+Une option commençant par `-` et inconnue est maintenant rejetée avec le code `2`.
 
-`--fix` n'est accepté que par les commandes qui autorisent une modification.
+Les valeurs d'options obligatoires doivent être vérifiées par les commandes ou bibliothèques concernées.
 
-### `--config`
-
-`--config` est maintenant pris en charge par le parser CLI commun.
-
-Le fichier est routé vers la variable de configuration correspondant à son nom :
+## Codes
 
 ```text
-plex.conf       → PTK_PLEX_CONFIG
-plex-sync.conf  → PTK_PLEX_SYNC_CONFIG
-inventory.conf  → PTK_INVENTORY_CONFIG
-anime.conf      → PTK_ANIME_CONFIG
-movies.conf     → PTK_MOVIE_CONFIG
-report.conf     → PTK_REPORT_CONFIG
-check.conf      → PTK_CHECK_CONFIG
+0 = succès
+1 = erreur
+2 = erreur d'utilisation
 ```
 
-La variable générique `PTK_CONFIG_FILE` est également renseignée.
+Une commande inconnue retourne `2`.
 
-La variable legacy `PLEXTK_CONFIG` reste exportée pour compatibilité.
-
-## Dispatcher
-
-Les noms de commandes utilisent des tirets :
-
-```text
-plex-sync-add
-inventory-plex-compare
-```
-
-Les fonctions shell utilisent des underscores :
-
-```text
-cmd_plex_sync_add
-cmd_inventory_plex_compare
-```
-
-Le dispatcher réalise automatiquement cette conversion.
-
-Cela évite de dupliquer des branches de dispatch uniquement pour adapter le nom de la fonction.
+Sans commande, `plex-toolkit` affiche l'aide.
