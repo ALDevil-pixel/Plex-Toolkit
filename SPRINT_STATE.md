@@ -1,15 +1,15 @@
 Sprint: 1.8.0
-Partie: 7
+Partie: 8
 
 Status: COMPLETE
 
 Objectif:
-- Harmoniser audit avec l'interface CLI commune.
+- Harmoniser doctor avec l'interface CLI commune.
 
 Modified:
-- commands/audit
-- lib/library_audit.sh
+- commands/doctor
+- lib/doctor.sh
 - docs/CLI.md
 
 New:
-- tests/test-audit-cli.sh
+- tests/test-doctor-cli.sh

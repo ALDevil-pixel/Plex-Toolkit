@@ -1,21 +1,20 @@
-# audit
+# doctor
 
 ## Usage
 
 ```bash
-plex-toolkit audit
-plex-toolkit audit --json
-plex-toolkit audit config/library.conf
+plex-toolkit doctor
+plex-toolkit doctor --json
 ```
 
-Options communes de lecture seule :
+Options communes :
 
 ```text
 --dry-run
---verbose
---quiet
+--verbose / -v
+--quiet / -q
 ```
 
-`audit` est une commande d'analyse uniquement. Elle ne modifie jamais les bibliothèques.
+`doctor` est une commande de diagnostic uniquement. Elle ne modifie jamais le système et refuse donc `--fix`.
 
-`--fix` est volontairement refusé afin d'éviter de présenter une commande sans correction automatique comme si elle pouvait modifier les fichiers.
+Le mode JSON fournit également l'état des outils vérifiés par le diagnostic.

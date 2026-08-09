@@ -1,11 +1,11 @@
-# Sprint 1.8.0 - Partie 7
+# Sprint 1.8.0 - Partie 8
 
-## Audit CLI
+## Doctor CLI
 
 - Intégration des options CLI communes.
 - Ajout de la journalisation commune.
-- Validation du fichier de configuration.
+- Validation des options.
 - Codes de retour harmonisés.
-- `audit` reste volontairement strictement en lecture seule.
-- `--fix` est explicitement refusé.
+- `doctor` reste strictement en lecture seule.
+- Amélioration de la sortie JSON.
 - Ajout d'un test CLI.

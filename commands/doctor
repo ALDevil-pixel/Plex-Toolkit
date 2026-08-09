@@ -1,9 +1,59 @@
 #!/usr/bin/env bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source "${SCRIPT_DIR}/../lib/exit_codes.sh"
+source "${SCRIPT_DIR}/../lib/cli_errors.sh"
+source "${SCRIPT_DIR}/../lib/cli_options.sh"
+source "${SCRIPT_DIR}/../lib/logger.sh"
 source "${SCRIPT_DIR}/../lib/doctor.sh"
 
 cmd_doctor() {
+    ptk_parse_common_options "$@"
+
     local format="text"
-    [[ "$1" == "--json" ]] && format="json"
+    local -a args=("${PTK_POSITIONAL[@]}")
+    PTK_POSITIONAL=()
+
+    while [[ "${#args[@]}" -gt 0 ]]; do
+        case "${args[0]}" in
+            --json)
+                format="json"
+                ;;
+            --)
+                args=("${args[@]:1}")
+                if [[ "${#args[@]}" -gt 0 ]]; then
+                    ptk_usage_error "Unexpected argument: ${args[0]}"
+                    local rc=$?
+                    ptk_log_command_end "doctor" "$rc"
+                    return "$rc"
+                fi
+                break
+                ;;
+            *)
+                ptk_usage_error "Unknown option or argument: ${args[0]}"
+                local rc=$?
+                ptk_log_command_end "doctor" "$rc"
+                return "$rc"
+                ;;
+        esac
+        args=("${args[@]:1}")
+    done
+
+    # Doctor is diagnostic only. It never changes the system.
+    if ptk_is_fix_enabled; then
+        ptk_usage_error "doctor does not support --fix."
+        local rc=$?
+        ptk_log_command_end "doctor" "$rc"
+        return "$rc"
+    fi
+
+    ptk_log_command_start "doctor"
+    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Output format: $format"
+
     ptk_doctor_run "$format"
+    local rc=$?
+
+    ptk_is_valid_exit_code "$rc" || rc="$PTK_EXIT_ERROR"
+    ptk_log_command_end "doctor" "$rc"
+    return "$rc"
 }
