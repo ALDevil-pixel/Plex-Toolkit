@@ -7,15 +7,10 @@ ptk_inventory_log() {
 
     if [[ -z "$logfile" ]]; then
         local cfg="${PTK_INVENTORY_CONFIG:-config/inventory.conf}"
-        [[ -f "$cfg" ]] || {
-            echo "[ERROR] Inventory configuration not found: $cfg" >&2
-            return 1
-        }
-        # shellcheck disable=SC1090
-        source "$cfg"
-        : "${REPORT_DIR:=./reports}"
-        : "${INVENTORY_LOG:=inventory.log}"
-        logfile="$REPORT_DIR/$INVENTORY_LOG"
+        source "$(dirname "${BASH_SOURCE[0]}")/config.sh"
+        ptk_load_config "$cfg" || return 1
+        : "${INVENTORY_LOG:=${PTK_INVENTORY_LOG}}"
+        logfile="$PTK_REPORT_DIR/$INVENTORY_LOG"
     fi
 
     mkdir -p "$(dirname "$logfile")" || return 1

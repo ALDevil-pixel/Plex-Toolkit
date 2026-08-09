@@ -1,9 +1,10 @@
-# Sprint 1.9.0 - Partie 2
+# Sprint 1.9.0 - Partie 3
 
-## Inventory configurable
+## Configuration centralisée
 
-- Suppression des chemins de sortie codés en dur dans Inventory.
-- Ajout de `config/inventory.conf`.
-- Configuration du CSV, du JSON et du log Inventory.
-- Conservation des paramètres de sortie explicites pour les fonctions.
-- Ajout d'un test des sorties configurées.
+- Ajout de `config/defaults.conf`.
+- Ajout du chargeur commun `lib/config.sh`.
+- Centralisation des répertoires logs/reports et des valeurs communes.
+- Les configurations spécialisées peuvent surcharger les valeurs par défaut.
+- Adaptation du logger, du reporting, du contrôle des extensions et d'Inventory.
+- Ajout d'un test du système de configuration.

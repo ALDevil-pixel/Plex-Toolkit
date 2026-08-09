@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 # Journalisation commune Plex Toolkit
 
-PTK_LOG_FILE="${PTK_LOG_FILE:-logs/plex-toolkit.log}"
+if [[ -z "${PTK_LOG_FILE:-}" ]]; then
+    if [[ -n "${PTK_LOG_DIR:-}" ]]; then
+        PTK_LOG_FILE="$PTK_LOG_DIR/plex-toolkit.log"
+    else
+        PTK_LOG_FILE="logs/plex-toolkit.log"
+    fi
+fi
 
 ptk_log() {
     local level="$1"

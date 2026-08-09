@@ -7,15 +7,10 @@ ptk_inventory_export_csv() {
 
     if [[ -z "$output" ]]; then
         local cfg="${PTK_INVENTORY_CONFIG:-config/inventory.conf}"
-        [[ -f "$cfg" ]] || {
-            echo "[ERROR] Inventory configuration not found: $cfg" >&2
-            return 1
-        }
-        # shellcheck disable=SC1090
-        source "$cfg"
-        : "${REPORT_DIR:=./reports}"
-        : "${INVENTORY_CSV_REPORT:=inventory.csv}"
-        output="$REPORT_DIR/$INVENTORY_CSV_REPORT"
+        source "$(dirname "${BASH_SOURCE[0]}")/config.sh"
+        ptk_load_config "$cfg" || return 1
+        : "${INVENTORY_CSV_REPORT:=${PTK_INVENTORY_CSV_REPORT}}"
+        output="$PTK_REPORT_DIR/$INVENTORY_CSV_REPORT"
     fi
 
     mkdir -p "$(dirname "$output")" || return 1

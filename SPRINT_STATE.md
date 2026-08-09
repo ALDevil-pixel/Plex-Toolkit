@@ -1,17 +1,22 @@
 Sprint: 1.9.0
-Partie: 2
+Partie: 3
 
 Status: COMPLETE
 
 Objectif:
-- Rendre les sorties Inventory configurables.
+- Centraliser les valeurs de configuration communes.
 
 Modified:
+- config/library.conf
+- config/check.conf
+- lib/logger.sh
+- lib/report.sh
 - lib/inventory_csv.sh
 - lib/inventory_json.sh
 - lib/inventory_logger.sh
-- docs/REPORTS.md
 
 New:
-- config/inventory.conf
-- tests/test-inventory-reports.sh
+- config/defaults.conf
+- lib/config.sh
+- tests/test-config.sh
+- docs/CONFIG.md

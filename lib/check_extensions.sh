@@ -3,14 +3,11 @@
 
 ptk_load_allowed_extensions() {
     local cfg="${1:-config/check.conf}"
-    local VIDEO_EXTENSIONS="mkv mp4 ts"
 
-    if [[ -f "$cfg" ]]; then
-        # shellcheck disable=SC1090
-        source "$cfg"
-    fi
+    source "$(dirname "${BASH_SOURCE[0]}")/config.sh"
+    ptk_load_config "$cfg" || return 1
 
-    echo "$VIDEO_EXTENSIONS"
+    echo "${VIDEO_EXTENSIONS:-${PTK_VIDEO_EXTENSIONS}}"
 }
 
 ptk_find_invalid_extensions() {
@@ -18,7 +15,7 @@ ptk_find_invalid_extensions() {
     [[ -d "$path" ]] || return 1
 
     local allowed
-    allowed="$(ptk_load_allowed_extensions)"
+    allowed="$(ptk_load_allowed_extensions)" || return 1
 
     find "$path" -type f -print0 |
     while IFS= read -r -d '' file; do
