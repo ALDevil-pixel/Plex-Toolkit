@@ -1,19 +1,29 @@
-# duplicates
+# check
 
-## Auto Fix
+## Modes
 
-La recherche de doublons reste non destructive par défaut.
-
-```bash
-plex-toolkit duplicates --deep /media/Movies
-```
-
-Pour supprimer automatiquement les doublons réellement identifiés par SHA-256 :
+Par défaut :
 
 ```bash
-plex-toolkit duplicates --deep --fix /media/Movies
+plex-toolkit check
 ```
 
-Le premier fichier rencontré est conservé et les suivants ayant exactement le même SHA-256 sont proposés/supprimés.
+effectue uniquement une analyse.
 
-Sans `--deep`, aucun fichier n'est supprimé.
+Pour appliquer les corrections sûres :
+
+```bash
+plex-toolkit check --fix
+```
+
+`--dry-run` force explicitement le mode lecture seule :
+
+```bash
+plex-toolkit check --dry-run
+```
+
+### Corrections automatiques
+
+Le mode `--fix` supprime les fichiers de 0 octet.
+
+Les extensions non conformes sont uniquement signalées. Elles ne sont pas renommées ou supprimées automatiquement, car une extension incorrecte ne permet pas de déterminer de façon fiable le format réel du fichier.
