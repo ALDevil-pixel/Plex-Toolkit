@@ -91,21 +91,19 @@ ptk_log_verbose() {
 }
 
 ptk_restore_cli_overrides() {
-    if [[ "${PTK_CLI_DRY_RUN_SET:-0}" -eq 0 ]]; then
-        # No explicit CLI choice: retain the configuration/default value.
-        return 0
-    fi
-
-    # --fix/--dry-run are intentionally authoritative.
-    if [[ "${PTK_CLI_FIX_SET:-0}" -eq 1 ]]; then
-        PTK_DRY_RUN=0
-    else
-        PTK_DRY_RUN=1
+    # Restore each explicitly supplied CLI option independently.
+    if [[ "${PTK_CLI_DRY_RUN_SET:-0}" -eq 1 ]]; then
+        if [[ "${PTK_CLI_FIX_SET:-0}" -eq 1 ]]; then
+            PTK_DRY_RUN=0
+        else
+            PTK_DRY_RUN=1
+        fi
     fi
 
     if [[ "${PTK_CLI_VERBOSE_SET:-0}" -eq 1 ]]; then
         PTK_VERBOSE=1
     fi
+
     if [[ "${PTK_CLI_QUIET_SET:-0}" -eq 1 ]]; then
         PTK_QUIET=1
     fi

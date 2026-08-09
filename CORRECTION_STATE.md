@@ -1,5 +1,5 @@
 Correction Release
-Partie: 2
+Partie: 3
 
 Status: COMPLETE
 
@@ -20,3 +20,5 @@ Priorité:
 
 Fichiers restaurés depuis Git:
 - version
+
+Correction 3 validée : comparaison d'inventaires et tests associés OK.

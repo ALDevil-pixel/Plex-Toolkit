@@ -12,36 +12,34 @@
 
 ### Priorité de configuration
 
-La priorité est désormais :
-
 ```text
 valeurs par défaut
       ↓
-fichiers de configuration
+configuration
       ↓
 options CLI explicites
 ```
 
-Les options explicites :
-
-```text
---fix
---dry-run
---verbose
---quiet
-```
-
-restent prioritaires sur les valeurs chargées depuis les fichiers de configuration.
-
 ### Booléens
 
-Les valeurs de configuration sont normalisées avant leur utilisation par les commandes.
+Validation et interprétation des booléens sont séparées.
 
-```text
-true  → 1
-false → 0
-```
+## Partie 3
 
-pour les indicateurs CLI internes.
+### Comparaison d'inventaires
 
-La validation d'une valeur booléenne reste distincte du test logique de cette valeur.
+Chaque ancien enregistrement est classé une seule fois :
+
+1. même chemin :
+   - `UNCHANGED` si les métadonnées sont identiques ;
+   - `CHANGED` sinon ;
+2. chemin différent mais identité identique :
+   - `CHANGED` ;
+3. aucune correspondance :
+   - `REMOVED`.
+
+Les nouveaux enregistrements non rapprochés deviennent `ADDED`.
+
+La correction évite notamment qu'une modification de contenu au même chemin soit rapportée comme `REMOVED + ADDED`.
+
+Elle reconnaît aussi un déplacement lorsque le hash reste identique.

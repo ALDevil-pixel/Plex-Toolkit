@@ -1,9 +1,10 @@
-# Release de correction - Partie 2
+# Release de correction - Partie 3
 
-## Configuration
+## Comparaison d'inventaires
 
-- Correction de la priorité entre configuration et options CLI.
-- `--fix` et `--dry-run` restent toujours prioritaires lorsqu'ils sont explicitement fournis.
-- `--verbose` et `--quiet` ne sont plus écrasés silencieusement par la configuration.
-- Normalisation des valeurs booléennes avant utilisation.
-- Ajout de tests de précédence.
+- Correction de la classification des fichiers modifiés.
+- Un fichier modifié au même chemin est maintenant `CHANGED`.
+- Un fichier déplacé avec le même hash est rapproché comme le même média.
+- Les vrais ajouts et suppressions restent `ADDED` / `REMOVED`.
+- Correction du test de non-régression du dispatcher.
+- Ajout de tests de non-régression pour les quatre états d'inventaire.
