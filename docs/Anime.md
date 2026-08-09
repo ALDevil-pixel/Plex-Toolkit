@@ -14,7 +14,7 @@ Elle est chargée et validée par :
 lib/anime_config.sh
 ```
 
-Les modèles acceptent uniquement les variables connues :
+Les modèles acceptent uniquement :
 
 ```text
 {title}
@@ -24,21 +24,21 @@ Les modèles acceptent uniquement les variables connues :
 {episode:02d}
 ```
 
-## Scan
+## Analyse
 
 ```bash
 ./plex-toolkit anime-scan <répertoire>
 ```
 
-Le scan est strictement en lecture seule.
+Lecture seule.
 
-## Plan de renommage
+## Plan
 
 ```bash
 ./plex-toolkit anime-rename-plan <répertoire>
 ```
 
-Le plan génère uniquement des propositions.
+Lecture seule : aucune modification n'est effectuée.
 
 ## Renommage
 
@@ -46,24 +46,40 @@ Le plan génère uniquement des propositions.
 ./plex-toolkit anime-rename <répertoire>
 ```
 
-Par défaut, la commande fonctionne en dry-run.
+Le comportement par défaut est le dry-run.
 
-Pour appliquer les changements :
+Pour appliquer :
 
 ```bash
 ./plex-toolkit anime-rename --fix <répertoire>
 ```
 
-### Protections
+### Garanties actuelles
 
-Le renommage :
+- aucun écrasement de fichier existant ;
+- détection des destinations concurrentes ;
+- validation des numéros saison/épisode ;
+- validation des placeholders ;
+- conservation des extensions ;
+- pas de déplacement ;
+- pas de suppression ;
+- dry-run par défaut ;
+- `--fix` obligatoire pour modifier ;
+- opération idempotente.
 
-- ne remplace jamais un fichier existant ;
-- détecte les destinations identiques produites par plusieurs sources ;
-- valide les numéros de saison et d'épisode ;
-- conserve l'extension du fichier ;
-- refuse les placeholders de configuration inconnus ;
-- n'effectue ni déplacement ni suppression ;
-- est idempotent.
+## Validation du sprint
 
-Les cas ambigus sont signalés et ne sont pas modifiés automatiquement.
+Les tests spécifiques sont :
+
+```bash
+bash tests/test-sprint-1.11.sh
+bash tests/test-anime-release.sh
+```
+
+La suite générale reste :
+
+```bash
+bash tests/run.sh
+```
+
+Après validation, le dépôt doit être consolidé dans un nouveau ZIP avant de commencer le sprint suivant.
