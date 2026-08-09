@@ -65,8 +65,17 @@ PTK_CLI_FIX_SET=0
                 while [[ $# -gt 0 ]]; do PTK_POSITIONAL+=("$1"); shift; done
                 break
                 ;;
-            --deep|--min-size|--extensions|--summary)
-                PTK_COMMON_OPTIONS_REMAINING+=("$1")
+            --deep|--summary)
+                PTK_POSITIONAL+=("$1")
+                ;;
+            --min-size|--extensions)
+                PTK_POSITIONAL+=("$1")
+                shift
+                if [[ $# -eq 0 ]]; then
+                    ptk_usage_error "$1 requires a value"
+                    return $?
+                fi
+                PTK_POSITIONAL+=("$1")
                 ;;
             -*)
                 ptk_usage_error "Unknown option: $1"

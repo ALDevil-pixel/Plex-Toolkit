@@ -1,10 +1,10 @@
-# Release de correction - Partie 3
+# Release de correction - Partie 4
 
-## Comparaison d'inventaires
+## Options CLI spécifiques
 
-- Correction de la classification des fichiers modifiés.
-- Un fichier modifié au même chemin est maintenant `CHANGED`.
-- Un fichier déplacé avec le même hash est rapproché comme le même média.
-- Les vrais ajouts et suppressions restent `ADDED` / `REMOVED`.
-- Correction du test de non-régression du dispatcher.
-- Ajout de tests de non-régression pour les quatre états d'inventaire.
+- Le parser commun ne consomme plus les options propres aux commandes.
+- `--deep` et `--summary` sont transmis tels quels.
+- `--min-size <valeur>` et `--extensions <valeur>` conservent leur valeur.
+- `duplicates` traite ses options métier dans son propre parser.
+- Le dispatcher convertit les noms `commande-avec-tirets` en `cmd_commande_avec_tirets`.
+- Ajout de tests de non-régression du parsing et de `duplicates`.

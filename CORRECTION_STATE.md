@@ -1,5 +1,5 @@
 Correction Release
-Partie: 3
+Partie: 4
 
 Status: COMPLETE
 
@@ -22,3 +22,5 @@ Fichiers restaurés depuis Git:
 - version
 
 Correction 3 validée : comparaison d'inventaires et tests associés OK.
+
+Partie 4 validée : options spécifiques conservées par le parser commun et traitées par la commande.

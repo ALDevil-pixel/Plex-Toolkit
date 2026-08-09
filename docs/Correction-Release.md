@@ -40,6 +40,32 @@ Chaque ancien enregistrement est classé une seule fois :
 
 Les nouveaux enregistrements non rapprochés deviennent `ADDED`.
 
-La correction évite notamment qu'une modification de contenu au même chemin soit rapportée comme `REMOVED + ADDED`.
+## Partie 4
 
-Elle reconnaît aussi un déplacement lorsque le hash reste identique.
+### Options communes / spécifiques
+
+Le parser commun traite uniquement les options globales.
+
+Les options propres à une commande sont transmises intactes dans `PTK_POSITIONAL` afin que la commande puisse les interpréter elle-même.
+
+Le flux est :
+
+```text
+CLI
+ ↓
+options communes
+ ↓
+options/options arguments spécifiques conservés
+ ↓
+parser de la commande
+```
+
+Le dispatcher continue de convertir automatiquement les noms de commandes :
+
+```text
+plex-sync-add
+      ↓
+cmd_plex_sync_add
+```
+
+Cette architecture évite de faire grossir le parser global à chaque nouveau plugin.

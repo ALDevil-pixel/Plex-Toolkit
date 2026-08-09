@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 set -e
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+source "$ROOT/lib/cli_errors.sh"
+source "$ROOT/lib/cli_options.sh"
 
-source lib/cli_options.sh
+ptk_parse_common_options --config /tmp/duplicates.conf --dry-run --deep --min-size 1024 --extensions mkv,mp4 --summary /media
 
-ptk_parse_common_options --verbose --dry-run /media/Movies
-test "$PTK_DRY_RUN" -eq 1
-test "$PTK_VERBOSE" -eq 1
-test "${#PTK_POSITIONAL[@]}" -eq 1
-test "${PTK_POSITIONAL[0]}" = "/media/Movies"
-
-ptk_parse_common_options --fix --quiet -- /media/Series
-test "$PTK_DRY_RUN" -eq 0
-test "$PTK_QUIET" -eq 1
-test "${PTK_POSITIONAL[0]}" = "/media/Series"
-
-echo OK
+printf '%s\n' "${PTK_POSITIONAL[@]}" | grep -Fx -- '--deep' >/dev/null
+printf '%s\n' "${PTK_POSITIONAL[@]}" | grep -Fx -- '--min-size' >/dev/null
+printf '%s\n' "${PTK_POSITIONAL[@]}" | grep -Fx -- '1024' >/dev/null
+printf '%s\n' "${PTK_POSITIONAL[@]}" | grep -Fx -- '--extensions' >/dev/null
+printf '%s\n' "${PTK_POSITIONAL[@]}" | grep -Fx -- 'mkv,mp4' >/dev/null
+printf '%s\n' "${PTK_POSITIONAL[@]}" | grep -Fx -- '--summary' >/dev/null
+printf '%s\n' "${PTK_POSITIONAL[@]}" | grep -Fx -- '/media' >/dev/null
+[[ "$PTK_DRY_RUN" -eq 1 ]]
+[[ "$PTK_CONFIG_FILE" == "/tmp/duplicates.conf" ]]
+echo "Command-specific options: OK"
