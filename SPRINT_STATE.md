@@ -1,7 +1,11 @@
 Release: 0.2.1
-Lot: 6
+Lot: 7
 
 Status: COMPLETE
+
+New:
+- lib/logger.sh
+- tests/test-logger.sh
 
 Modified:
 - commands/rename
@@ -9,6 +13,3 @@ Modified:
 - commands/check
 - commands/inventory
 - docs/CONSOLIDATION.md
-
-New:
-- tests/test-command-errors.sh

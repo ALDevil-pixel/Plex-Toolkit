@@ -1,17 +1,25 @@
 # Consolidation v0.2.1
 
-## Lot 6
+## Lot 7
 
-Intégration des briques communes de codes de retour et d'erreurs dans les quatre commandes principales :
+Journalisation commune des commandes principales.
 
+Les commandes :
 - `rename`
 - `cleanup`
 - `check`
 - `inventory`
 
-Comportement harmonisé :
-- `0` : succès
-- `1` : erreur d'exécution
-- `2` : erreur d'utilisation
+utilisent maintenant `lib/logger.sh` pour enregistrer :
+- le démarrage ;
+- la fin ;
+- le code de retour ;
+- les erreurs d'exécution.
 
-Les chemins explicitement fournis sont validés avant l'appel au moteur métier.
+Fichier par défaut :
+
+```text
+logs/plex-toolkit.log
+```
+
+Le fichier peut être redéfini avec `PTK_LOG_FILE`.

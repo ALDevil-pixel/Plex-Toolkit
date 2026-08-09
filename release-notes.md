@@ -1,6 +1,6 @@
-# Consolidation 0.2.1 - Lot 6
+# Consolidation 0.2.1 - Lot 7
 
-- Intégration des codes de retour communs.
-- Validation des répertoires fournis en argument.
-- Harmonisation des erreurs de paramètres.
-- Test CLI complémentaire.
+- Ajout d'un logger commun.
+- Journalisation du démarrage et de la fin des commandes.
+- Journalisation des codes de retour.
+- Harmonisation de la journalisation des commandes principales.

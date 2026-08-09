@@ -1,21 +1,28 @@
+#!/usr/bin/env bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/../lib/exit_codes.sh"
 source "${SCRIPT_DIR}/../lib/cli_errors.sh"
 source "${SCRIPT_DIR}/../lib/cli_options.sh"
+source "${SCRIPT_DIR}/../lib/logger.sh"
 source "${SCRIPT_DIR}/../lib/cleanup.sh"
 
 cmd_cleanup() {
     ptk_parse_common_options "$@"
     if [[ "${#PTK_POSITIONAL[@]}" -gt 1 ]]; then
         ptk_usage_error "Too many positional arguments."
-        return $?
+        local rc=$?
+        ptk_log_command_end "cleanup" "$rc"
+        return "$rc"
     fi
 
     local target="${PTK_POSITIONAL[0]:-}"
     if [[ -n "$target" ]] && ! ptk_require_directory "$target"; then
-        return $?
+        local rc=$?
+        ptk_log_command_end "cleanup" "$rc"
+        return "$rc"
     fi
 
+    ptk_log_command_start "cleanup"
     [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Command: cleanup"
     if [[ "$PTK_DRY_RUN" -eq 0 ]]; then
         ptk_cleanup --fix "$target"
@@ -24,5 +31,6 @@ cmd_cleanup() {
     fi
     local rc=$?
     ptk_is_valid_exit_code "$rc" || rc="$PTK_EXIT_ERROR"
+    ptk_log_command_end "cleanup" "$rc"
     return "$rc"
 }
