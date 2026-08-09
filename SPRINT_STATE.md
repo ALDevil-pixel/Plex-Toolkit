@@ -1,16 +1,17 @@
 Sprint: 1.9.0
-Partie: 1
+Partie: 2
 
 Status: COMPLETE
 
 Objectif:
-- Poser la base d'un reporting centralisé et configurable.
+- Rendre les sorties Inventory configurables.
 
 Modified:
-- lib/report.sh
-- commands/audit
+- lib/inventory_csv.sh
+- lib/inventory_json.sh
+- lib/inventory_logger.sh
+- docs/REPORTS.md
 
 New:
-- config/report.conf
-- tests/test-report.sh
-- docs/REPORTS.md
+- config/inventory.conf
+- tests/test-inventory-reports.sh

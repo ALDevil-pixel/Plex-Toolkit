@@ -1,9 +1,9 @@
-# Sprint 1.9.0 - Partie 1
+# Sprint 1.9.0 - Partie 2
 
-## Reporting configurable
+## Inventory configurable
 
-- Suppression des chemins de rapports codés en dur dans `report.sh`.
-- Ajout de `config/report.conf`.
-- Centralisation du répertoire et des noms de rapports.
-- Conservation des rapports texte et JSON d'audit.
-- Ajout d'un test du writer de rapports.
+- Suppression des chemins de sortie codés en dur dans Inventory.
+- Ajout de `config/inventory.conf`.
+- Configuration du CSV, du JSON et du log Inventory.
+- Conservation des paramètres de sortie explicites pour les fonctions.
+- Ajout d'un test des sorties configurées.
