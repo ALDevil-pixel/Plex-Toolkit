@@ -1,14 +1,13 @@
-# Sprint 1.14.0 - Partie 2
+# Sprint 1.14.0 - Partie 3
 
-## Préparation des ajouts Plex
+## Ajout d'un média à Plex
 
-- Ajout de la validation des fichiers candidats.
-- Contrôle des extensions autorisées.
-- Contrôle de lecture.
-- Refus des liens symboliques.
-- Ajout de racines locales autorisées.
-- Validation de l'existence et du type de bibliothèque Plex.
-- Ajout de `plex-sync-validate`.
-- `--fix` refusé.
-- Aucun appel de modification Plex.
-- Ajout de tests de validation.
+- Ajout de `plex-sync-add`.
+- Support réel de `--fix`.
+- Dry-run par défaut.
+- Validation du chemin contre les locations de la bibliothèque Plex.
+- Refresh limité au répertoire contenant le média.
+- Aucun refresh global.
+- Aucun déplacement, renommage ou suppression local.
+- Ajout des locations Plex au module de bibliothèques.
+- Ajout de tests avec API Plex simulée.

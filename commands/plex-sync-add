@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source "${SCRIPT_DIR}/../lib/exit_codes.sh"
+source "${SCRIPT_DIR}/../lib/cli_errors.sh"
+source "${SCRIPT_DIR}/../lib/cli_options.sh"
+source "${SCRIPT_DIR}/../lib/logger.sh"
+source "${SCRIPT_DIR}/../lib/plex_config.sh"
+source "${SCRIPT_DIR}/../lib/plex_api.sh"
+source "${SCRIPT_DIR}/../lib/plex_libraries.sh"
+source "${SCRIPT_DIR}/../lib/plex_safety.sh"
+source "${SCRIPT_DIR}/../lib/plex_sync_config.sh"
+source "${SCRIPT_DIR}/../lib/plex_sync_validate.sh"
+source "${SCRIPT_DIR}/../lib/plex_sync_add.sh"
+
+cmd_plex_sync_add() {
+    ptk_parse_common_options "$@" || return $?
+
+    if [[ "${#PTK_POSITIONAL[@]}" -ne 2 ]]; then
+        ptk_usage_error "A local media file and a Plex library key are required."
+        local rc=$?
+        ptk_log_command_end "plex-sync-add" "$rc"
+        return "$rc"
+    fi
+
+    local file="${PTK_POSITIONAL[0]}"
+    local library_key="${PTK_POSITIONAL[1]}"
+
+    ptk_log_command_start "plex-sync-add"
+
+    ptk_load_plex_config "${PTK_PLEX_CONFIG:-config/plex.conf}" || {
+        local rc=$?
+        ptk_log_command_end "plex-sync-add" "$rc"
+        return "$rc"
+    }
+
+    ptk_load_plex_sync_config "${PTK_PLEX_SYNC_CONFIG:-config/plex-sync.conf}" || {
+        local rc=$?
+        ptk_log_command_end "plex-sync-add" "$rc"
+        return "$rc"
+    }
+
+    if ! ptk_is_fix_enabled; then
+        echo "[DRY-RUN] Would request Plex refresh for: $file"
+        ptk_plex_sync_validate_file "$file" || {
+            local rc=$?
+            ptk_log_command_end "plex-sync-add" "$rc"
+            return "$rc"
+        }
+        ptk_plex_sync_validate_library "$library_key" || {
+            local rc=$?
+            ptk_log_command_end "plex-sync-add" "$rc"
+            return "$rc"
+        }
+        ptk_plex_sync_validate_library_path "$file" "$library_key" >/dev/null || {
+            local rc=$?
+            ptk_log_command_end "plex-sync-add" "$rc"
+            return "$rc"
+        }
+        echo "[DRY-RUN] No Plex request sent."
+        ptk_log_command_end "plex-sync-add" 0
+        return 0
+    fi
+
+    ptk_plex_sync_add "$file" "$library_key"
+    local rc=$?
+
+    ptk_is_valid_exit_code "$rc" || rc="$PTK_EXIT_ERROR"
+    ptk_log_command_end "plex-sync-add" "$rc"
+    return "$rc"
+}

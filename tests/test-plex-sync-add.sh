@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+set -e
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+TMP="$(mktemp -d)"
+trap 'rm -rf "$TMP"' EXIT
+
+if ! command -v jq >/dev/null 2>&1; then
+    echo "SKIP: jq not installed"
+    exit 0
+fi
+
+mkdir -p "$TMP/bin" "$TMP/Movies"
+printf 'movie\n' > "$TMP/Movies/Film.mkv"
+
+cat > "$TMP/bin/curl" <<'EOF'
+#!/usr/bin/env bash
+case "$*" in
+  */library/sections*)
+    cat <<'JSON'
+{"MediaContainer":{"Directory":[
+{"key":"1","type":"movie","title":"Films","Location":[{"path":"PLACEHOLDER"}]}
+]}}
+JSON
+    ;;
+  */library/sections/1/refresh*)
+    printf '{"MediaContainer":{"size":1}}'
+    ;;
+  *)
+    exit 1
+    ;;
+esac
+EOF
+# Inject actual test path into the mock.
+sed -i "s|PLACEHOLDER|$TMP/Movies|" "$TMP/bin/curl"
+chmod +x "$TMP/bin/curl"
+
+cat > "$TMP/plex.conf" <<'EOF'
+PLEX_URL="http://plex.test:32400"
+PLEX_TOKEN="test-token"
+PLEX_TIMEOUT=5
+PLEX_VERIFY_TLS=true
+PLEX_RETRIES=0
+EOF
+
+cat > "$TMP/plex-sync.conf" <<EOF
+PLEX_SYNC_MODE="local-to-plex"
+PLEX_SYNC_MOVIE_EXTENSIONS="mkv mp4 ts"
+PLEX_SYNC_REQUIRE_YEAR=false
+PLEX_SYNC_ALLOW_PLEX_ONLY=false
+PLEX_SYNC_ALLOWED_ROOTS="$TMP/Movies"
+EOF
+
+export PATH="$TMP/bin:$PATH"
+
+# Dry-run validates everything but must not call the refresh endpoint.
+dry="$("$ROOT/plex-toolkit" plex-sync-add \
+    --config "$TMP/plex.conf" "$TMP/Movies/Film.mkv" 1)"
+grep '\[DRY-RUN\] No Plex request sent.' <<<"$dry" >/dev/null
+
+# --fix performs the narrow directory refresh.
+fix="$("$ROOT/plex-toolkit" plex-sync-add \
+    --config "$TMP/plex.conf" --fix "$TMP/Movies/Film.mkv" 1)"
+grep 'Plex add request: OK' <<<"$fix" >/dev/null
+grep 'Scan path' <<<"$fix" >/dev/null
+
+# Wrong path must fail.
+mkdir -p "$TMP/Other"
+cp "$TMP/Movies/Film.mkv" "$TMP/Other/Film.mkv"
+if "$ROOT/plex-toolkit" plex-sync-add \
+    --config "$TMP/plex.conf" --fix "$TMP/Other/Film.mkv" 1 >/dev/null 2>&1; then
+    exit 1
+fi
+
+test -f "$TMP/Movies/Film.mkv"
+test -f "$TMP/Other/Film.mkv"
+
+echo OK

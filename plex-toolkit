@@ -14,7 +14,7 @@ run_command() {
     fi
 
     case "$command" in
-        anime-rename|anime-rename-plan|anime-scan|audit|check|cleanup|doctor|duplicates|help|info|inventory|list|movie-duplicates|movie-scan|plex-compare|plex-config|plex-libraries|plex-media|plex-ping|plex-sync-plan|plex-sync-validate|rename|self-check|version)
+        anime-rename|anime-rename-plan|anime-scan|audit|check|cleanup|doctor|duplicates|help|info|inventory|list|movie-duplicates|movie-scan|plex-compare|plex-config|plex-libraries|plex-media|plex-ping|plex-sync-add|plex-sync-plan|plex-sync-validate|rename|self-check|version)
             source "$ROOT/commands/$command"
             "cmd_$command" "$@"
             return $?
