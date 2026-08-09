@@ -1,15 +1,17 @@
 Sprint: 1.12.0
-Partie: 4
+Partie: 5
 
 Status: COMPLETE
 
 Objectif:
-- Renforcer la sécurité des suppressions de doublons Films.
+- Validation finale des fonctionnalités Films et préparation de consolidation.
 
 Modified:
-- lib/duplicates.sh
-- tests/test-movie-config.sh
 - docs/Movies.md
 
 New:
-- tests/test-movie-duplicates-safety.sh
+- tests/test-sprint-1.12.sh
+- tests/test-movie-release.sh
+
+Release:
+- Sprint 1.12.0 prêt pour consolidation finale.

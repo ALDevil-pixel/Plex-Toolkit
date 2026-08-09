@@ -8,7 +8,17 @@ La configuration Films est définie dans :
 config/movies.conf
 ```
 
-## Scan
+Paramètres :
+
+```text
+MOVIES_ROOT
+MOVIES_VIDEO_EXTENSIONS
+MOVIES_MIN_SIZE
+MOVIES_INCLUDE_HIDDEN
+MOVIES_PREFERRED_EXTENSIONS
+```
+
+## Analyse
 
 ```bash
 ./plex-toolkit movie-scan <répertoire>
@@ -25,34 +35,36 @@ Lecture seule.
 La détection utilise :
 
 1. regroupement par taille ;
-2. SHA-256 exact.
+2. vérification exacte SHA-256.
 
 La commande est en lecture seule par défaut.
 
-Pour supprimer les copies identiques :
+### Sélection
+
+Le fichier conservé est choisi selon :
+
+1. préférence d'extension ;
+2. chemin le plus court ;
+3. ordre lexical.
+
+La préférence par défaut est :
+
+```text
+MKV > MP4 > TS
+```
+
+### Suppression
+
+Pour appliquer les suppressions :
 
 ```bash
 ./plex-toolkit movie-duplicates --fix <répertoire>
 ```
 
-### Sécurité du mode `--fix`
+Avant chaque suppression, le fichier candidat est revérifié par SHA-256.
 
-Avant toute suppression :
+Si un candidat a disparu ou changé depuis l'analyse, la suppression est refusée.
 
-1. le groupe est identifié par SHA-256 ;
-2. le fichier à conserver est sélectionné selon la politique configurée ;
-3. chaque fichier candidat à la suppression est revérifié ;
-4. si un fichier a disparu ou changé depuis l'analyse, la suppression du groupe est interrompue ;
-5. les suppressions ne commencent qu'après cette vérification.
+Aucun fichier différent n'est supprimé.
 
-Le Toolkit ne supprime jamais un fichier dont le contenu ne correspond plus au hash analysé.
-
-La sélection du fichier conservé utilise :
-
-```text
-MOVIES_PREFERRED_EXTENSIONS
-```
-
-puis le chemin le plus court et l'ordre lexical pour départager les égalités.
-
-Aucun écrasement, renommage ou déplacement n'est effectué.
+Le comportement est idempotent : une seconde exécution ne supprime rien de plus une fois les doublons traités.
