@@ -1,21 +1,25 @@
 # Tests
 
-La suite de tests peut être lancée depuis la racine du dépôt :
+## Suite complète
 
 ```bash
 bash tests/run.sh
 ```
 
-Elle recherche automatiquement tous les fichiers :
+## Intégration
 
-```text
-tests/test-*.sh
+```bash
+bash tests/test-integration.sh
 ```
 
-Chaque test est exécuté séparément.
+Le test d'intégration vérifie le fonctionnement combiné du CLI, de la configuration, des plugins et du reporting.
 
-À la fin, le nombre de tests réussis et échoués est affiché.
+## Non-régression
 
-Le script retourne :
-- `0` si tous les tests passent ;
-- `1` si au moins un test échoue.
+```bash
+bash tests/test-regression.sh
+```
+
+Le test de non-régression vérifie les commandes de base et les wrappers legacy conservés pour compatibilité.
+
+Les tests restent indépendants et ne nécessitent aucun framework externe.

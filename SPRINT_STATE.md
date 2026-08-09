@@ -1,17 +1,14 @@
 Sprint: 1.10.0
-Partie: 4
+Partie: 5
 
 Status: COMPLETE
 
 Objectif:
-- Renforcer le CLI et uniformiser les erreurs.
+- Ajouter les tests d'intégration et de non-régression du sprint.
 
 Modified:
-- lib/cli_options.sh
-- lib/cli_errors.sh
-- plex-toolkit
-- tests/test-dispatcher.sh
-- docs/CLI.md
+- docs/TESTS.md
 
 New:
-- tests/test-cli.sh
+- tests/test-integration.sh
+- tests/test-regression.sh

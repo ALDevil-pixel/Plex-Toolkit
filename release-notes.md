@@ -1,9 +1,8 @@
-# Sprint 1.10.0 - Partie 4
+# Sprint 1.10.0 - Partie 5
 
-## CLI et erreurs
+## Tests d'intégration
 
-- Les options inconnues sont désormais rejetées par le parser commun.
-- Ajout d'une validation générique des valeurs d'options.
-- Simplification du dispatcher principal.
-- Conservation des codes de sortie `0/1/2`.
-- Ajout de tests dédiés au parser et au dispatcher.
+- Ajout d'un scénario intégrant CLI, configuration, plugins et reporting.
+- Ajout d'un test de non-régression des commandes de base.
+- Vérification de la compatibilité des wrappers legacy.
+- Documentation des nouveaux tests.
