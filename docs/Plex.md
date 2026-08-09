@@ -2,7 +2,7 @@
 
 ## Configuration
 
-La configuration Plex est séparée de la configuration générale :
+La configuration Plex est définie dans :
 
 ```text
 config/plex.conf
@@ -18,36 +18,49 @@ PLEX_VERIFY_TLS
 PLEX_RETRIES
 ```
 
-Exemple :
+Le token ne doit jamais être versionné.
+
+## Client API
+
+Les appels HTTP sont centralisés dans :
 
 ```text
-PLEX_URL="https://plex.example.test:32400"
-PLEX_TOKEN="..."
-PLEX_TIMEOUT=10
-PLEX_VERIFY_TLS=true
-PLEX_RETRIES=2
+lib/plex_api.sh
 ```
 
-Le token ne doit jamais être placé dans le dépôt Git.
+Le module fournit notamment :
 
-## Validation
+```text
+ptk_plex_request
+ptk_plex_ping
+ptk_plex_url
+```
+
+Les paramètres réseau sont pris exclusivement depuis `config/plex.conf`.
+
+Le client :
+
+- utilise le token Plex dans l'en-tête HTTP ;
+- applique le timeout configuré ;
+- respecte la vérification TLS ;
+- effectue le nombre de tentatives configuré ;
+- journalise les échecs ;
+- ne contient aucune logique métier.
+
+## Vérification de connexion
 
 ```bash
-./plex-toolkit plex-config --config config/plex.conf
+./plex-toolkit plex-ping --config config/plex.conf
 ```
 
-La commande vérifie uniquement la cohérence de la configuration. Elle ne contacte pas encore le serveur Plex.
-
-Le token est volontairement masqué dans la sortie.
-
-## URL
-
-Le module commun :
+Cette commande contacte :
 
 ```text
-lib/plex_config.sh
+/identity
 ```
 
-fournit également `ptk_plex_url` pour construire les URL Plex sans dupliquer la logique dans les prochaines commandes.
+et retourne un code de succès ou d'erreur.
 
-Les appels HTTP et l'API Plex seront ajoutés dans les parties suivantes.
+Le token n'est jamais affiché dans la sortie.
+
+Les commandes de bibliothèque seront ajoutées dans les prochaines parties.

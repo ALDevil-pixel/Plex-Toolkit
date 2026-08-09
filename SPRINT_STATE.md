@@ -1,17 +1,16 @@
 Sprint: 1.13.0
-Partie: 1
+Partie: 2
 
 Status: COMPLETE
 
 Objectif:
-- Poser la configuration Plex et sa validation centralisée.
+- Ajouter le client HTTP/API Plex commun et une vérification de connectivité.
 
 Modified:
 - plex-toolkit
 
 New:
-- config/plex.conf
-- lib/plex_config.sh
-- commands/plex-config
-- tests/test-plex-config.sh
+- lib/plex_api.sh
+- commands/plex-ping
+- tests/test-plex-api.sh
 - docs/Plex.md

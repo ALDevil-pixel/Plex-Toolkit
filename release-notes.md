@@ -1,12 +1,13 @@
-# Sprint 1.13.0 - Partie 1
+# Sprint 1.13.0 - Partie 2
 
-## Configuration Plex
+## Client API Plex
 
-- Ajout d'une configuration Plex dédiée.
-- Validation de l'URL Plex.
-- Validation du token.
-- Validation du timeout, TLS et nombre de retries.
-- Ajout de la commande `plex-config`.
-- Le token n'est jamais affiché par la commande.
-- Ajout du constructeur d'URL Plex commun.
-- Aucun appel réseau dans cette partie.
+- Ajout d'un client HTTP Plex centralisé.
+- Utilisation du token via l'en-tête `X-Plex-Token`.
+- Timeout configurable.
+- Vérification TLS configurable.
+- Retries configurables.
+- Journalisation des échecs.
+- Ajout de `plex-ping`.
+- Ajout de tests de non-fuite du token.
+- Aucune logique métier de bibliothèque dans le client API.
