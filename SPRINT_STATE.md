@@ -1,16 +1,17 @@
 Sprint: 1.13.0
-Partie: 6
+Partie: 7
 
 Status: COMPLETE
 
 Objectif:
-- Renforcer les validations et protections avant les futures actions Plex.
+- Validation finale de l'intégration Plex et préparation de consolidation.
 
 Modified:
-- lib/plex_api.sh
-- commands/plex-compare
 - docs/Plex.md
 
 New:
-- lib/plex_safety.sh
-- tests/test-plex-safety.sh
+- tests/test-sprint-1.13.sh
+- tests/test-plex-release.sh
+
+Release:
+- Sprint 1.13.0 prêt pour consolidation finale.

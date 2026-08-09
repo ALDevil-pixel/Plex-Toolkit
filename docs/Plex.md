@@ -2,41 +2,55 @@
 
 ## Configuration
 
-La configuration Plex est définie dans :
-
 ```text
 config/plex.conf
 ```
 
-## Client API
-
-Les appels HTTP sont centralisés dans :
+Paramètres :
 
 ```text
-lib/plex_api.sh
+PLEX_URL
+PLEX_TOKEN
+PLEX_TIMEOUT
+PLEX_VERIFY_TLS
+PLEX_RETRIES
 ```
 
-Les erreurs réseau, timeout, TLS et retries sont gérés par cette couche.
+Le token ne doit jamais être versionné ni affiché.
 
-## Bibliothèques
+## Commandes
+
+### Vérifier la configuration
+
+```bash
+./plex-toolkit plex-config --config config/plex.conf
+```
+
+### Tester la connexion
+
+```bash
+./plex-toolkit plex-ping --config config/plex.conf
+```
+
+### Lister les bibliothèques
 
 ```bash
 ./plex-toolkit plex-libraries --config config/plex.conf
 ```
 
-## Médias
+### Lister les médias
 
 ```bash
 ./plex-toolkit plex-media --config config/plex.conf <library-key>
 ```
 
-## Comparaison
+### Comparer local et Plex
 
 ```bash
 ./plex-toolkit plex-compare --config config/plex.conf <répertoire-local> <library-key>
 ```
 
-La comparaison est en lecture seule et retourne :
+La comparaison retourne :
 
 ```text
 MATCH
@@ -44,14 +58,17 @@ LOCAL_ONLY
 PLEX_ONLY
 ```
 
-Avant la comparaison, le Toolkit vérifie :
+## Architecture
 
-- que le répertoire local existe ;
-- que la clé Plex est valide ;
-- que la bibliothèque existe ;
-- que son type correspond au type attendu par l'action.
-
-## Actions futures
+```text
+commandes
+   ↓
+modules métier
+   ↓
+plex_api.sh
+   ↓
+Plex HTTP API
+```
 
 Les protections communes sont centralisées dans :
 
@@ -59,10 +76,30 @@ Les protections communes sont centralisées dans :
 lib/plex_safety.sh
 ```
 
-Toute future action destructive Plex devra utiliser `--fix`.
+## Sécurité actuelle
 
-Une commande sans `--fix` ne doit jamais effectuer d'action destructive.
+Toutes les commandes livrées dans le Sprint 1.13.0 sont en lecture seule vis-à-vis des bibliothèques et médias Plex.
 
-Le token Plex ne doit jamais apparaître dans les sorties ou les logs.
+Aucune synchronisation destructive n'est activée dans ce sprint.
 
-La validation des cibles doit être effectuée avant toute future modification.
+Toute future action destructive devra :
+
+- exiger explicitement `--fix` ;
+- valider sa cible ;
+- valider le type de bibliothèque ;
+- être journalisée ;
+- retourner un code d'erreur cohérent ;
+- disposer d'un test dédié.
+
+## Validation
+
+Les tests spécifiques du sprint :
+
+```bash
+bash tests/test-sprint-1.13.sh
+bash tests/test-plex-release.sh
+```
+
+La suite générale du projet doit également être exécutée avant consolidation.
+
+Après validation, le dépôt peut être consolidé pour préparer le sprint suivant.
