@@ -20,7 +20,7 @@ case "$*" in
   */identity*)
     printf '{"MediaContainer":{"size":1}}'
     ;;
-  */library/sections*)
+  */library/sections)
     cat <<'JSON'
 {"MediaContainer":{"Directory":[
 {"key":"1","type":"movie","title":"Films"}

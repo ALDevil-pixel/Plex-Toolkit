@@ -14,10 +14,16 @@ fi
 ptk_return 0
 test "$?" -eq 0
 
-ptk_return 1
-test "$?" -eq 1
+if ptk_return 1; then
+    exit 1
+else
+    test "$?" -eq 1
+fi
 
-ptk_return 2
-test "$?" -eq 2
+if ptk_return 2; then
+    exit 1
+else
+    test "$?" -eq 2
+fi
 
 echo OK

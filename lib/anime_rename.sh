@@ -40,8 +40,8 @@ ptk_anime_extract_title() {
     local base="${filename%.*}"
 
     base="$(printf '%s\n' "$base" | sed -E \
-        's/[[:space:._-]*[Ss][0-9]{1,3}[Ee][0-9]{1,4}.*$//;
-         s/[[:space:._-]*[0-9]{1,3}[xX][0-9]{1,4}.*$//')"
+        's/[[:space:]_.-]*[Ss][0-9]{1,3}[Ee][0-9]{1,4}.*$//;
+         s/[[:space:]_.-]*[0-9]{1,3}[xX][0-9]{1,4}.*$//')"
 
     ptk_anime_sanitize_title "$base"
 }
@@ -142,7 +142,9 @@ ptk_anime_rename_proposals() {
         fi
     done < <(ptk_anime_collect_renames "$target")
 
-    return "$collision"
+    # Collisions are reported in the plan and are not an execution error.
+    # The plan remains a successful, read-only result.
+    return 0
 }
 
 ptk_anime_apply_renames() {

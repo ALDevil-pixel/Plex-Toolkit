@@ -26,7 +26,7 @@ cmd_list() {
     fi
 
     ptk_log_command_start "list"
-    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Target: ${target:-default}"
+    ptk_is_verbose && ptk_log_verbose "Target: ${target:-default}"
 
     ptk_list "$target"
     local rc=$?

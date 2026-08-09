@@ -56,7 +56,7 @@ cmd_audit() {
     fi
 
     ptk_log_command_start "audit"
-    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Configuration: $cfg"
+    ptk_is_verbose && ptk_log_verbose "Configuration: $cfg"
     [[ "$json" -eq 1 ]] && ptk_log_verbose "JSON summary enabled"
 
     if ptk_is_fix_enabled; then

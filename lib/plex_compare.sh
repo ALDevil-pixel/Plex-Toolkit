@@ -63,7 +63,7 @@ ptk_plex_compare_media() {
         fi
 
         title="$(printf '%s\n' "$title" |
-            sed -E 's/[._-]+/ /g; s/[[:space:]]+/ /g; s/^ +//; s/ +$//')"
+            sed -E 's/\([[:space:]]*\)//g; s/[._-]+/ /g; s/[[:space:]]+/ /g; s/^ +//; s/ +$//')"
 
         printf '%s\t%s\t%s\n' \
             "$(ptk_plex_normalize_title "$title")" "$year" "$file"

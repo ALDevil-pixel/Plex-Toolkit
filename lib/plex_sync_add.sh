@@ -30,5 +30,18 @@ ptk_plex_sync_add() {
     echo "Library key   : $library_key"
     echo "File          : $file"
     echo "Scan path     : $scan_dir"
+
+    if command -v jq >/dev/null 2>&1; then
+        if ptk_plex_sync_verify_add "$file" "$library_key" >/tmp/ptk-plex-sync-verify.out 2>/dev/null; then
+            echo "Plex media verification: FOUND"
+            rm -f /tmp/ptk-plex-sync-verify.out
+        else
+            echo "Plex media verification: PENDING"
+            rm -f /tmp/ptk-plex-sync-verify.out
+        fi
+    else
+        echo "Plex media verification: PENDING"
+    fi
+
     return 0
 }

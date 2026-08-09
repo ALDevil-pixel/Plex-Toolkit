@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
-mkdir -p config
-echo 'Movies=/tmp' > config/library.conf
-source lib/library_loader.sh
-ptk_load_libraries config/library.conf >/dev/null
-rm -rf config
+set -e
+
+TMP="$(mktemp -d)"
+trap 'rm -rf "$TMP"' EXIT
+
+echo 'Movies=/tmp' > "$TMP/library.conf"
+source "$PWD/lib/library_loader.sh"
+ptk_load_libraries "$TMP/library.conf" >/dev/null
+
 echo OK

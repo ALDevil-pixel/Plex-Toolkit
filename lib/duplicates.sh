@@ -189,11 +189,14 @@ ptk_find_duplicates() {
                 printf '  %s\n' "$duplicate_file"
             done
 
-            if [[ "$dry" -eq 0 ]]; then
-                local keep
-                keep="$(ptk_select_duplicate_keeper "${hash_group[@]}")"
+            # Always report the deterministic keeper. In dry-run this is an
+            # informational decision; in fix mode it is the file protected
+            # from deletion.
+            local keep
+            keep="$(ptk_select_duplicate_keeper "${hash_group[@]}")"
+            printf '[KEEP] %s\n' "$keep"
 
-                printf '[KEEP] %s\n' "$keep"
+            if [[ "$dry" -eq 0 ]]; then
 
                 local i victim current_hash
                 for ((i=0; i<${#hash_group[@]}; i++)); do

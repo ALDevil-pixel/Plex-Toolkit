@@ -25,7 +25,7 @@ cmd_version() {
     fi
 
     ptk_log_command_start "version"
-    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Reading VERSION"
+    ptk_is_verbose && ptk_log_verbose "Reading VERSION"
 
     ptk_version_show
     local rc=$?

@@ -25,7 +25,7 @@ cmd_cleanup() {
     fi
 
     ptk_log_command_start "cleanup"
-    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Command: cleanup"
+    ptk_is_verbose && ptk_log_verbose "Command: cleanup"
 
     if ptk_is_fix_enabled; then
         ptk_cleanup --fix "$target"

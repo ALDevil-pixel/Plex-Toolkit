@@ -40,8 +40,9 @@ cmd_movie_duplicates() {
 
     ptk_log_command_start "movie-duplicates"
 
-    local -a args=(--deep --extensions "$MOVIES_VIDEO_EXTENSIONS" "$target")
-    ptk_is_fix_enabled && args=(--deep --fix --extensions "$MOVIES_VIDEO_EXTENSIONS" "$target")
+    local extensions_csv="${MOVIES_VIDEO_EXTENSIONS// /,}"
+    local -a args=(--deep --extensions "$extensions_csv" "$target")
+    ptk_is_fix_enabled && args=(--deep --fix --extensions "$extensions_csv" "$target")
 
     ptk_find_duplicates "${args[@]}"
     local rc=$?

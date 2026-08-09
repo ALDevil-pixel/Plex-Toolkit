@@ -39,7 +39,7 @@ ptk_plex_sync_extract_title_year() {
     fi
 
     title="$(printf '%s\n' "$title" |
-        sed -E 's/[._-]+/ /g; s/[[:space:]]+/ /g; s/^ +//; s/ +$//')"
+        sed -E 's/\([[:space:]]*\)//g; s/[._-]+/ /g; s/[[:space:]]+/ /g; s/^ +//; s/ +$//')"
 
     printf '%s\t%s\n' "$title" "$year"
 }

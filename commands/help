@@ -25,7 +25,7 @@ cmd_help() {
     fi
 
     ptk_log_command_start "help"
-    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Showing help"
+    ptk_is_verbose && ptk_log_verbose "Showing help"
 
     ptk_help_show "${PTK_POSITIONAL[0]:-}"
     local rc=$?

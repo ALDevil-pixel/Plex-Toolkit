@@ -5,7 +5,7 @@ TEST_ROOT="$(mktemp -d)"
 trap 'rm -rf "$TEST_ROOT"' EXIT
 
 touch "$TEST_ROOT/empty.mkv"
-touch "$TEST_ROOT/invalid.wmv"
+echo "invalid extension" > "$TEST_ROOT/invalid.wmv"
 echo "video" > "$TEST_ROOT/good.mkv"
 
 source lib/check.sh

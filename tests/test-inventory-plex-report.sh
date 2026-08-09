@@ -20,7 +20,7 @@ mkdir -p "$TMP/bin"
 cat > "$TMP/bin/curl" <<'EOF'
 #!/usr/bin/env bash
 case "$*" in
-  */library/sections*)
+  */library/sections)
     cat <<'JSON'
 {"MediaContainer":{"Directory":[
 {"key":"1","type":"movie","title":"Films"}
@@ -49,7 +49,7 @@ PLEX_VERIFY_TLS=true
 PLEX_RETRIES=0
 EOF
 
-output="$("$ROOT/plex-toolkit" inventory-plex-report \
+output="$(PATH="$TMP/bin:$PATH" "$ROOT/plex-toolkit" inventory-plex-report \
     --config "$TMP/plex.conf" \
     "$TMP/inventory.txt" 1 "$TMP/report.txt")"
 
@@ -61,7 +61,7 @@ grep 'Film A' "$TMP/report.txt" >/dev/null
 grep 'Local Only' "$TMP/report.txt" >/dev/null
 
 # The command is read-only and must reject --fix.
-if "$ROOT/plex-toolkit" inventory-plex-report \
+if PATH="$TMP/bin:$PATH" "$ROOT/plex-toolkit" inventory-plex-report \
     --config "$TMP/plex.conf" --fix \
     "$TMP/inventory.txt" 1 "$TMP/report2.txt" >/dev/null 2>&1; then
     exit 1

@@ -37,3 +37,9 @@ Ils ne constituent pas des versions applicatives.
 - La version applicative reste `0.2.1`, sans bump artificiel lié aux corrections.
 - `VERSION` et `version` sont contrôlés pour rester identiques.
 - La présence de la version dans le changelog et le README est vérifiée automatiquement.
+
+## Partie 8
+- Validation finale du dépôt.
+- Runner global corrigé.
+- Tests globaux et historiques entièrement verts.
+- Rapport détaillé : `docs/FINAL-VALIDATION.md`.

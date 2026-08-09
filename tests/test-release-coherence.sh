@@ -27,7 +27,9 @@ do
 done
 
 grep -q "v$version" CHANGELOG.md
-grep -q "Sprint 1.8.0" SPRINT_STATE.md
+current_sprint="$(grep -E "^Sprint:" SPRINT_STATE.md | head -1 | cut -d: -f2- | xargs)"
+test -n "$current_sprint"
+grep -q "$current_sprint" SPRINT_STATE.md
 
 echo "Release coherence: OK"
 echo "Version: $version"

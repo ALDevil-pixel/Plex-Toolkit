@@ -12,7 +12,15 @@ ptk_inventory_load_config() {
     source "$(dirname "${BASH_SOURCE[0]}")/config.sh"
     ptk_load_config "$config_file" || return 1
 
-    : "${REPORT_DIR:=./reports}"
+    # Inventory historically used REPORT_DIR while the common config layer
+    # uses PTK_REPORT_DIR. Prefer an explicitly supplied legacy value, then
+    # keep both names synchronized.
+    if [[ -n "${REPORT_DIR:-}" ]]; then
+        PTK_REPORT_DIR="$REPORT_DIR"
+    else
+        REPORT_DIR="${PTK_REPORT_DIR:-./reports}"
+    fi
+
     : "${INVENTORY_CSV_REPORT:=inventory.csv}"
     : "${INVENTORY_JSON_REPORT:=inventory.json}"
     : "${INVENTORY_LOG:=inventory.log}"
@@ -21,9 +29,9 @@ ptk_inventory_load_config() {
     : "${INVENTORY_HASH_ENABLED:=false}"
     : "${INVENTORY_HASH_ALGORITHM:=sha256}"
 
-    ptk_config_bool "$INVENTORY_FOLLOW_SYMLINKS" >/dev/null || return 1
-    ptk_config_bool "$INVENTORY_INCLUDE_HIDDEN" >/dev/null || return 1
-    ptk_config_bool "$INVENTORY_HASH_ENABLED" >/dev/null || return 1
+    ptk_config_validate_bool "$INVENTORY_FOLLOW_SYMLINKS" >/dev/null || return 1
+    ptk_config_validate_bool "$INVENTORY_INCLUDE_HIDDEN" >/dev/null || return 1
+    ptk_config_validate_bool "$INVENTORY_HASH_ENABLED" >/dev/null || return 1
 
     case "${INVENTORY_HASH_ALGORITHM,,}" in
         sha256|md5) ;;
@@ -50,7 +58,8 @@ ptk_inventory_library() {
     local path="$1"
     [[ -d "$path" ]] || return 1
 
-    mkdir -p -- "$REPORT_DIR" || return 1
+    local report_dir="${REPORT_DIR:-${PTK_REPORT_DIR:-./reports}}"
+    mkdir -p -- "$report_dir" || return 1
 
     local tmp
     tmp="$(mktemp)"

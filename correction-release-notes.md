@@ -1,9 +1,12 @@
-# Release de correction - Partie 7
+# Release de correction - Partie 8
 
-## Documentation et versions
+## Validation finale
 
-- README obsolète remplacé par la documentation du projet consolidé.
-- Version applicative conservée à `0.2.1`.
-- Ajout de `tests/test-version-consistency.sh`.
-- Vérification de la cohérence entre `VERSION`, `version`, `CHANGELOG.md` et `README.md`.
-- Les numéros des parties de correction sont explicitement séparés des versions applicatives.
+- Runner global corrigé : racine du dépôt + protection contre la récursion.
+- Tests destructifs rendus non destructifs.
+- Compatibilité de configuration renforcée.
+- Corrections de matching Anime, Movie et Plex.
+- Vérification finale de structure, syntaxe, permissions et versions.
+- Suite globale : 117 tests passés, 0 échec.
+- Suite historique : 8 tests passés, 0 échec.
+- Rapport final : `docs/FINAL-VALIDATION.md`.

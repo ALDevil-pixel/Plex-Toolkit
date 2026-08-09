@@ -48,7 +48,7 @@ cmd_doctor() {
     fi
 
     ptk_log_command_start "doctor"
-    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Output format: $format"
+    ptk_is_verbose && ptk_log_verbose "Output format: $format"
 
     ptk_doctor_run "$format"
     local rc=$?

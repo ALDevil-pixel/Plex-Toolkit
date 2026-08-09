@@ -8,7 +8,7 @@ trap 'rm -rf "$TMP"' EXIT
 mkdir -p "$TMP/Anime/Show"
 
 touch "$TMP/Anime/Show/My.Anime.S01E02.mkv"
-touch "$TMP/Anime/Show/My-Anime.S01E02.mp4"
+touch "$TMP/Anime/Show/My-Anime.S01E02.mkv"
 touch "$TMP/Anime/Show/My Anime S01E03.ts"
 touch "$TMP/Anime/Show/readme.txt"
 

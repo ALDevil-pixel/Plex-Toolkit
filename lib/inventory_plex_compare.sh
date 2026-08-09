@@ -34,7 +34,13 @@ ptk_inventory_plex_compare() {
             [[ -n "$plex_title" ]] || continue
 
             local normalized_local normalized_plex
-            normalized_local="$(ptk_plex_normalize_title "${name%.*}")"
+            local local_base="${name%.*}"
+            if [[ "$local_base" =~ (^|[^0-9])((19|20)[0-9]{2})([^0-9]|$) ]]; then
+                local_base="${local_base/${BASH_REMATCH[2]}/}"
+            fi
+            local_base="$(printf '%s\n' "$local_base" |
+                sed -E 's/\([[:space:]]*\)//g')"
+            normalized_local="$(ptk_plex_normalize_title "$local_base")"
             normalized_plex="$(ptk_plex_normalize_title "$plex_title")"
 
             if [[ "$normalized_local" == "$normalized_plex" &&

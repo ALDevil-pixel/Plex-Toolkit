@@ -17,7 +17,7 @@ printf 'local only\n' > "$TMP/Movies/Local Only (2022).mp4"
 cat > "$TMP/bin/curl" <<'EOF'
 #!/usr/bin/env bash
 case "$*" in
-  */library/sections*)
+  */library/sections)
     cat <<'JSON'
 {"MediaContainer":{"Directory":[
 {"key":"1","type":"movie","title":"Films"}

@@ -87,15 +87,35 @@ PTK_CLI_FIX_SET=0
     done
 }
 
-ptk_is_fix_enabled() { [[ "$PTK_DRY_RUN" -eq 0 ]]; }
-ptk_is_dry_run() { [[ "$PTK_DRY_RUN" -eq 1 ]]; }
+ptk_is_fix_enabled() {
+    case "${PTK_DRY_RUN:-true}" in
+        0|false|no|off) return 0 ;;
+        1|true|yes|on) return 1 ;;
+        *) return 1 ;;
+    esac
+}
+ptk_is_dry_run() {
+    ! ptk_is_fix_enabled
+}
+ptk_is_verbose() {
+    case "${PTK_VERBOSE:-false}" in
+        1|true|yes|on) return 0 ;;
+        *) return 1 ;;
+    esac
+}
+ptk_is_quiet() {
+    case "${PTK_QUIET:-false}" in
+        1|true|yes|on) return 0 ;;
+        *) return 1 ;;
+    esac
+}
 
 ptk_log_info() {
-    [[ "$PTK_QUIET" -eq 1 ]] && return 0
+    ptk_is_quiet && return 0
     echo "[INFO] $*"
 }
 ptk_log_verbose() {
-    [[ "$PTK_VERBOSE" -eq 1 && "$PTK_QUIET" -eq 0 ]] || return 0
+    ptk_is_verbose && ! ptk_is_quiet || return 0
     echo "[DEBUG] $*"
 }
 

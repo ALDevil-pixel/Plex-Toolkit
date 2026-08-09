@@ -40,7 +40,7 @@ cmd_anime_scan() {
     fi
 
     ptk_log_command_start "anime-scan"
-    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Directory: $target"
+    ptk_is_verbose && ptk_log_verbose "Directory: $target"
 
     # This command is deliberately read-only.
     ptk_anime_scan "$target"

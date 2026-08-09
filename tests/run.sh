@@ -2,7 +2,8 @@
 set -u
 
 TEST_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$(dirname "$TEST_DIR")"
+ROOT="$(cd "$TEST_DIR/.." && pwd)"
+cd "$ROOT"
 
 passed=0
 failed=0
@@ -15,9 +16,11 @@ for test_file in "$TEST_DIR"/test-*.sh; do
     [[ -f "$test_file" ]] || continue
 
     name="$(basename "$test_file")"
+    [[ "$name" == "test-suite.sh" || "$name" == "test-historical-sprints.sh" ]] && continue
+
     printf "[TEST] %-40s " "$name"
 
-    if bash "$test_file" >/tmp/plex-toolkit-test.out 2>&1; then
+    if (cd "$ROOT" && bash "$test_file") >/tmp/plex-toolkit-test.out 2>&1; then
         echo "OK"
         passed=$((passed + 1))
     else

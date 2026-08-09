@@ -26,7 +26,7 @@ cmd_check() {
     fi
 
     ptk_log_command_start "check"
-    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Command: check"
+    ptk_is_verbose && ptk_log_verbose "Command: check"
 
     if ptk_is_fix_enabled; then
         ptk_check --fix "$target"

@@ -24,6 +24,13 @@ ptk_load_config() {
         source "$config_file"
     fi
 
+    # Backward-compatible configuration keys remain authoritative when present.
+    # This is especially important for inventory/report configurations created
+    # before the PTK_* common naming convention.
+    if [[ -n "${REPORT_DIR:-}" ]]; then
+        PTK_REPORT_DIR="$REPORT_DIR"
+    fi
+
     : "${PTK_LOG_DIR:=./logs}"
     : "${PTK_REPORT_DIR:=./reports}"
     : "${PTK_DRY_RUN:=true}"
@@ -31,6 +38,12 @@ ptk_load_config() {
     : "${PTK_COLOR:=true}"
 
     ptk_validate_config || return $?
+
+    # Explicit CLI values must remain authoritative over configuration files.
+    if declare -F ptk_restore_cli_overrides >/dev/null 2>&1; then
+        ptk_restore_cli_overrides
+    fi
+
     return 0
 }
 

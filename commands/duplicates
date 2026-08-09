@@ -103,7 +103,7 @@ cmd_duplicates() {
     fi
 
     ptk_log_command_start "duplicates"
-    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Command: duplicates"
+    ptk_is_verbose && ptk_log_verbose "Command: duplicates"
 
     local -a args=()
     ptk_is_fix_enabled && args+=(--fix)

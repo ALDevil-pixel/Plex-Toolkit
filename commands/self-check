@@ -25,7 +25,7 @@ cmd_self_check() {
     fi
 
     ptk_log_command_start "self-check"
-    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Running dependency checks"
+    ptk_is_verbose && ptk_log_verbose "Running dependency checks"
 
     ptk_self_check_run
     local rc=$?

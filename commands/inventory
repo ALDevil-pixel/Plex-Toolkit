@@ -21,7 +21,14 @@ cmd_inventory() {
         return "$rc"
     fi
     ptk_log_command_start "inventory"
-    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Command: inventory"
+
+    ptk_inventory_load_config "${PTK_INVENTORY_CONFIG:-config/inventory.conf}" || {
+        local rc=$?
+        ptk_log_command_end "inventory" "$rc"
+        return "$rc"
+    }
+
+    ptk_is_verbose && ptk_log_verbose "Command: inventory"
     ptk_inventory "$target"
     local rc=$?
     ptk_is_valid_exit_code "$rc" || rc="$PTK_EXIT_ERROR"
