@@ -1,8 +1,13 @@
 # Consolidation v0.2.1
 
-## Lot 3
+## Lot 4
 
-Ajout de `lib/cli_options.sh` pour préparer la gestion commune des options CLI.
+Les commandes principales utilisent maintenant le parseur commun :
+
+- `rename`
+- `cleanup`
+- `check`
+- `inventory`
 
 Options communes :
 - `--dry-run`
@@ -10,4 +15,5 @@ Options communes :
 - `--verbose` / `-v`
 - `--quiet` / `-q`
 
-Le module ne remplace pas encore les parseurs propres aux commandes. Il sert de base commune pour les prochaines intégrations.
+Les arguments positionnels sont conservés pour cibler une bibliothèque.
+La logique métier reste dans `lib/`.

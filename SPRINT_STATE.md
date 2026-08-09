@@ -1,11 +1,15 @@
 Release: 0.2.1
-Lot: 3
+Lot: 4
 
 Status: COMPLETE
 
 New:
-- lib/cli_options.sh
-- tests/test-cli-options.sh
+- tests/test-cli-command-options.sh
 
 Modified:
+- lib/cli_options.sh
+- commands/rename
+- commands/cleanup
+- commands/check
+- commands/inventory
 - docs/CONSOLIDATION.md

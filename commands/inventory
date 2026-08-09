@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${SCRIPT_DIR}/../lib/library_loader.sh"
+source "${SCRIPT_DIR}/../lib/cli_options.sh"
 source "${SCRIPT_DIR}/../lib/inventory.sh"
 
 cmd_inventory() {
-    ptk_inventory "$@"
+    ptk_parse_common_options "$@"
+    if [[ "${#PTK_POSITIONAL[@]}" -gt 1 ]]; then
+        echo "[ERROR] Too many positional arguments" >&2
+        return 2
+    fi
+    local target="${PTK_POSITIONAL[0]:-}"
+    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Command: inventory"
+    ptk_inventory "$target"
 }

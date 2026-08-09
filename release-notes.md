@@ -1,5 +1,6 @@
-# Consolidation 0.2.1 - Lot 3
+# Consolidation 0.2.1 - Lot 4
 
-- Ajout du module commun de gestion des options CLI.
-- Préparation de --dry-run, --fix, --verbose et --quiet.
-- Aucun changement de comportement des commandes existantes dans ce lot.
+- Intégration du parseur d'options commun dans les commandes principales.
+- Support homogène de --dry-run, --fix, --verbose et --quiet au niveau CLI.
+- Conservation des arguments positionnels.
+- Ajout d'un test du parseur CLI.

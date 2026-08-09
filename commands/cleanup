@@ -1,38 +1,19 @@
 #!/usr/bin/env bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-source "${SCRIPT_DIR}/../lib/library_loader.sh"
+source "${SCRIPT_DIR}/../lib/cli_options.sh"
 source "${SCRIPT_DIR}/../lib/cleanup.sh"
-source "${SCRIPT_DIR}/../lib/cleanup_fix.sh"
 
 cmd_cleanup() {
-    local dry=1
-    local target=""
-
-    while [[ $# -gt 0 ]]; do
-        case "$1" in
-            --fix) dry=0 ;;
-            *) target="$1" ;;
-        esac
-        shift
-    done
-
-    if [[ -z "$target" ]]; then
-        while IFS='|' read -r name path; do
-            echo "== $name =="
-            ptk_cleanup_library "$path"
-
-            if [[ "$dry" -eq 0 ]]; then
-                echo
-                echo "Cleanup enabled (--fix)"
-            fi
-        done < <(ptk_load_libraries)
+    ptk_parse_common_options "$@"
+    if [[ "${#PTK_POSITIONAL[@]}" -gt 1 ]]; then
+        echo "[ERROR] Too many positional arguments" >&2
+        return 2
+    fi
+    local target="${PTK_POSITIONAL[0]:-}"
+    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Command: cleanup"
+    if [[ "$PTK_DRY_RUN" -eq 0 ]]; then
+        ptk_cleanup --fix "$target"
     else
-        ptk_cleanup_library "$target"
-
-        if [[ "$dry" -eq 0 ]]; then
-            echo
-            echo "Cleanup enabled (--fix)"
-        fi
+        ptk_cleanup "$target"
     fi
 }

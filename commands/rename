@@ -1,7 +1,19 @@
 #!/usr/bin/env bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/../lib/cli_options.sh"
 source "${SCRIPT_DIR}/../lib/rename.sh"
 
 cmd_rename() {
-    ptk_rename "$@"
+    ptk_parse_common_options "$@"
+    if [[ "${#PTK_POSITIONAL[@]}" -gt 1 ]]; then
+        echo "[ERROR] Too many positional arguments" >&2
+        return 2
+    fi
+    local target="${PTK_POSITIONAL[0]:-}"
+    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Command: rename"
+    if [[ "$PTK_DRY_RUN" -eq 0 ]]; then
+        ptk_rename --fix "$target"
+    else
+        ptk_rename "$target"
+    fi
 }
