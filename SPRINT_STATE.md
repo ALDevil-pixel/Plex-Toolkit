@@ -1,14 +1,14 @@
 Sprint: 1.8.0
-Partie: 13
+Partie: 14
 
 Status: COMPLETE
 
 Objectif:
-- Finaliser le point d'entrée CLI principal.
+- Finaliser les outils de développement et de validation du dépôt.
 
 Modified:
-- plex-toolkit
+- Makefile
 
 New:
-- tests/test-dispatcher.sh
-- docs/CLI.md
+- tests/test-make-targets.sh
+- docs/DEVELOPMENT.md

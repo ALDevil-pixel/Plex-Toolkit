@@ -1,10 +1,10 @@
-# Sprint 1.8.0 - Partie 13
+# Sprint 1.8.0 - Partie 14
 
-## Point d'entrée CLI
+## Outils de développement
 
-- Le script `plex-toolkit` distribue maintenant vers toutes les commandes consolidées.
-- Les fonctions `cmd_*` sont appelées directement.
-- Les options restent gérées par chaque commande.
-- Une commande inconnue retourne `2`.
-- Sans argument, l'aide est affichée.
-- Ajout d'un test du dispatcher.
+- Amélioration de la cible `install`.
+- Le lint vérifie désormais la présence de ShellCheck.
+- Ajout d'une cible `validate` regroupant tests et lint.
+- Extension du lint aux scripts de tests et plugins.
+- Ajout d'un test de présence des cibles Make.
+- Documentation du workflow de développement.
