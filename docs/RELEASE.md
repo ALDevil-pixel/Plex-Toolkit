@@ -1,38 +1,35 @@
-# Sprint 1.9.0 — Release
+# Release Sprint 1.10.0
 
 ## Vérification finale
 
-Avant consolidation :
+Lancer la suite complète :
 
 ```bash
 bash tests/run.sh
 ```
 
-Puis, si ShellCheck est disponible :
+Puis le contrôle spécifique au sprint :
+
+```bash
+bash tests/test-sprint-1.10.sh
+```
+
+Enfin :
+
+```bash
+bash tests/test-release-ready.sh
+```
+
+Si ShellCheck est installé :
 
 ```bash
 make lint
 ```
 
-La cohérence spécifique au Sprint 1.9.0 peut être vérifiée avec :
+## Après validation
 
-```bash
-bash tests/test-sprint-1.9.sh
-```
+Créer un nouveau ZIP consolidé du dépôt.
 
-## Parties
+Ce ZIP consolidé devient la seule base de référence pour le sprint suivant.
 
-Le sprint a été découpé en 6 parties :
-
-1. Reporting configurable
-2. Inventory configurable
-3. Configuration commune
-4. Fiabilisation des exports
-5. Validation des configurations
-6. Vérification finale
-
-## Consolidation
-
-Après validation, créer un nouveau ZIP consolidé du dépôt.
-
-Ce ZIP doit devenir la seule base de référence avant le Sprint suivant.
+Ne pas repartir d'un lot intermédiaire.

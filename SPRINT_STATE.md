@@ -1,14 +1,17 @@
 Sprint: 1.10.0
-Partie: 5
+Partie: 6
 
 Status: COMPLETE
 
 Objectif:
-- Ajouter les tests d'intégration et de non-régression du sprint.
+- Vérification finale du Sprint 1.10.0 et préparation de consolidation.
 
 Modified:
-- docs/TESTS.md
+- docs/RELEASE.md
 
 New:
-- tests/test-integration.sh
-- tests/test-regression.sh
+- tests/test-sprint-1.10.sh
+- tests/test-release-ready.sh
+
+Release:
+- Sprint 1.10.0 prêt pour consolidation finale.
