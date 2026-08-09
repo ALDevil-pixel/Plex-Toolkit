@@ -1,13 +1,14 @@
-# Sprint 1.14.0 - Partie 1
+# Sprint 1.14.0 - Partie 2
 
-## Plan de synchronisation Plex
+## Préparation des ajouts Plex
 
-- Ajout d'une configuration dédiée à la synchronisation.
-- Ajout du mode `local-to-plex`.
-- Ajout de `plex-sync-plan`.
-- Transformation des résultats de comparaison en actions proposées.
-- `ADD_TO_PLEX` proposé pour les fichiers locaux compatibles.
-- `PLEX_ONLY` reste informatif et ne déclenche aucune suppression.
-- `--fix` explicitement refusé par le plan.
+- Ajout de la validation des fichiers candidats.
+- Contrôle des extensions autorisées.
+- Contrôle de lecture.
+- Refus des liens symboliques.
+- Ajout de racines locales autorisées.
+- Validation de l'existence et du type de bibliothèque Plex.
+- Ajout de `plex-sync-validate`.
+- `--fix` refusé.
 - Aucun appel de modification Plex.
-- Ajout de tests dédiés.
+- Ajout de tests de validation.

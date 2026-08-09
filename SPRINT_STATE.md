@@ -1,18 +1,18 @@
 Sprint: 1.14.0
-Partie: 1
+Partie: 2
 
 Status: COMPLETE
 
 Objectif:
-- Préparer la synchronisation Plex avec un plan local-vers-Plex strictement en lecture seule.
+- Valider les cibles d'une future synchronisation local-vers-Plex sans effectuer de modification.
 
 Modified:
-- plex-toolkit
-
-New:
 - config/plex-sync.conf
 - lib/plex_sync_config.sh
-- lib/plex_sync_plan.sh
-- commands/plex-sync-plan
-- tests/test-plex-sync-plan.sh
+- plex-toolkit
 - docs/Plex-Sync.md
+
+New:
+- lib/plex_sync_validate.sh
+- commands/plex-sync-validate
+- tests/test-plex-sync-validate.sh

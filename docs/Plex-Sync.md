@@ -4,49 +4,43 @@
 
 Cette première partie prépare la synchronisation sans effectuer de modification.
 
+## Sprint 1.14.0.2
+
+Cette partie ajoute la validation d'une cible avant toute future action `ADD_TO_PLEX`.
+
 Configuration :
 
 ```text
-config/plex-sync.conf
+PLEX_SYNC_ALLOWED_ROOTS
 ```
 
-Paramètres :
+Lorsqu'elle est renseignée, un fichier doit se trouver sous l'un des répertoires autorisés.
 
-```text
-PLEX_SYNC_MODE
-PLEX_SYNC_MOVIE_EXTENSIONS
-PLEX_SYNC_REQUIRE_YEAR
-PLEX_SYNC_ALLOW_PLEX_ONLY
-```
-
-Le mode actuellement supporté est :
-
-```text
-local-to-plex
-```
-
-## Plan
-
-Commande :
+La commande :
 
 ```bash
-./plex-toolkit plex-sync-plan --config config/plex.conf <répertoire-local> <library-key>
+./plex-toolkit plex-sync-validate --config config/plex.conf <fichier-local> <library-key>
 ```
 
-Le plan transforme les résultats de `plex-compare` en actions proposées :
+vérifie :
+
+- existence du fichier ;
+- lecture du fichier ;
+- extension autorisée ;
+- absence de lien symbolique ;
+- appartenance éventuelle aux racines autorisées ;
+- existence de la bibliothèque Plex ;
+- type `movie` de la bibliothèque.
+
+La commande est strictement en lecture seule.
+
+Elle affiche explicitement :
 
 ```text
-ADD_TO_PLEX
-REVIEW
-NONE
+Action         : ADD_TO_PLEX (prepared only)
+Modification   : NONE
 ```
 
-`ADD_TO_PLEX` signifie qu'un fichier local peut être proposé pour une future synchronisation vers Plex.
+`--fix` est refusé.
 
-Cette partie **n'envoie aucune requête de modification à Plex**.
-
-`PLEX_ONLY` reste informatif et ne déclenche aucune suppression locale.
-
-`--fix` est volontairement refusé par `plex-sync-plan`.
-
-Les prochaines parties pourront implémenter les actions une par une, avec leurs propres validations et tests.
+Aucune requête de modification Plex n'est encore effectuée.
