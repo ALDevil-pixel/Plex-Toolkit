@@ -1,13 +1,14 @@
 Release: 0.2.1
-Lot: 5
+Lot: 6
 
 Status: COMPLETE
 
-New:
-- lib/exit_codes.sh
-- lib/cli_errors.sh
-- tests/test-exit-codes.sh
-- tests/test-cli-errors.sh
-
 Modified:
+- commands/rename
+- commands/cleanup
+- commands/check
+- commands/inventory
 - docs/CONSOLIDATION.md
+
+New:
+- tests/test-command-errors.sh

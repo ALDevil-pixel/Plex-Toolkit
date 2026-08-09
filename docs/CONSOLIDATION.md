@@ -1,16 +1,17 @@
 # Consolidation v0.2.1
 
-## Lot 5
+## Lot 6
 
-Ajout des codes de sortie et de la gestion commune des erreurs CLI.
+Intégration des briques communes de codes de retour et d'erreurs dans les quatre commandes principales :
 
-Codes :
+- `rename`
+- `cleanup`
+- `check`
+- `inventory`
+
+Comportement harmonisé :
 - `0` : succès
 - `1` : erreur d'exécution
-- `2` : erreur d'utilisation / paramètres
+- `2` : erreur d'utilisation
 
-Nouveaux modules :
-- `lib/exit_codes.sh`
-- `lib/cli_errors.sh`
-
-Ce lot prépare l'harmonisation des commandes sans modifier leur logique métier.
+Les chemins explicitement fournis sont validés avant l'appel au moteur métier.

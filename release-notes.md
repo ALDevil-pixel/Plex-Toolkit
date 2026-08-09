@@ -1,6 +1,6 @@
-# Consolidation 0.2.1 - Lot 5
+# Consolidation 0.2.1 - Lot 6
 
-- Ajout des codes de sortie communs.
-- Ajout de la gestion commune des erreurs CLI.
-- Ajout des contrôles de répertoire.
-- Aucun changement volontaire du comportement métier.
+- Intégration des codes de retour communs.
+- Validation des répertoires fournis en argument.
+- Harmonisation des erreurs de paramètres.
+- Test CLI complémentaire.
