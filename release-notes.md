@@ -1,12 +1,12 @@
-# Sprint 1.13.0 - Partie 3
+# Sprint 1.13.0 - Partie 4
 
-## Bibliothèques Plex
+## Médias Plex
 
-- Ajout de la découverte via `/library/sections`.
-- Ajout du module `lib/plex_libraries.sh`.
-- Ajout de la commande `plex-libraries`.
+- Ajout de la lecture des médias d'une bibliothèque.
+- Ajout de `lib/plex_media.sh`.
+- Ajout de la commande `plex-media`.
+- Validation de la clé de bibliothèque.
 - Parsing JSON via `jq`.
-- Ajout d'un test avec serveur HTTP simulé.
-- Aucun appel Plex réel dans les tests.
-- Aucune modification des bibliothèques Plex.
-- Séparation du transport API et de la logique de découverte.
+- Ajout d'un test avec API Plex simulée.
+- Aucun changement côté serveur Plex.
+- Données exposées : ratingKey, type, titre, année, bibliothèque et date de mise à jour.

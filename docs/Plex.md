@@ -24,36 +24,46 @@ La découverte des bibliothèques est centralisée dans :
 lib/plex_libraries.sh
 ```
 
-La commande :
-
 ```bash
 ./plex-toolkit plex-libraries --config config/plex.conf
 ```
 
-interroge :
+## Médias
+
+La lecture des médias d'une bibliothèque est centralisée dans :
 
 ```text
-/library/sections
+lib/plex_media.sh
 ```
 
-et affiche :
+Commande :
+
+```bash
+./plex-toolkit plex-media --config config/plex.conf <library-key>
+```
+
+Elle interroge :
 
 ```text
-key    type    title    agent    scanner
+/library/sections/<library-key>/all
 ```
 
-Exemple :
+et affiche notamment :
 
 ```text
-1       movie   Films
-2       show    Séries
-3       artist Musique
+ratingKey
+type
+title
+year
+librarySectionID
+librarySectionTitle
+updatedAt
 ```
 
-La commande est strictement en lecture seule.
+Cette commande est strictement en lecture seule.
 
-Elle ne modifie aucune bibliothèque et ne lance aucune analyse Plex.
+Elle ne modifie aucun élément Plex.
 
-Le token Plex est transmis au client API mais n'est jamais affiché.
+La clé de bibliothèque est vérifiée avant l'interrogation des médias.
 
-La logique de découverte est séparée du transport HTTP afin que les prochaines commandes puissent réutiliser le même client.
+Les prochaines parties pourront utiliser ces données pour comparer l'état Plex avec l'inventaire local.

@@ -1,16 +1,16 @@
 Sprint: 1.13.0
-Partie: 3
+Partie: 4
 
 Status: COMPLETE
 
 Objectif:
-- Découvrir les bibliothèques Plex via l'API sans modifier le serveur.
+- Lire les médias d'une bibliothèque Plex sans modifier le serveur.
 
 Modified:
 - plex-toolkit
 
 New:
-- lib/plex_libraries.sh
-- commands/plex-libraries
-- tests/test-plex-libraries.sh
+- lib/plex_media.sh
+- commands/plex-media
+- tests/test-plex-media.sh
 - docs/Plex.md
