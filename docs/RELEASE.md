@@ -1,35 +1,38 @@
-# Release 0.2.1
+# Sprint 1.9.0 — Release
 
-## État
+## Vérification finale
 
-La consolidation `0.2.1` et le Sprint `1.8.0` sont prêts pour une vérification finale.
-
-## Vérification
-
-Depuis la racine :
+Avant consolidation :
 
 ```bash
 bash tests/run.sh
 ```
 
-Puis :
+Puis, si ShellCheck est disponible :
 
 ```bash
 make lint
 ```
 
-La cohérence structurelle peut être vérifiée avec :
+La cohérence spécifique au Sprint 1.9.0 peut être vérifiée avec :
 
 ```bash
-bash tests/test-release-coherence.sh
+bash tests/test-sprint-1.9.sh
 ```
 
-## Règle de consolidation
+## Parties
 
-Les fichiers modifiés lors des lots sont toujours fournis dans leur intégralité.
+Le sprint a été découpé en 6 parties :
 
-Le prochain dépôt consolidé doit être utilisé comme base avant tout nouveau sprint.
+1. Reporting configurable
+2. Inventory configurable
+3. Configuration commune
+4. Fiabilisation des exports
+5. Validation des configurations
+6. Vérification finale
 
-## Version
+## Consolidation
 
-La version actuelle du dépôt est celle indiquée dans `VERSION`.
+Après validation, créer un nouveau ZIP consolidé du dépôt.
+
+Ce ZIP doit devenir la seule base de référence avant le Sprint suivant.

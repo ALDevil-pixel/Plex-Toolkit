@@ -1,10 +1,13 @@
-# Sprint 1.9.0 - Partie 5
+# Sprint 1.9.0 - Partie 6
 
-## Validation de configuration
+## Vérification finale
 
-- Ajout d'une validation systématique après chargement.
-- Validation des booléens communs.
-- Validation des chemins communs.
-- Validation de la présence des extensions vidéo.
-- Les configurations invalides sont maintenant refusées.
-- Ajout de tests dédiés aux erreurs de configuration.
+- Ajout d'un test de cohérence spécifique au Sprint 1.9.0.
+- Vérification de la présence des configurations et modules concernés.
+- Vérification de l'utilisation du chargeur de configuration commun.
+- Runner de tests conservé comme point d'entrée unique.
+- Documentation de la procédure de release.
+
+## Statut
+
+Le Sprint 1.9.0 est terminé et prêt pour consolidation finale.

@@ -1,16 +1,17 @@
 Sprint: 1.9.0
-Partie: 5
+Partie: 6
 
 Status: COMPLETE
 
 Objectif:
-- Valider les configurations avant leur utilisation.
+- Vérification finale et préparation de la consolidation du Sprint 1.9.0.
 
 Modified:
-- lib/config.sh
-- config/defaults.conf
-- tests/test-config.sh
-- docs/CONFIG.md
+- tests/run.sh
 
 New:
-- tests/test-config-validation.sh
+- tests/test-sprint-1.9.sh
+- docs/RELEASE.md
+
+Release:
+- Sprint 1.9.0 prêt pour consolidation finale.
