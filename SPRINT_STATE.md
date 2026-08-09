@@ -1,16 +1,16 @@
 Sprint: 1.13.0
-Partie: 2
+Partie: 3
 
 Status: COMPLETE
 
 Objectif:
-- Ajouter le client HTTP/API Plex commun et une vérification de connectivité.
+- Découvrir les bibliothèques Plex via l'API sans modifier le serveur.
 
 Modified:
 - plex-toolkit
 
 New:
-- lib/plex_api.sh
-- commands/plex-ping
-- tests/test-plex-api.sh
+- lib/plex_libraries.sh
+- commands/plex-libraries
+- tests/test-plex-libraries.sh
 - docs/Plex.md

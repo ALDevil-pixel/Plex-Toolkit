@@ -8,18 +8,6 @@ La configuration Plex est définie dans :
 config/plex.conf
 ```
 
-Paramètres :
-
-```text
-PLEX_URL
-PLEX_TOKEN
-PLEX_TIMEOUT
-PLEX_VERIFY_TLS
-PLEX_RETRIES
-```
-
-Le token ne doit jamais être versionné.
-
 ## Client API
 
 Les appels HTTP sont centralisés dans :
@@ -28,39 +16,44 @@ Les appels HTTP sont centralisés dans :
 lib/plex_api.sh
 ```
 
-Le module fournit notamment :
+## Bibliothèques
+
+La découverte des bibliothèques est centralisée dans :
 
 ```text
-ptk_plex_request
-ptk_plex_ping
-ptk_plex_url
+lib/plex_libraries.sh
 ```
 
-Les paramètres réseau sont pris exclusivement depuis `config/plex.conf`.
-
-Le client :
-
-- utilise le token Plex dans l'en-tête HTTP ;
-- applique le timeout configuré ;
-- respecte la vérification TLS ;
-- effectue le nombre de tentatives configuré ;
-- journalise les échecs ;
-- ne contient aucune logique métier.
-
-## Vérification de connexion
+La commande :
 
 ```bash
-./plex-toolkit plex-ping --config config/plex.conf
+./plex-toolkit plex-libraries --config config/plex.conf
 ```
 
-Cette commande contacte :
+interroge :
 
 ```text
-/identity
+/library/sections
 ```
 
-et retourne un code de succès ou d'erreur.
+et affiche :
 
-Le token n'est jamais affiché dans la sortie.
+```text
+key    type    title    agent    scanner
+```
 
-Les commandes de bibliothèque seront ajoutées dans les prochaines parties.
+Exemple :
+
+```text
+1       movie   Films
+2       show    Séries
+3       artist Musique
+```
+
+La commande est strictement en lecture seule.
+
+Elle ne modifie aucune bibliothèque et ne lance aucune analyse Plex.
+
+Le token Plex est transmis au client API mais n'est jamais affiché.
+
+La logique de découverte est séparée du transport HTTP afin que les prochaines commandes puissent réutiliser le même client.
