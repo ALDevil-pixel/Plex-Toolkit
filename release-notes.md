@@ -1,11 +1,10 @@
-# Sprint 1.8.0 - Partie 8
+# Sprint 1.8.0 - Partie 9
 
-## Doctor CLI
+## Commandes d'information
 
-- Intégration des options CLI communes.
-- Ajout de la journalisation commune.
-- Validation des options.
+- Intégration de `info` à l'interface CLI commune.
+- Intégration de `list` à l'interface CLI commune.
+- Ajout de la validation des chemins fournis.
+- Journalisation commune.
 - Codes de retour harmonisés.
-- `doctor` reste strictement en lecture seule.
-- Amélioration de la sortie JSON.
-- Ajout d'un test CLI.
+- Ajout d'un test CLI commun.

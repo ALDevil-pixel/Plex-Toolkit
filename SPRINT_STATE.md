@@ -1,15 +1,15 @@
 Sprint: 1.8.0
-Partie: 8
+Partie: 9
 
 Status: COMPLETE
 
 Objectif:
-- Harmoniser doctor avec l'interface CLI commune.
+- Harmoniser les commandes d'information avec l'interface CLI commune.
 
 Modified:
-- commands/doctor
-- lib/doctor.sh
+- commands/info
+- commands/list
 - docs/CLI.md
 
 New:
-- tests/test-doctor-cli.sh
+- tests/test-info-list-cli.sh

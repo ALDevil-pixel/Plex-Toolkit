@@ -1,20 +1,31 @@
-# doctor
+# Commandes CLI
 
-## Usage
+## info
 
 ```bash
-plex-toolkit doctor
-plex-toolkit doctor --json
+plex-toolkit info
+plex-toolkit info /media/Movies
 ```
 
 Options communes :
+- `--dry-run`
+- `--verbose / -v`
+- `--quiet / -q`
 
-```text
---dry-run
---verbose / -v
---quiet / -q
+`info` est une commande de consultation et ne modifie aucun fichier.
+
+## list
+
+```bash
+plex-toolkit list
+plex-toolkit list /media/Movies
 ```
 
-`doctor` est une commande de diagnostic uniquement. Elle ne modifie jamais le système et refuse donc `--fix`.
+Options communes :
+- `--dry-run`
+- `--verbose / -v`
+- `--quiet / -q`
 
-Le mode JSON fournit également l'état des outils vérifiés par le diagnostic.
+`list` est une commande de consultation et ne modifie aucun fichier.
+
+Les commandes refusent `--fix` lorsqu'elles ne proposent aucune opération de modification.
