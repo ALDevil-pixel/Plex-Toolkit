@@ -3,7 +3,7 @@ set -u
 
 TEST_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$TEST_DIR/.." && pwd)"
-cd "$ROOT"
+cd "$ROOT" || exit 1
 
 passed=0
 failed=0
@@ -14,9 +14,11 @@ echo
 
 for test_file in "$TEST_DIR"/test-*.sh; do
     [[ -f "$test_file" ]] || continue
-
     name="$(basename "$test_file")"
-    [[ "$name" == "test-suite.sh" || "$name" == "test-historical-sprints.sh" ]] && continue
+
+    # Helpers/wrappers are not independent tests.
+    [[ "$name" == "test-suite.sh" ]] && continue
+    [[ "$name" == "test-historical-sprints.sh" ]] && continue
 
     printf "[TEST] %-40s " "$name"
 
@@ -39,9 +41,4 @@ echo "Passed : $passed"
 echo "Failed : $failed"
 echo "Skipped: $skipped"
 
-if [[ "$failed" -ne 0 ]]; then
-    exit 1
-fi
-
-echo "All tests passed."
-exit 0
+(( failed == 0 ))

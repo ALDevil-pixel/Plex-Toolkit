@@ -4,7 +4,7 @@ set -e
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # Dispatcher must translate command hyphens to function underscores.
-grep -q 'function_name="cmd_${command//-/_}"' "$ROOT/plex-toolkit"
+grep -q '"cmd_${command//-/_}"' "$ROOT/plex-toolkit"
 
 # Common parser must accept --config and route known config names.
 source "$ROOT/lib/cli_errors.sh"

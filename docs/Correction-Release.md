@@ -43,3 +43,9 @@ Ils ne constituent pas des versions applicatives.
 - Runner global corrigé.
 - Tests globaux et historiques entièrement verts.
 - Rapport détaillé : `docs/FINAL-VALIDATION.md`.
+
+## Partie 9
+- Restauration de `VERSION`.
+- Correction des permissions POSIX dans l'archive.
+- Correction du test de dispatcher obsolète.
+- Validation du ZIP après extraction Linux.

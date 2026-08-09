@@ -1,5 +1,5 @@
 Correction Release
-Partie: 8
+Partie: 9
 
 Status: COMPLETE
 
@@ -31,4 +31,6 @@ Partie 6 validée : permissions des entry points/plugins restaurées et testées
 
 Partie 7 validée : documentation consolidée et cohérence de version vérifiée.
 
-Partie 8 validée : validation finale effectuée.
+
+
+Partie 9 validée : dépôt et archive finale validés après extraction Linux.

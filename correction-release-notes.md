@@ -1,12 +1,12 @@
-# Release de correction - Partie 8
+# Release de correction - Partie 9
 
-## Validation finale
+## Résultat
 
-- Runner global corrigé : racine du dépôt + protection contre la récursion.
-- Tests destructifs rendus non destructifs.
-- Compatibilité de configuration renforcée.
-- Corrections de matching Anime, Movie et Plex.
-- Vérification finale de structure, syntaxe, permissions et versions.
-- Suite globale : 117 tests passés, 0 échec.
-- Suite historique : 8 tests passés, 0 échec.
+- `VERSION` restauré et synchronisé avec `version`.
+- Permissions exécutables restaurées.
+- Test de dispatcher obsolète corrigé.
+- Suite historique : 8/8.
+- Suite globale : 119/119.
+- `make test` : PASS.
+- ZIP final extrait avec `unzip` puis `make test` : PASS.
 - Rapport final : `docs/FINAL-VALIDATION.md`.
