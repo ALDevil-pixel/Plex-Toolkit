@@ -1,7 +1,12 @@
 Correction Release
-Partie: 1
+Partie: 2
 
 Status: COMPLETE
+
+Partie 2:
+- Priorité configuration → CLI corrigée.
+- Normalisation des booléens communs ajoutée.
+- Tests de précédence ajoutés.
 
 Objectif:
 - Restaurer les fichiers perdus lors de la consolidation.

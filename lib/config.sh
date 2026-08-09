@@ -117,7 +117,34 @@ ptk_config_bool_value() {
 
 # Normalize common CLI booleans after configuration loading.
 ptk_normalize_common_booleans() {
-    PTK_DRY_RUN="${PTK_DRY_RUN:-1}"
-    PTK_VERBOSE="$(ptk_config_bool_value "${PTK_VERBOSE:-false}" 2>/dev/null || printf 'false')"
-    PTK_QUIET="$(ptk_config_bool_value "${PTK_QUIET:-false}" 2>/dev/null || printf 'false')"
+    # PTK_DRY_RUN is numeric and is controlled by the CLI.
+    if [[ "${PTK_DRY_RUN:-1}" != "0" && "${PTK_DRY_RUN:-1}" != "1" ]]; then
+        PTK_DRY_RUN=1
+    fi
+
+    # Configuration files may contain booleans, while the CLI parser uses
+    # numeric flags. Normalize both forms without treating "false" as an
+    # error.
+    local verbose_value quiet_value
+    verbose_value="$(ptk_config_bool_value "${PTK_VERBOSE:-false}" 2>/dev/null || printf 'false')"
+    quiet_value="$(ptk_config_bool_value "${PTK_QUIET:-false}" 2>/dev/null || printf 'false')"
+
+    if [[ "$verbose_value" == "true" ]]; then
+        PTK_VERBOSE=1
+    else
+        PTK_VERBOSE=0
+    fi
+
+    if [[ "$quiet_value" == "true" ]]; then
+        PTK_QUIET=1
+    else
+        PTK_QUIET=0
+    fi
+}
+
+ptk_finalize_config_with_cli() {
+    ptk_normalize_common_booleans
+    if declare -F ptk_restore_cli_overrides >/dev/null 2>&1; then
+        ptk_restore_cli_overrides
+    fi
 }

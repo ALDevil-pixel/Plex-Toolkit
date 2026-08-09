@@ -8,6 +8,10 @@ PTK_QUIET=0
 PTK_POSITIONAL=()
 PTK_CONFIG_FILE=""
 PTK_COMMON_OPTIONS_REMAINING=()
+PTK_CLI_DRY_RUN_SET=0
+PTK_CLI_VERBOSE_SET=0
+PTK_CLI_QUIET_SET=0
+PTK_CLI_FIX_SET=0
 
 ptk_set_config_override() {
     local config_file="$1"
@@ -37,13 +41,17 @@ ptk_parse_common_options() {
     PTK_POSITIONAL=()
     PTK_CONFIG_FILE=""
     PTK_COMMON_OPTIONS_REMAINING=()
+PTK_CLI_DRY_RUN_SET=0
+PTK_CLI_VERBOSE_SET=0
+PTK_CLI_QUIET_SET=0
+PTK_CLI_FIX_SET=0
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            --dry-run) PTK_DRY_RUN=1 ;;
-            --fix) PTK_DRY_RUN=0 ;;
-            --verbose|-v) PTK_VERBOSE=1 ;;
-            --quiet|-q) PTK_QUIET=1 ;;
+            --dry-run) PTK_DRY_RUN=1; PTK_CLI_DRY_RUN_SET=1 ;;
+            --fix) PTK_DRY_RUN=0; PTK_CLI_DRY_RUN_SET=1; PTK_CLI_FIX_SET=1 ;;
+            --verbose|-v) PTK_VERBOSE=1; PTK_CLI_VERBOSE_SET=1 ;;
+            --quiet|-q) PTK_QUIET=1; PTK_CLI_QUIET_SET=1 ;;
             --config)
                 shift
                 if [[ $# -eq 0 ]]; then
@@ -80,4 +88,25 @@ ptk_log_info() {
 ptk_log_verbose() {
     [[ "$PTK_VERBOSE" -eq 1 && "$PTK_QUIET" -eq 0 ]] || return 0
     echo "[DEBUG] $*"
+}
+
+ptk_restore_cli_overrides() {
+    if [[ "${PTK_CLI_DRY_RUN_SET:-0}" -eq 0 ]]; then
+        # No explicit CLI choice: retain the configuration/default value.
+        return 0
+    fi
+
+    # --fix/--dry-run are intentionally authoritative.
+    if [[ "${PTK_CLI_FIX_SET:-0}" -eq 1 ]]; then
+        PTK_DRY_RUN=0
+    else
+        PTK_DRY_RUN=1
+    fi
+
+    if [[ "${PTK_CLI_VERBOSE_SET:-0}" -eq 1 ]]; then
+        PTK_VERBOSE=1
+    fi
+    if [[ "${PTK_CLI_QUIET_SET:-0}" -eq 1 ]]; then
+        PTK_QUIET=1
+    fi
 }
