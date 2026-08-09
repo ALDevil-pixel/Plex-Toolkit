@@ -57,15 +57,22 @@ MATCH
 LOCAL_ONLY
 ```
 
-Le rapprochement utilise le titre normalisé et l'année lorsqu'elle est présente dans le nom local.
+## Sprint 1.15.0.5
 
-Cette étape est volontairement diagnostique.
+Ajout de la génération persistante d'un rapport local/Plex :
 
-Elle ne déclenche :
+```bash
+./plex-toolkit inventory-plex-report   --config config/plex.conf   inventory.txt   <library-key>   reports/plex-compare.txt
+```
 
-- aucun refresh Plex ;
-- aucune modification Plex ;
-- aucun renommage ;
-- aucune suppression.
+Le rapport contient :
 
-Les données Plex utilisées sont lues via l'API existante.
+```text
+Status|Local path|Local name|Plex title|Year|Plex ratingKey
+```
+
+Le fichier est écrit de manière atomique : les données sont générées dans un fichier temporaire puis déplacées vers la destination.
+
+La commande reste strictement en lecture seule et refuse `--fix`.
+
+Aucun fichier média n'est modifié.

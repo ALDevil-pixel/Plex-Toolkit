@@ -1,11 +1,10 @@
-# Sprint 1.15.0 - Partie 4
+# Sprint 1.15.0 - Partie 5
 
-## Intégration inventaire / Plex
+## Rapport local / Plex
 
-- Ajout de l'export des métadonnées médias Plex vers un format interne.
-- Ajout de `inventory-plex-compare`.
-- Rapprochement local/Plex par titre normalisé et année.
-- États `MATCH` et `LOCAL_ONLY`.
-- Commande strictement en lecture seule.
-- Aucun refresh ou changement Plex.
-- Ajout d'un test avec API Plex simulée.
+- Ajout de `inventory-plex-report`.
+- Génération persistante du résultat local/Plex.
+- Écriture via fichier temporaire puis déplacement.
+- Conservation du mode strictement lecture seule.
+- Refus de `--fix`.
+- Ajout d'un test dédié.

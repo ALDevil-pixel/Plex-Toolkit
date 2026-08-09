@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Compare local inventory records with Plex metadata.
-# This is diagnostic/read-only.
+# Read-only local inventory / Plex comparison helpers.
 
 ptk_inventory_plex_compare() {
     local local_inventory="$1"
@@ -55,4 +54,31 @@ ptk_inventory_plex_compare() {
     done < "$local_inventory"
 
     rm -f -- "$plex_records"
+}
+
+ptk_inventory_plex_build_report() {
+    local local_inventory="$1"
+    local plex_library="$2"
+    local output_file="$3"
+
+    [[ -n "$output_file" ]] || {
+        echo "[ERROR] Output report path is required." >&2
+        return 2
+    }
+
+    local tmp
+    tmp="$(mktemp)"
+
+    ptk_inventory_plex_compare "$local_inventory" "$plex_library" > "$tmp" || {
+        local rc=$?
+        rm -f -- "$tmp"
+        return "$rc"
+    }
+
+    mkdir -p -- "$(dirname -- "$output_file")" || {
+        rm -f -- "$tmp"
+        return 1
+    }
+
+    mv -- "$tmp" "$output_file"
 }
