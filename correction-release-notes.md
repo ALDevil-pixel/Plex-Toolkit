@@ -1,6 +1,6 @@
-# Release de correction - Partie 5
+# Release de correction - Partie 6
 
-- Suppression des dépendances artificielles des tests historiques à `SPRINT_STATE.md`.
-- Ajout du runner `tests/test-historical-sprints.sh`.
-- Ajout du contrôle `tests/test-sprint-state-independent.sh`.
-- Conservation du bit exécutable du lanceur `plex-toolkit`.
+- Diagnostic de l'échec restant de `test-sprint-1.10.sh`.
+- Restauration du bit exécutable des quatre plugins concernés et du lanceur.
+- Ajout de `tests/test-plugin-permissions.sh`.
+- Le runner historique n'exécute plus les helpers de contrôle comme des anciens sprints.

@@ -1,5 +1,5 @@
 Correction Release
-Partie: 5
+Partie: 6
 
 Status: COMPLETE
 
@@ -26,3 +26,5 @@ Correction 3 validée : comparaison d'inventaires et tests associés OK.
 Partie 4 validée : options spécifiques conservées par le parser commun et traitées par la commande.
 
 Partie 5 validée : tests historiques rendus indépendants de SPRINT_STATE.md.
+
+Partie 6 validée : permissions des entry points/plugins restaurées et testées.

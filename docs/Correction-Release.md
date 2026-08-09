@@ -19,6 +19,20 @@
 - Séparation des options communes et spécifiques aux commandes.
 
 ## Partie 5
-- Les tests historiques sont traités comme des tests de non-régression.
-- Ils ne dépendent plus du numéro courant de `SPRINT_STATE.md`.
-- Ajout d'un runner historique et d'un contrôle dédié.
+- Tests historiques rendus indépendants de `SPRINT_STATE.md`.
+- Ajout d'un runner de non-régression historique.
+
+## Partie 6
+### Permissions des entry points
+
+Les scripts utilisés comme entry points et plugins doivent rester exécutables après consolidation et packaging.
+
+Les permissions sont maintenant vérifiées pour :
+
+- `plex-toolkit`
+- `plugins/anime/audit.sh`
+- `plugins/anime/rename.sh`
+- `plugins/movies/duplicates.sh`
+- `plugins/plex/verify.sh`
+
+Un test dédié empêche une future régression silencieuse des permissions.
