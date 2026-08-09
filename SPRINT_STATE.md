@@ -1,18 +1,17 @@
 Sprint: 1.14.0
-Partie: 3
+Partie: 4
 
 Status: COMPLETE
 
 Objectif:
-- Implémenter la première action réelle local-vers-Plex : demander un refresh ciblé du répertoire contenant un média validé.
+- Gérer le caractère asynchrone du refresh Plex et distinguer requête acceptée, média trouvé et vérification en attente.
 
 Modified:
-- lib/plex_libraries.sh
-- lib/plex_sync_validate.sh
-- plex-toolkit
+- lib/plex_sync_add.sh
+- commands/plex-sync-add
+- config/plex-sync.conf
+- tests/test-plex-sync-add.sh
 - docs/Plex-Sync.md
 
 New:
-- lib/plex_sync_add.sh
-- commands/plex-sync-add
-- tests/test-plex-sync-add.sh
+- lib/plex_sync_verify.sh

@@ -8,10 +8,12 @@ source "${SCRIPT_DIR}/../lib/logger.sh"
 source "${SCRIPT_DIR}/../lib/plex_config.sh"
 source "${SCRIPT_DIR}/../lib/plex_api.sh"
 source "${SCRIPT_DIR}/../lib/plex_libraries.sh"
+source "${SCRIPT_DIR}/../lib/plex_media.sh"
 source "${SCRIPT_DIR}/../lib/plex_safety.sh"
 source "${SCRIPT_DIR}/../lib/plex_sync_config.sh"
 source "${SCRIPT_DIR}/../lib/plex_sync_validate.sh"
 source "${SCRIPT_DIR}/../lib/plex_sync_add.sh"
+source "${SCRIPT_DIR}/../lib/plex_sync_verify.sh"
 
 cmd_plex_sync_add() {
     ptk_parse_common_options "$@" || return $?
@@ -42,30 +44,54 @@ cmd_plex_sync_add() {
 
     if ! ptk_is_fix_enabled; then
         echo "[DRY-RUN] Would request Plex refresh for: $file"
+
         ptk_plex_sync_validate_file "$file" || {
             local rc=$?
             ptk_log_command_end "plex-sync-add" "$rc"
             return "$rc"
         }
+
         ptk_plex_sync_validate_library "$library_key" || {
             local rc=$?
             ptk_log_command_end "plex-sync-add" "$rc"
             return "$rc"
         }
+
         ptk_plex_sync_validate_library_path "$file" "$library_key" >/dev/null || {
             local rc=$?
             ptk_log_command_end "plex-sync-add" "$rc"
             return "$rc"
         }
+
         echo "[DRY-RUN] No Plex request sent."
         ptk_log_command_end "plex-sync-add" 0
         return 0
     fi
 
-    ptk_plex_sync_add "$file" "$library_key"
-    local rc=$?
+    ptk_plex_sync_add "$file" "$library_key" || {
+        local rc=$?
+        ptk_log_command_end "plex-sync-add" "$rc"
+        return "$rc"
+    }
 
-    ptk_is_valid_exit_code "$rc" || rc="$PTK_EXIT_ERROR"
-    ptk_log_command_end "plex-sync-add" "$rc"
-    return "$rc"
+    # Plex's refresh endpoint accepts the request asynchronously. We therefore
+    # distinguish "request accepted" from "media confirmed".
+    local verify_rc
+    if ptk_plex_sync_verify_add "$file" "$library_key"; then
+        echo "Plex media verification: FOUND"
+        verify_rc=0
+    else
+        verify_rc=$?
+        if [[ "$verify_rc" -eq 1 ]]; then
+            echo "Plex media verification: PENDING"
+            verify_rc=0
+        else
+            echo "Plex media verification: ERROR" >&2
+            ptk_log_command_end "plex-sync-add" "$PTK_EXIT_ERROR"
+            return "$PTK_EXIT_ERROR"
+        fi
+    fi
+
+    ptk_log_command_end "plex-sync-add" "$verify_rc"
+    return "$verify_rc"
 }

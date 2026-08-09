@@ -1,13 +1,10 @@
-# Sprint 1.14.0 - Partie 3
+# Sprint 1.14.0 - Partie 4
 
-## Ajout d'un média à Plex
+## Vérification post-refresh
 
-- Ajout de `plex-sync-add`.
-- Support réel de `--fix`.
-- Dry-run par défaut.
-- Validation du chemin contre les locations de la bibliothèque Plex.
-- Refresh limité au répertoire contenant le média.
-- Aucun refresh global.
-- Aucun déplacement, renommage ou suppression local.
-- Ajout des locations Plex au module de bibliothèques.
+- Ajout de la vérification du média après refresh.
+- Distinction entre `FOUND` et `PENDING`.
+- Gestion explicite des erreurs de vérification.
+- Prise en compte du caractère asynchrone de Plex.
+- Aucun échec artificiel si Plex n'a pas encore indexé le média.
 - Ajout de tests avec API Plex simulée.

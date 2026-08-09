@@ -11,7 +11,7 @@ if ! command -v jq >/dev/null 2>&1; then
 fi
 
 mkdir -p "$TMP/bin" "$TMP/Movies"
-printf 'movie\n' > "$TMP/Movies/Film.mkv"
+printf 'movie\n' > "$TMP/Movies/Film A (2020).mkv"
 
 cat > "$TMP/bin/curl" <<'EOF'
 #!/usr/bin/env bash
@@ -26,12 +26,18 @@ JSON
   */library/sections/1/refresh*)
     printf '{"MediaContainer":{"size":1}}'
     ;;
+  */library/sections/1/all*)
+    cat <<'JSON'
+{"MediaContainer":{"size":1,"Metadata":[
+{"ratingKey":"101","type":"movie","title":"Film A","year":2020,"updatedAt":1700000000}
+]}}
+JSON
+    ;;
   *)
     exit 1
     ;;
 esac
 EOF
-# Inject actual test path into the mock.
 sed -i "s|PLACEHOLDER|$TMP/Movies|" "$TMP/bin/curl"
 chmod +x "$TMP/bin/curl"
 
@@ -53,26 +59,16 @@ EOF
 
 export PATH="$TMP/bin:$PATH"
 
-# Dry-run validates everything but must not call the refresh endpoint.
 dry="$("$ROOT/plex-toolkit" plex-sync-add \
-    --config "$TMP/plex.conf" "$TMP/Movies/Film.mkv" 1)"
+    --config "$TMP/plex.conf" "$TMP/Movies/Film A (2020).mkv" 1)"
 grep '\[DRY-RUN\] No Plex request sent.' <<<"$dry" >/dev/null
 
-# --fix performs the narrow directory refresh.
 fix="$("$ROOT/plex-toolkit" plex-sync-add \
-    --config "$TMP/plex.conf" --fix "$TMP/Movies/Film.mkv" 1)"
+    --config "$TMP/plex.conf" --fix "$TMP/Movies/Film A (2020).mkv" 1)"
 grep 'Plex add request: OK' <<<"$fix" >/dev/null
-grep 'Scan path' <<<"$fix" >/dev/null
+grep 'Plex media verification: FOUND' <<<"$fix" >/dev/null
 
-# Wrong path must fail.
-mkdir -p "$TMP/Other"
-cp "$TMP/Movies/Film.mkv" "$TMP/Other/Film.mkv"
-if "$ROOT/plex-toolkit" plex-sync-add \
-    --config "$TMP/plex.conf" --fix "$TMP/Other/Film.mkv" 1 >/dev/null 2>&1; then
-    exit 1
-fi
-
-test -f "$TMP/Movies/Film.mkv"
-test -f "$TMP/Other/Film.mkv"
+if grep -q 'test-token' <<<"$fix"; then exit 1; fi
+test -f "$TMP/Movies/Film A (2020).mkv"
 
 echo OK

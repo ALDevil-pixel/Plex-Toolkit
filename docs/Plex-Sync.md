@@ -2,65 +2,47 @@
 
 ## Sprint 1.14.0.1
 
-La commande `plex-sync-plan` prépare les actions sans modifier Plex.
+`plex-sync-plan` prépare les actions sans modifier Plex.
 
 ## Sprint 1.14.0.2
 
-La commande `plex-sync-validate` vérifie les cibles avant action.
+`plex-sync-validate` vérifie les cibles avant action.
 
 ## Sprint 1.14.0.3
 
-La commande `plex-sync-add` réalise la première action Plex réelle :
+`plex-sync-add` demande un refresh ciblé du répertoire contenant le média :
 
 ```bash
 ./plex-toolkit plex-sync-add   --config config/plex.conf   --fix   /media/Films/MonFilm.mkv   1
 ```
 
-### Principe
+Le Toolkit ne copie, ne déplace, ne renomme et ne supprime aucun fichier.
 
-Plex découvre les nouveaux médias lors d'un refresh de bibliothèque.
+## Sprint 1.14.0.4
 
-Le Toolkit ne déclenche jamais un refresh global lorsque l'ajout est ciblé.
+Après le refresh, Plex traite la demande de manière asynchrone.
 
-Il :
-
-1. vérifie le fichier ;
-2. vérifie la bibliothèque ;
-3. récupère les chemins `Location` de la bibliothèque Plex ;
-4. vérifie que le fichier se trouve réellement sous une de ces locations ;
-5. détermine le répertoire contenant le fichier ;
-6. demande à Plex un refresh limité à ce répertoire.
-
-Endpoint utilisé :
+Le Toolkit distingue donc :
 
 ```text
-/library/sections/<library-key>/refresh?path=<directory>
+Plex add request: OK
 ```
 
-### Dry-run
+de :
 
-Sans `--fix` :
-
-```bash
-./plex-toolkit plex-sync-add   --config config/plex.conf   /media/Films/MonFilm.mkv   1
+```text
+Plex media verification: FOUND
+Plex media verification: PENDING
 ```
 
-aucune requête de modification n'est envoyée.
+`FOUND` signifie que le média est déjà visible dans la bibliothèque.
 
-### Sécurité
+`PENDING` signifie que Plex a accepté la demande mais que le média n'est pas encore visible au moment de la vérification.
 
-Le `--fix` est obligatoire pour effectuer le refresh.
+Une erreur réelle du contrôle retourne un échec.
 
-Le fichier doit appartenir à une location Plex de la bibliothèque cible.
+Cette distinction évite de considérer un refresh asynchrone comme un échec simplement parce que l'indexation n'est pas instantanée.
 
-Le Toolkit refuse :
+La vérification utilise le titre et l'année extraits du nom de fichier.
 
-- un fichier inexistant ;
-- une extension non supportée ;
-- un lien symbolique ;
-- une bibliothèque inexistante ;
-- une bibliothèque qui n'est pas de type `movie` ;
-- un fichier situé hors des locations Plex ;
-- un fichier situé hors des racines autorisées si `PLEX_SYNC_ALLOWED_ROOTS` est configuré.
-
-Le Toolkit ne supprime, ne déplace et ne renomme aucun fichier.
+Aucune suppression ou modification locale n'est effectuée.
