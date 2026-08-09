@@ -1,7 +1,11 @@
-# Consolidation 0.2.1 - Lot 8
+# Sprint 1.8.0 - Partie 1
 
-Release de consolidation terminée.
+## Auto Fix
 
-Version : 0.2.1
-
-Ce lot clôture la consolidation avant le Sprint 1.8.0.
+- Intégration du mode `--fix` dans `cleanup`.
+- Conservation du mode lecture seule par défaut.
+- Suppression contrôlée des dossiers vides.
+- Suppression contrôlée des fichiers indésirables.
+- Suppression contrôlée des sous-titres orphelins.
+- Journalisation des suppressions existante conservée.
+- Ajout d'un test d'intégration.

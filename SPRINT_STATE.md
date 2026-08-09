@@ -1,8 +1,16 @@
-Release: 0.2.1
-Lot: 8
+Sprint: 1.8.0
+Partie: 1
 
 Status: COMPLETE
-Version: 0.2.1
 
-Next:
-- Sprint 1.8.0
+Objectif:
+- Première intégration réelle de l'Auto Fix sur cleanup.
+
+New:
+- lib/cleanup_fix.sh
+- tests/test-cleanup-fix-integration.sh
+
+Modified:
+- lib/cleanup.sh
+- commands/cleanup
+- docs/CLI.md
