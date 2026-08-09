@@ -1,6 +1,7 @@
-# Consolidation 0.2.1 - Lot 7
+# Consolidation 0.2.1 - Lot 8
 
-- Ajout d'un logger commun.
-- Journalisation du démarrage et de la fin des commandes.
-- Journalisation des codes de retour.
-- Harmonisation de la journalisation des commandes principales.
+Release de consolidation terminée.
+
+Version : 0.2.1
+
+Ce lot clôture la consolidation avant le Sprint 1.8.0.

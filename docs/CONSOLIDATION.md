@@ -1,25 +1,26 @@
 # Consolidation v0.2.1
 
-## Lot 7
+## Lot 8
 
-Journalisation commune des commandes principales.
+Dernier lot de consolidation avant le Sprint 1.8.0.
 
-Les commandes :
+Ajouts :
+- suite de tests commune ;
+- vérification des composants partagés ;
+- préparation de la release `0.2.1`.
+
+Composants consolidés :
+
+- `library_runner.sh`
+- `cli_options.sh`
+- `exit_codes.sh`
+- `cli_errors.sh`
+- `logger.sh`
+
+Les commandes principales restent :
 - `rename`
 - `cleanup`
 - `check`
 - `inventory`
 
-utilisent maintenant `lib/logger.sh` pour enregistrer :
-- le démarrage ;
-- la fin ;
-- le code de retour ;
-- les erreurs d'exécution.
-
-Fichier par défaut :
-
-```text
-logs/plex-toolkit.log
-```
-
-Le fichier peut être redéfini avec `PTK_LOG_FILE`.
+Le Sprint 1.8.0 pourra maintenant être développé sur cette base.

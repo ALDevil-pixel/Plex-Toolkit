@@ -1,15 +1,8 @@
 Release: 0.2.1
-Lot: 7
+Lot: 8
 
 Status: COMPLETE
+Version: 0.2.1
 
-New:
-- lib/logger.sh
-- tests/test-logger.sh
-
-Modified:
-- commands/rename
-- commands/cleanup
-- commands/check
-- commands/inventory
-- docs/CONSOLIDATION.md
+Next:
+- Sprint 1.8.0
