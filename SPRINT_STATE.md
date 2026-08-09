@@ -1,16 +1,15 @@
 Sprint: 1.12.0
-Partie: 2
+Partie: 3
 
 Status: COMPLETE
 
 Objectif:
-- Fiabiliser la détection des doublons Films et fournir une commande dédiée.
+- Définir une sélection déterministe du fichier à conserver parmi les doublons exacts.
 
 Modified:
+- config/movies.conf
+- lib/movie_config.sh
 - lib/duplicates.sh
-- plex-toolkit
-- docs/Movies.md
-
-New:
-- commands/movie-duplicates
+- tests/test-movie-config.sh
 - tests/test-movie-duplicates.sh
+- docs/Movies.md

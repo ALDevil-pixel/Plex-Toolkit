@@ -31,6 +31,42 @@ ptk_file_sha256() {
     fi
 }
 
+ptk_duplicate_keeper_score() {
+    local file="$1"
+    local ext="${file##*.}"
+    local rank=9999
+    local index=0
+    local preferred
+
+    for preferred in $MOVIES_PREFERRED_EXTENSIONS; do
+        if [[ "${preferred,,}" == "${ext,,}" ]]; then
+            rank="$index"
+            break
+        fi
+        index=$((index + 1))
+    done
+
+    # Lower score wins. Extension preference is primary; path length and
+    # lexical order make the result deterministic.
+    printf '%04d|%08d|%s\n' "$rank" "${#file}" "$file"
+}
+
+ptk_select_duplicate_keeper() {
+    local best=""
+    local best_score=""
+    local file score
+
+    for file in "$@"; do
+        score="$(ptk_duplicate_keeper_score "$file")"
+        if [[ -z "$best_score" || "$score" < "$best_score" ]]; then
+            best="$file"
+            best_score="$score"
+        fi
+    done
+
+    printf '%s\n' "$best"
+}
+
 ptk_find_duplicates() {
     local rootdir="."
     local minsize=0
@@ -154,15 +190,19 @@ ptk_find_duplicates() {
             done
 
             if [[ "$dry" -eq 0 ]]; then
-                local keep="${hash_group[0]}"
+                local keep
+                keep="$(ptk_select_duplicate_keeper "${hash_group[@]}")"
+
+                printf '[KEEP] %s\n' "$keep"
+
                 local i
-                for ((i=1; i<${#hash_group[@]}; i++)); do
+                for ((i=0; i<${#hash_group[@]}; i++)); do
+                    [[ "${hash_group[$i]}" == "$keep" ]] && continue
                     ptk_remove_duplicate "${hash_group[$i]}" "$dry" || {
                         rm -f -- "$hash_tmp"
                         return 1
                     }
                 done
-                printf '[KEEP] %s\n' "$keep"
             fi
 
             hash_group=()

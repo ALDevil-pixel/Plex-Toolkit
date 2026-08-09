@@ -11,6 +11,7 @@ ptk_load_movie_config() {
     : "${MOVIES_VIDEO_EXTENSIONS:=}"
     : "${MOVIES_MIN_SIZE:=0}"
     : "${MOVIES_INCLUDE_HIDDEN:=false}"
+    : "${MOVIES_PREFERRED_EXTENSIONS:=$MOVIES_VIDEO_EXTENSIONS}"
 
     ptk_validate_movie_config
 }
@@ -30,6 +31,23 @@ ptk_validate_movie_config() {
         echo "[ERROR] Configuration value is empty: MOVIES_VIDEO_EXTENSIONS" >&2
         return 1
     }
+
+    [[ -n "$MOVIES_PREFERRED_EXTENSIONS" ]] || {
+        echo "[ERROR] Configuration value is empty: MOVIES_PREFERRED_EXTENSIONS" >&2
+        return 1
+    }
+
+    local preferred ext allowed found
+    for preferred in $MOVIES_PREFERRED_EXTENSIONS; do
+        found=0
+        for allowed in $MOVIES_VIDEO_EXTENSIONS; do
+            [[ "${preferred,,}" == "${allowed,,}" ]] && found=1
+        done
+        (( found == 1 )) || {
+            echo "[ERROR] Preferred extension is not supported: $preferred" >&2
+            return 1
+        }
+    done
 
     return 0
 }

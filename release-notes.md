@@ -1,13 +1,11 @@
-# Sprint 1.12.0 - Partie 2
+# Sprint 1.12.0 - Partie 3
 
-## Doublons Films
+## Sélection du fichier à conserver
 
-- Remplacement de la comparaison superficielle par une détection en deux étapes.
-- Regroupement préalable par taille.
-- Vérification exacte par SHA-256.
-- Support SHA-256 via `sha256sum` ou `shasum`.
-- Ajout de la commande `movie-duplicates`.
-- Dry-run par défaut.
-- `--fix` supprime uniquement les doublons dont le contenu est vérifié identique.
-- Conservation du premier fichier du groupe.
-- Ajout de tests de non-régression et d'application.
+- Ajout de `MOVIES_PREFERRED_EXTENSIONS`.
+- Priorité configurable des extensions.
+- Sélection déterministe du fichier conservé.
+- Priorité à l'extension configurée.
+- Départage par longueur de chemin puis ordre lexical.
+- Suppression des doublons uniquement après sélection explicite du keeper.
+- Tests de la politique de sélection.
