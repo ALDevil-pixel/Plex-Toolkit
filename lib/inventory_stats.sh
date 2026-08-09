@@ -5,8 +5,8 @@ ptk_inventory_stats() {
     local input="$1"
 
     local files total
-    files=$(wc -l < "$input")
-    total=$(awk -F'|' '{s+=$3} END{print s+0}' "$input")
+    files="$(wc -l < "$input")"
+    total="$(awk -F'|' '{s+=$3} END{print s+0}' "$input")"
 
     ptk_inventory_log "Files: $files"
     ptk_inventory_log "Total size: $total bytes"
