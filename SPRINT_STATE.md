@@ -1,16 +1,16 @@
 Sprint: 1.11.0
-Partie: 1
+Partie: 2
 
 Status: COMPLETE
 
 Objectif:
-- Poser la configuration et la validation communes aux fonctionnalités Anime.
+- Analyser une bibliothèque Anime sans modifier les fichiers.
 
 Modified:
-- aucun fichier fonctionnel existant supprimé.
+- plex-toolkit
+- docs/Anime.md
 
 New:
-- config/anime.conf
-- lib/anime_config.sh
-- tests/test-anime-config.sh
-- docs/Anime.md
+- lib/anime_scanner.sh
+- commands/anime-scan
+- tests/test-anime-scan.sh

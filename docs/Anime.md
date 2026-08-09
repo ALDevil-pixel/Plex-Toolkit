@@ -1,27 +1,49 @@
-# Configuration Anime
+# Fonctionnalités Anime
 
-La configuration Anime est séparée de la configuration générale :
+## Configuration
+
+La configuration Anime est définie dans :
 
 ```text
 config/anime.conf
 ```
 
-Elle définit les éléments nécessaires aux prochains modules Anime :
-
-- répertoire racine optionnel ;
-- modèle de nom de série ;
-- modèle de saison ;
-- modèle d'épisode ;
-- extensions vidéo autorisées ;
-- obligation de détecter une saison ;
-- obligation de détecter un épisode.
-
-Le chargement et la validation sont centralisés dans :
+Elle est chargée et validée par :
 
 ```text
 lib/anime_config.sh
 ```
 
-Cette partie ne réalise encore aucun renommage et aucune modification de fichier.
+## Scan
 
-Les fonctionnalités Anime utiliseront cette configuration dans les parties suivantes du Sprint 1.11.0.
+Le scanner est :
+
+```text
+lib/anime_scanner.sh
+```
+
+Il est accessible via :
+
+```bash
+./plex-toolkit anime-scan <répertoire>
+```
+
+Le scan est **strictement en lecture seule**.
+
+Il recherche les formats vidéo configurés et tente de détecter :
+
+```text
+S01E02
+s01e02
+1x02
+```
+
+Pour chaque fichier vidéo, il indique la saison et l'épisode détectés lorsqu'ils sont disponibles.
+
+Les fichiers dont l'extension n'est pas autorisée sont signalés.
+
+Aucun fichier n'est renommé, déplacé ou supprimé.
+
+## Suite du développement
+
+Le scanner constitue la base des prochaines étapes de détection et de proposition de renommage.

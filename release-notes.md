@@ -1,11 +1,11 @@
-# Sprint 1.11.0 - Partie 1
+# Sprint 1.11.0 - Partie 2
 
-## Configuration Anime
+## Scanner Anime
 
-- Ajout d'une configuration dédiée Anime.
-- Ajout du chargeur et validateur Anime.
-- Validation des modèles de nommage.
-- Validation des extensions vidéo Anime.
-- Validation des paramètres booléens.
-- Ajout de tests dédiés.
-- Aucune modification de média n'est effectuée dans cette partie.
+- Ajout d'un scanner Anime en lecture seule.
+- Détection des extensions vidéo configurées.
+- Détection des formats SxxExx et 1x02.
+- Signalement des fichiers vidéo dont la saison/épisode n'est pas détecté.
+- Signalement des extensions non supportées.
+- Ajout de la commande `anime-scan`.
+- Ajout de tests vérifiant que le scan ne modifie aucun fichier.
