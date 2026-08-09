@@ -1,16 +1,17 @@
 Sprint: 1.15.0
-Partie: 3
+Partie: 4
 
 Status: COMPLETE
 
 Objectif:
-- Comparer deux inventaires locaux de manière déterministe et en lecture seule.
+- Rapprocher un inventaire local des médias présents dans Plex, en lecture seule.
 
 Modified:
 - plex-toolkit
 - docs/Inventory.md
 
 New:
-- lib/inventory_compare.sh
-- commands/inventory-compare
-- tests/test-inventory-compare.sh
+- lib/plex_inventory.sh
+- lib/inventory_plex_compare.sh
+- commands/inventory-plex-compare
+- tests/test-inventory-plex-compare.sh

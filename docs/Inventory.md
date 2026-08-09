@@ -27,13 +27,13 @@ name-size:<name>|<size>
 
 ## Sprint 1.15.0.3
 
-Ajout de la comparaison de deux inventaires :
+Ajout de la comparaison de deux inventaires locaux :
 
 ```bash
 ./plex-toolkit inventory-compare --config config/inventory.conf old.txt new.txt
 ```
 
-Résultats possibles :
+Résultats :
 
 ```text
 UNCHANGED
@@ -42,18 +42,30 @@ ADDED
 REMOVED
 ```
 
-`CHANGED` peut notamment représenter :
+## Sprint 1.15.0.4
 
-- un changement de taille ;
-- une modification de date ;
-- un changement de chemin pour une même identité.
+Ajout du rapprochement entre un inventaire local et Plex :
 
-La comparaison est strictement en lecture seule.
+```bash
+./plex-toolkit inventory-plex-compare   --config config/plex.conf   inventory.txt   <library-key>
+```
 
-Elle ne modifie ni les inventaires, ni les fichiers locaux.
-
-Le module est :
+Résultats :
 
 ```text
-lib/inventory_compare.sh
+MATCH
+LOCAL_ONLY
 ```
+
+Le rapprochement utilise le titre normalisé et l'année lorsqu'elle est présente dans le nom local.
+
+Cette étape est volontairement diagnostique.
+
+Elle ne déclenche :
+
+- aucun refresh Plex ;
+- aucune modification Plex ;
+- aucun renommage ;
+- aucune suppression.
+
+Les données Plex utilisées sont lues via l'API existante.

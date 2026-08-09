@@ -1,11 +1,11 @@
-# Sprint 1.15.0 - Partie 3
+# Sprint 1.15.0 - Partie 4
 
-## Comparaison d'inventaires
+## Intégration inventaire / Plex
 
-- Ajout de `inventory-compare`.
-- Comparaison basée sur l'identité des fichiers.
-- Distinction `UNCHANGED`, `CHANGED`, `ADDED` et `REMOVED`.
-- Prise en compte du hash lorsqu'il est disponible.
-- Fallback nom + taille lorsque le hash est absent.
+- Ajout de l'export des métadonnées médias Plex vers un format interne.
+- Ajout de `inventory-plex-compare`.
+- Rapprochement local/Plex par titre normalisé et année.
+- États `MATCH` et `LOCAL_ONLY`.
 - Commande strictement en lecture seule.
-- Ajout d'un test dédié.
+- Aucun refresh ou changement Plex.
+- Ajout d'un test avec API Plex simulée.
