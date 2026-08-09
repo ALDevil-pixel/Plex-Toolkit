@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # Client HTTP Plex commun.
-#
-# Ce module centralise les appels API et ne contient aucune logique métier.
+# Les opérations métier restent dans les modules spécialisés.
 
 ptk_plex_curl_args() {
     local -a args=(--silent --show-error --fail --connect-timeout "$PLEX_TIMEOUT" --max-time "$PLEX_TIMEOUT")
@@ -34,7 +33,9 @@ ptk_plex_request() {
     local -a args
     mapfile -t args < <(ptk_plex_curl_args)
 
-    args+=(-X "$method" -H "X-Plex-Token: $PLEX_TOKEN" -H "Accept: application/json")
+    args+=(-X "$method"
+           -H "X-Plex-Token: $PLEX_TOKEN"
+           -H "Accept: application/json")
 
     [[ -n "$body" ]] && args+=(--data "$body")
 

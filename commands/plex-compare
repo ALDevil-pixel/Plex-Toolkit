@@ -9,6 +9,7 @@ source "${SCRIPT_DIR}/../lib/plex_config.sh"
 source "${SCRIPT_DIR}/../lib/plex_api.sh"
 source "${SCRIPT_DIR}/../lib/plex_libraries.sh"
 source "${SCRIPT_DIR}/../lib/plex_media.sh"
+source "${SCRIPT_DIR}/../lib/plex_safety.sh"
 source "${SCRIPT_DIR}/../lib/plex_compare.sh"
 
 cmd_plex_compare() {
@@ -32,10 +33,16 @@ cmd_plex_compare() {
         return "$rc"
     }
 
-    ptk_plex_library_exists "$library_key" || {
-        ptk_error "Plex library not found: $library_key"
-        ptk_log_command_end "plex-compare" "$PTK_EXIT_ERROR"
-        return "$PTK_EXIT_ERROR"
+    ptk_plex_validate_action_target "$local_root" "$library_key" || {
+        local rc=$?
+        ptk_log_command_end "plex-compare" "$rc"
+        return "$rc"
+    }
+
+    ptk_plex_confirm_library_type "$library_key" "movie" || {
+        local rc=$?
+        ptk_log_command_end "plex-compare" "$rc"
+        return "$rc"
     }
 
     ptk_plex_compare_media "$local_root" "$library_key"

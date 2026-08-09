@@ -16,6 +16,8 @@ Les appels HTTP sont centralisés dans :
 lib/plex_api.sh
 ```
 
+Les erreurs réseau, timeout, TLS et retries sont gérés par cette couche.
+
 ## Bibliothèques
 
 ```bash
@@ -28,27 +30,13 @@ lib/plex_api.sh
 ./plex-toolkit plex-media --config config/plex.conf <library-key>
 ```
 
-## Comparaison local ↔ Plex
-
-La comparaison est centralisée dans :
-
-```text
-lib/plex_compare.sh
-```
-
-Commande :
+## Comparaison
 
 ```bash
 ./plex-toolkit plex-compare --config config/plex.conf <répertoire-local> <library-key>
 ```
 
-Exemple :
-
-```bash
-./plex-toolkit plex-compare --config config/plex.conf /media/Films 1
-```
-
-Le résultat utilise trois états :
+La comparaison est en lecture seule et retourne :
 
 ```text
 MATCH
@@ -56,8 +44,25 @@ LOCAL_ONLY
 PLEX_ONLY
 ```
 
-La correspondance initiale est volontairement prudente et basée sur le titre normalisé et, lorsqu'il est disponible, l'année.
+Avant la comparaison, le Toolkit vérifie :
 
-Cette commande ne modifie ni les fichiers locaux ni Plex.
+- que le répertoire local existe ;
+- que la clé Plex est valide ;
+- que la bibliothèque existe ;
+- que son type correspond au type attendu par l'action.
 
-Elle sert de couche de diagnostic avant toute future action de synchronisation.
+## Actions futures
+
+Les protections communes sont centralisées dans :
+
+```text
+lib/plex_safety.sh
+```
+
+Toute future action destructive Plex devra utiliser `--fix`.
+
+Une commande sans `--fix` ne doit jamais effectuer d'action destructive.
+
+Le token Plex ne doit jamais apparaître dans les sorties ou les logs.
+
+La validation des cibles doit être effectuée avant toute future modification.

@@ -1,12 +1,12 @@
-# Sprint 1.13.0 - Partie 5
+# Sprint 1.13.0 - Partie 6
 
-## Comparaison local / Plex
+## Sécurité Plex
 
-- Ajout de la comparaison en lecture seule.
-- Correspondance basée sur titre normalisé et année.
-- Ajout des états `MATCH`, `LOCAL_ONLY` et `PLEX_ONLY`.
-- Ajout de `lib/plex_compare.sh`.
-- Ajout de la commande `plex-compare`.
-- Ajout d'un test avec API Plex simulée.
-- Aucun changement local ou Plex.
-- Cette couche prépare les futures actions de synchronisation.
+- Ajout d'un module de protections communes.
+- Validation du répertoire local.
+- Validation de la clé de bibliothèque.
+- Validation du type de bibliothèque.
+- Obligation future de `--fix` pour toute action destructive.
+- Durcissement du client API.
+- Ajout de tests des erreurs de cible et de type.
+- Aucune nouvelle action destructive dans cette partie.

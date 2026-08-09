@@ -1,16 +1,16 @@
 Sprint: 1.13.0
-Partie: 5
+Partie: 6
 
 Status: COMPLETE
 
 Objectif:
-- Comparer un répertoire local avec une bibliothèque Plex en lecture seule.
+- Renforcer les validations et protections avant les futures actions Plex.
 
 Modified:
-- plex-toolkit
+- lib/plex_api.sh
+- commands/plex-compare
+- docs/Plex.md
 
 New:
-- lib/plex_compare.sh
-- commands/plex-compare
-- tests/test-plex-compare.sh
-- docs/Plex.md
+- lib/plex_safety.sh
+- tests/test-plex-safety.sh
