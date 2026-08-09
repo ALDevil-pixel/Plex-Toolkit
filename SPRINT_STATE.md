@@ -1,17 +1,19 @@
-Sprint: 1.11.0
-Partie: 6
+Sprint: 1.12.0
+Partie: 1
 
 Status: COMPLETE
 
 Objectif:
-- Vérification finale des fonctionnalités Anime et préparation de consolidation.
+- Poser la configuration et le scanner Films en lecture seule.
 
 Modified:
-- docs/Anime.md
+- plex-toolkit
 
 New:
-- tests/test-sprint-1.11.sh
-- tests/test-anime-release.sh
-
-Release:
-- Sprint 1.11.0 prêt pour consolidation finale.
+- config/movies.conf
+- lib/movie_config.sh
+- lib/movie_scanner.sh
+- commands/movie-scan
+- tests/test-movie-config.sh
+- tests/test-movie-scan.sh
+- docs/Movies.md

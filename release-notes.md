@@ -1,16 +1,13 @@
-# Sprint 1.11.0 - Partie 6
+# Sprint 1.12.0 - Partie 1
 
-## Vérification finale Anime
+## Films
 
-- Ajout du contrôle de cohérence du sprint.
-- Ajout d'un scénario de release Anime.
-- Vérification du scan.
-- Vérification du plan de renommage.
-- Vérification du dry-run.
-- Vérification du renommage avec `--fix`.
-- Vérification que les fichiers sont effectivement renommés après validation explicite.
-- Documentation de la procédure de validation.
-
-## Statut
-
-Le Sprint 1.11.0 est terminé et prêt pour consolidation finale.
+- Ajout d'une configuration dédiée aux films.
+- Ajout de la validation de la configuration Films.
+- Ajout d'un scanner Films en lecture seule.
+- Détection des extensions vidéo supportées.
+- Filtrage optionnel par taille minimale.
+- Ignorance des fichiers cachés par défaut.
+- Ajout de la commande `movie-scan`.
+- Ajout de tests dédiés.
+- La logique de doublons reste séparée de ce scanner.
