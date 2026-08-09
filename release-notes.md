@@ -1,17 +1,12 @@
-# Sprint 1.12.0 - Partie 5
+# Sprint 1.13.0 - Partie 1
 
-## Validation finale Films
+## Configuration Plex
 
-- Ajout du contrôle de cohérence du sprint.
-- Ajout d'un scénario complet de release Films.
-- Vérification du scanner.
-- Vérification de la détection SHA-256.
-- Vérification de la sélection du keeper.
-- Vérification du dry-run.
-- Vérification de `--fix`.
-- Vérification de l'idempotence.
-- Documentation finale des protections.
-
-## Statut
-
-Le Sprint 1.12.0 est terminé et prêt pour consolidation finale.
+- Ajout d'une configuration Plex dédiée.
+- Validation de l'URL Plex.
+- Validation du token.
+- Validation du timeout, TLS et nombre de retries.
+- Ajout de la commande `plex-config`.
+- Le token n'est jamais affiché par la commande.
+- Ajout du constructeur d'URL Plex commun.
+- Aucun appel réseau dans cette partie.

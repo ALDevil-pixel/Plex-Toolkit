@@ -1,17 +1,17 @@
-Sprint: 1.12.0
-Partie: 5
+Sprint: 1.13.0
+Partie: 1
 
 Status: COMPLETE
 
 Objectif:
-- Validation finale des fonctionnalités Films et préparation de consolidation.
+- Poser la configuration Plex et sa validation centralisée.
 
 Modified:
-- docs/Movies.md
+- plex-toolkit
 
 New:
-- tests/test-sprint-1.12.sh
-- tests/test-movie-release.sh
-
-Release:
-- Sprint 1.12.0 prêt pour consolidation finale.
+- config/plex.conf
+- lib/plex_config.sh
+- commands/plex-config
+- tests/test-plex-config.sh
+- docs/Plex.md
