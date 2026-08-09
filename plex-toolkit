@@ -16,7 +16,8 @@ run_command() {
     case "$command" in
         anime-rename|anime-rename-plan|anime-scan|audit|check|cleanup|doctor|duplicates|help|info|inventory|inventory-compare|inventory-plex-compare|inventory-plex-report|list|movie-duplicates|movie-scan|plex-compare|plex-config|plex-libraries|plex-media|plex-ping|plex-sync-add|plex-sync-plan|plex-sync-validate|rename|self-check|version)
             source "$ROOT/commands/$command"
-            "cmd_$command" "$@"
+            local function_name="cmd_${command//-/_}"
+            "$function_name" "$@"
             return $?
             ;;
         *)

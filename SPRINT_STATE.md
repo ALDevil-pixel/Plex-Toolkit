@@ -1,17 +1,20 @@
-Sprint: 1.15.0
-Partie: 6
+Sprint: 1.16.0
+Partie: 1
 
 Status: COMPLETE
 
 Objectif:
-- Validation finale du Sprint 1.15.0 et préparation de la consolidation.
+- Réparer et uniformiser le socle CLI avant d'ajouter de nouvelles fonctionnalités.
 
 Modified:
-- docs/Inventory.md
+- plex-toolkit
+- lib/cli_options.sh
+- docs/CLI.md
 
 New:
-- tests/test-sprint-1.15.0.sh
-- tests/test-inventory-safety.sh
+- tests/test-cli-dispatch-config.sh
+- tests/test-cli-dispatch-integration.sh
 
-Release:
-- Sprint 1.15.0 prêt pour consolidation.
+Important:
+- Le dispatcher convertit désormais automatiquement les tirets des commandes en underscores pour appeler les fonctions shell.
+- --config est pris en charge par le parser CLI commun et routé vers la variable de configuration appropriée.

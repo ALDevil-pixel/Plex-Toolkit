@@ -5,12 +5,62 @@ PTK_DRY_RUN=1
 PTK_VERBOSE=0
 PTK_QUIET=0
 PTK_POSITIONAL=()
+PTK_CONFIG_FILE=""
+
+ptk_set_config_override() {
+    local config_file="$1"
+    local base
+    base="$(basename -- "$config_file")"
+
+    PTK_CONFIG_FILE="$config_file"
+    export PTK_CONFIG_FILE
+
+    case "$base" in
+        plex.conf|plex.yaml)
+            PTK_PLEX_CONFIG="$config_file"
+            export PTK_PLEX_CONFIG
+            ;;
+        plex-sync.conf|plex-sync.yaml)
+            PTK_PLEX_SYNC_CONFIG="$config_file"
+            export PTK_PLEX_SYNC_CONFIG
+            ;;
+        inventory.conf|inventory.yaml)
+            PTK_INVENTORY_CONFIG="$config_file"
+            export PTK_INVENTORY_CONFIG
+            ;;
+        anime.conf|anime.yaml)
+            PTK_ANIME_CONFIG="$config_file"
+            export PTK_ANIME_CONFIG
+            ;;
+        movies.conf|movies.yaml)
+            PTK_MOVIE_CONFIG="$config_file"
+            export PTK_MOVIE_CONFIG
+            ;;
+        report.conf|report.yaml)
+            PTK_REPORT_CONFIG="$config_file"
+            export PTK_REPORT_CONFIG
+            ;;
+        check.conf|check.yaml)
+            PTK_CHECK_CONFIG="$config_file"
+            export PTK_CHECK_CONFIG
+            ;;
+        *)
+            # Keep the generic override available to callers that need a
+            # command-specific configuration file.
+            ;;
+    esac
+
+    # Legacy compatibility for scripts that still consume PLEXTK_CONFIG.
+    PLEXTK_CONFIG="$config_file"
+    export PLEXTK_CONFIG
+}
 
 ptk_parse_common_options() {
     PTK_DRY_RUN=1
     PTK_VERBOSE=0
     PTK_QUIET=0
     PTK_POSITIONAL=()
+    PTK_CONFIG_FILE=""
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
@@ -25,6 +75,14 @@ ptk_parse_common_options() {
                 ;;
             --quiet|-q)
                 PTK_QUIET=1
+                ;;
+            --config)
+                shift
+                if [[ $# -eq 0 ]]; then
+                    ptk_usage_error "--config requires a value"
+                    return $?
+                fi
+                ptk_set_config_override "$1"
                 ;;
             --)
                 shift
