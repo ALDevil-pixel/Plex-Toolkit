@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source "${SCRIPT_DIR}/../lib/exit_codes.sh"
+source "${SCRIPT_DIR}/../lib/cli_errors.sh"
+source "${SCRIPT_DIR}/../lib/cli_options.sh"
+source "${SCRIPT_DIR}/../lib/logger.sh"
+source "${SCRIPT_DIR}/../lib/movie_config.sh"
+source "${SCRIPT_DIR}/../lib/duplicates.sh"
+
+cmd_movie_duplicates() {
+    ptk_parse_common_options "$@" || return $?
+
+    if [[ "${#PTK_POSITIONAL[@]}" -gt 1 ]]; then
+        ptk_usage_error "Too many positional arguments."
+        local rc=$?
+        ptk_log_command_end "movie-duplicates" "$rc"
+        return "$rc"
+    fi
+
+    ptk_load_movie_config "${PTK_MOVIE_CONFIG:-config/movies.conf}" || {
+        local rc=$?
+        ptk_log_command_end "movie-duplicates" "$rc"
+        return "$rc"
+    }
+
+    local target="${PTK_POSITIONAL[0]:-${MOVIES_ROOT:-}}"
+    if [[ -z "$target" ]]; then
+        ptk_usage_error "A Movies directory is required."
+        local rc=$?
+        ptk_log_command_end "movie-duplicates" "$rc"
+        return "$rc"
+    fi
+
+    ptk_require_directory "$target" || {
+        local rc=$?
+        ptk_log_command_end "movie-duplicates" "$rc"
+        return "$rc"
+    }
+
+    ptk_log_command_start "movie-duplicates"
+
+    local -a args=(--deep --extensions "$MOVIES_VIDEO_EXTENSIONS" "$target")
+    ptk_is_fix_enabled && args=(--deep --fix --extensions "$MOVIES_VIDEO_EXTENSIONS" "$target")
+
+    ptk_find_duplicates "${args[@]}"
+    local rc=$?
+
+    ptk_is_valid_exit_code "$rc" || rc="$PTK_EXIT_ERROR"
+    ptk_log_command_end "movie-duplicates" "$rc"
+    return "$rc"
+}

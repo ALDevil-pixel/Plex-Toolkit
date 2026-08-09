@@ -8,21 +8,6 @@ La configuration Films est définie dans :
 config/movies.conf
 ```
 
-Elle est chargée et validée par :
-
-```text
-lib/movie_config.sh
-```
-
-Paramètres actuels :
-
-```text
-MOVIES_ROOT
-MOVIES_VIDEO_EXTENSIONS
-MOVIES_MIN_SIZE
-MOVIES_INCLUDE_HIDDEN
-```
-
 ## Scan
 
 ```bash
@@ -31,14 +16,35 @@ MOVIES_INCLUDE_HIDDEN
 
 Le scan est strictement en lecture seule.
 
-Il permet de :
+## Doublons
 
-- identifier les fichiers vidéo supportés ;
-- signaler les extensions non supportées ;
-- signaler les fichiers sous la taille minimale ;
-- afficher la taille des fichiers vidéo ;
-- ignorer les fichiers cachés par défaut.
+```bash
+./plex-toolkit movie-duplicates <répertoire>
+```
 
-La détection des doublons est volontairement séparée et reste traitée par la commande `duplicates`.
+La détection Films utilise deux niveaux :
 
-Aucun fichier n'est renommé, déplacé, supprimé ou modifié.
+1. regroupement par taille ;
+2. vérification exacte par SHA-256.
+
+Un fichier n'est donc considéré comme doublon supprimable qu'après vérification du contenu.
+
+Par défaut, la commande est en lecture seule.
+
+Pour supprimer les doublons vérifiés :
+
+```bash
+./plex-toolkit movie-duplicates --fix <répertoire>
+```
+
+En mode `--fix`, le premier fichier du groupe est conservé et les autres fichiers dont le SHA-256 est identique sont supprimés.
+
+Les fichiers de taille différente ne sont jamais considérés comme des doublons exacts.
+
+La logique générale de détection est centralisée dans :
+
+```text
+lib/duplicates.sh
+```
+
+La commande Films ne crée pas une deuxième implémentation de l'algorithme.

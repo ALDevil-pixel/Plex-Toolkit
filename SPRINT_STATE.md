@@ -1,19 +1,16 @@
 Sprint: 1.12.0
-Partie: 1
+Partie: 2
 
 Status: COMPLETE
 
 Objectif:
-- Poser la configuration et le scanner Films en lecture seule.
+- Fiabiliser la détection des doublons Films et fournir une commande dédiée.
 
 Modified:
+- lib/duplicates.sh
 - plex-toolkit
+- docs/Movies.md
 
 New:
-- config/movies.conf
-- lib/movie_config.sh
-- lib/movie_scanner.sh
-- commands/movie-scan
-- tests/test-movie-config.sh
-- tests/test-movie-scan.sh
-- docs/Movies.md
+- commands/movie-duplicates
+- tests/test-movie-duplicates.sh
