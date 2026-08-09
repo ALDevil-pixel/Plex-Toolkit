@@ -1,11 +1,10 @@
-# Sprint 1.12.0 - Partie 3
+# Sprint 1.12.0 - Partie 4
 
-## Sélection du fichier à conserver
+## Sécurité des doublons
 
-- Ajout de `MOVIES_PREFERRED_EXTENSIONS`.
-- Priorité configurable des extensions.
-- Sélection déterministe du fichier conservé.
-- Priorité à l'extension configurée.
-- Départage par longueur de chemin puis ordre lexical.
-- Suppression des doublons uniquement après sélection explicite du keeper.
-- Tests de la politique de sélection.
+- Ajout d'une revérification SHA-256 immédiatement avant suppression.
+- Refus de supprimer un fichier disparu ou modifié depuis l'analyse.
+- Prévalidation de tous les fichiers candidats d'un groupe avant suppression.
+- Conservation de la politique de sélection du keeper.
+- Vérification de l'idempotence de `--fix`.
+- Ajout d'un test de sécurité dédié.

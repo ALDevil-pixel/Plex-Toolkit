@@ -22,9 +22,7 @@ MOVIES_INCLUDE_HIDDEN=false
 MOVIES_PREFERRED_EXTENSIONS="mkv"
 EOF
 
-if ptk_load_movie_config "$TMP" >/dev/null 2>&1; then
-    exit 1
-fi
+if ptk_load_movie_config "$TMP" >/dev/null 2>&1; then exit 1; fi
 
 cat > "$TMP" <<'EOF'
 MOVIES_VIDEO_EXTENSIONS="mkv mp4"
@@ -33,8 +31,6 @@ MOVIES_INCLUDE_HIDDEN=false
 MOVIES_PREFERRED_EXTENSIONS="avi"
 EOF
 
-if ptk_load_movie_config "$TMP" >/dev/null 2>&1; then
-    exit 1
-fi
+if ptk_load_movie_config "$TMP" >/dev/null 2>&1; then exit 1; fi
 
 echo OK

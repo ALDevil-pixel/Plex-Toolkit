@@ -195,10 +195,35 @@ ptk_find_duplicates() {
 
                 printf '[KEEP] %s\n' "$keep"
 
-                local i
+                local i victim current_hash
                 for ((i=0; i<${#hash_group[@]}; i++)); do
-                    [[ "${hash_group[$i]}" == "$keep" ]] && continue
-                    ptk_remove_duplicate "${hash_group[$i]}" "$dry" || {
+                    victim="${hash_group[$i]}"
+                    [[ "$victim" == "$keep" ]] && continue
+
+                    [[ -f "$victim" ]] || {
+                        echo "[ERROR] Duplicate candidate disappeared: $victim" >&2
+                        rm -f -- "$hash_tmp"
+                        return 1
+                    }
+
+                    current_hash="$(ptk_file_sha256 "$victim")" || {
+                        echo "[ERROR] Unable to re-check SHA-256: $victim" >&2
+                        rm -f -- "$hash_tmp"
+                        return 1
+                    }
+
+                    [[ "$current_hash" == "$group_hash" ]] || {
+                        echo "[ERROR] File changed since scan, refusing deletion: $victim" >&2
+                        rm -f -- "$hash_tmp"
+                        return 1
+                    }
+                done
+
+                for ((i=0; i<${#hash_group[@]}; i++)); do
+                    victim="${hash_group[$i]}"
+                    [[ "$victim" == "$keep" ]] && continue
+
+                    ptk_remove_duplicate "$victim" "$dry" || {
                         rm -f -- "$hash_tmp"
                         return 1
                     }
