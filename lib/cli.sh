@@ -1,19 +1,23 @@
 #!/usr/bin/env bash
-# lib/cli.sh
-
-source "$(dirname "${BASH_SOURCE[0]}")/common.sh"
-source "$(dirname "${BASH_SOURCE[0]}")/errors.sh"
+# CLI dispatcher compatibility layer.
+#
+# The root plex-toolkit dispatcher is the primary entry point.
+# This function remains available for legacy callers.
 
 ptk_dispatch() {
-    local cmd="$1"; shift || true
+    local cmd="${1:-}"
+    shift || true
+
     if [[ -z "$cmd" ]]; then
-        ptk_error "No command specified"
-        return $PTK_ERROR
+        printf '[ERROR] No command specified\n' >&2
+        return "${PTK_EXIT_USAGE:-2}"
     fi
-    if command -v "cmd_${cmd}" >/dev/null 2>&1; then
+
+    if declare -F "cmd_${cmd}" >/dev/null 2>&1; then
         "cmd_${cmd}" "$@"
-    else
-        ptk_error "Unknown command: ${cmd}"
-        return $PTK_ERROR
+        return $?
     fi
+
+    printf '[ERROR] Unknown command: %s\n' "$cmd" >&2
+    return "${PTK_EXIT_USAGE:-2}"
 }

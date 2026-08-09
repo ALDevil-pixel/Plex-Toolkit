@@ -1,13 +1,11 @@
-# Sprint 1.9.0 - Partie 6
+# Sprint 1.10.0 - Partie 1
 
-## Vérification finale
+## Nettoyage architectural
 
-- Ajout d'un test de cohérence spécifique au Sprint 1.9.0.
-- Vérification de la présence des configurations et modules concernés.
-- Vérification de l'utilisation du chargeur de configuration commun.
-- Runner de tests conservé comme point d'entrée unique.
-- Documentation de la procédure de release.
-
-## Statut
-
-Le Sprint 1.9.0 est terminé et prêt pour consolidation finale.
+- Identification des anciennes couches communes.
+- Conservation des anciens fichiers pour compatibilité.
+- Normalisation de leur comportement.
+- Ajout d'une indication claire sur leur statut legacy.
+- Suppression des comportements dangereux comme `exit` depuis les fonctions de bibliothèque.
+- Harmonisation des codes de retour.
+- Ajout d'un test de compatibilité legacy.

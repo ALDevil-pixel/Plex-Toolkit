@@ -1,17 +1,18 @@
-Sprint: 1.9.0
-Partie: 6
+Sprint: 1.10.0
+Partie: 1
 
 Status: COMPLETE
 
 Objectif:
-- Vérification finale et préparation de la consolidation du Sprint 1.9.0.
+- Nettoyer les anciennes couches communes sans casser la compatibilité.
 
 Modified:
-- tests/run.sh
+- lib/common.sh
+- lib/args.sh
+- lib/cli.sh
+- lib/errors.sh
+- lib/validation.sh
+- docs/Architecture.md
 
 New:
-- tests/test-sprint-1.9.sh
-- docs/RELEASE.md
-
-Release:
-- Sprint 1.9.0 prêt pour consolidation finale.
+- tests/test-legacy-compatibility.sh
