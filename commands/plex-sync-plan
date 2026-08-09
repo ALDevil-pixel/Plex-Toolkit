@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source "${SCRIPT_DIR}/../lib/exit_codes.sh"
+source "${SCRIPT_DIR}/../lib/cli_errors.sh"
+source "${SCRIPT_DIR}/../lib/cli_options.sh"
+source "${SCRIPT_DIR}/../lib/logger.sh"
+source "${SCRIPT_DIR}/../lib/plex_config.sh"
+source "${SCRIPT_DIR}/../lib/plex_api.sh"
+source "${SCRIPT_DIR}/../lib/plex_libraries.sh"
+source "${SCRIPT_DIR}/../lib/plex_media.sh"
+source "${SCRIPT_DIR}/../lib/plex_safety.sh"
+source "${SCRIPT_DIR}/../lib/plex_compare.sh"
+source "${SCRIPT_DIR}/../lib/plex_sync_config.sh"
+source "${SCRIPT_DIR}/../lib/plex_sync_plan.sh"
+
+cmd_plex_sync_plan() {
+    ptk_parse_common_options "$@" || return $?
+
+    if [[ "${#PTK_POSITIONAL[@]}" -ne 2 ]]; then
+        ptk_usage_error "A local media directory and a Plex library key are required."
+        local rc=$?
+        ptk_log_command_end "plex-sync-plan" "$rc"
+        return "$rc"
+    fi
+
+    # Planning is always read-only in this part.
+    if ptk_is_fix_enabled; then
+        ptk_usage_error "plex-sync-plan is read-only and does not support --fix."
+        local rc=$?
+        ptk_log_command_end "plex-sync-plan" "$rc"
+        return "$rc"
+    fi
+
+    local local_root="${PTK_POSITIONAL[0]}"
+    local library_key="${PTK_POSITIONAL[1]}"
+
+    ptk_log_command_start "plex-sync-plan"
+
+    ptk_load_plex_config "${PTK_PLEX_CONFIG:-config/plex.conf}" || {
+        local rc=$?
+        ptk_log_command_end "plex-sync-plan" "$rc"
+        return "$rc"
+    }
+
+    ptk_load_plex_sync_config "${PTK_PLEX_SYNC_CONFIG:-config/plex-sync.conf}" || {
+        local rc=$?
+        ptk_log_command_end "plex-sync-plan" "$rc"
+        return "$rc"
+    }
+
+    ptk_plex_sync_plan "$local_root" "$library_key"
+    local rc=$?
+
+    ptk_is_valid_exit_code "$rc" || rc="$PTK_EXIT_ERROR"
+    ptk_log_command_end "plex-sync-plan" "$rc"
+    return "$rc"
+}

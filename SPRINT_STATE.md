@@ -1,17 +1,18 @@
-Sprint: 1.13.0
-Partie: 7
+Sprint: 1.14.0
+Partie: 1
 
 Status: COMPLETE
 
 Objectif:
-- Validation finale de l'intégration Plex et préparation de consolidation.
+- Préparer la synchronisation Plex avec un plan local-vers-Plex strictement en lecture seule.
 
 Modified:
-- docs/Plex.md
+- plex-toolkit
 
 New:
-- tests/test-sprint-1.13.sh
-- tests/test-plex-release.sh
-
-Release:
-- Sprint 1.13.0 prêt pour consolidation finale.
+- config/plex-sync.conf
+- lib/plex_sync_config.sh
+- lib/plex_sync_plan.sh
+- commands/plex-sync-plan
+- tests/test-plex-sync-plan.sh
+- docs/Plex-Sync.md
