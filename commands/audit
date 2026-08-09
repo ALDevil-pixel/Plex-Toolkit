@@ -59,8 +59,6 @@ cmd_audit() {
     [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Configuration: $cfg"
     [[ "$json" -eq 1 ]] && ptk_log_verbose "JSON summary enabled"
 
-    # Audit is intentionally read-only. --fix is rejected rather than
-    # silently pretending to modify anything.
     if ptk_is_fix_enabled; then
         ptk_usage_error "audit does not support --fix."
         local rc=$?

@@ -1,14 +1,9 @@
-# Sprint 1.8.0 - Partie 15
+# Sprint 1.9.0 - Partie 1
 
-## Vérification finale
+## Reporting configurable
 
-- Ajout d'un contrôle de cohérence structurelle du dépôt.
-- Vérification des commandes principales.
-- Vérification des bibliothèques CLI communes.
-- Vérification de la version et du changelog.
-- Documentation de la procédure de validation de release.
-- Le runner de tests reste compatible avec tous les tests `test-*.sh`.
-
-## Statut
-
-Sprint 1.8.0 prêt pour consolidation finale.
+- Suppression des chemins de rapports codés en dur dans `report.sh`.
+- Ajout de `config/report.conf`.
+- Centralisation du répertoire et des noms de rapports.
+- Conservation des rapports texte et JSON d'audit.
+- Ajout d'un test du writer de rapports.

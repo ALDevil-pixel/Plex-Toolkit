@@ -1,17 +1,16 @@
-Sprint: 1.8.0
-Partie: 15
+Sprint: 1.9.0
+Partie: 1
 
 Status: COMPLETE
 
 Objectif:
-- Vérification finale de cohérence du dépôt avant clôture du Sprint 1.8.0.
+- Poser la base d'un reporting centralisé et configurable.
 
 Modified:
-- tests/run.sh
+- lib/report.sh
+- commands/audit
 
 New:
-- tests/test-release-coherence.sh
-- docs/RELEASE.md
-
-Release:
-- 1.8.0 prêt pour consolidation finale.
+- config/report.conf
+- tests/test-report.sh
+- docs/REPORTS.md
