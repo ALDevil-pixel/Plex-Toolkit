@@ -1,10 +1,14 @@
-# Sprint 1.8.0 - Partie 14
+# Sprint 1.8.0 - Partie 15
 
-## Outils de développement
+## Vérification finale
 
-- Amélioration de la cible `install`.
-- Le lint vérifie désormais la présence de ShellCheck.
-- Ajout d'une cible `validate` regroupant tests et lint.
-- Extension du lint aux scripts de tests et plugins.
-- Ajout d'un test de présence des cibles Make.
-- Documentation du workflow de développement.
+- Ajout d'un contrôle de cohérence structurelle du dépôt.
+- Vérification des commandes principales.
+- Vérification des bibliothèques CLI communes.
+- Vérification de la version et du changelog.
+- Documentation de la procédure de validation de release.
+- Le runner de tests reste compatible avec tous les tests `test-*.sh`.
+
+## Statut
+
+Sprint 1.8.0 prêt pour consolidation finale.

@@ -1,14 +1,17 @@
 Sprint: 1.8.0
-Partie: 14
+Partie: 15
 
 Status: COMPLETE
 
 Objectif:
-- Finaliser les outils de développement et de validation du dépôt.
+- Vérification finale de cohérence du dépôt avant clôture du Sprint 1.8.0.
 
 Modified:
-- Makefile
+- tests/run.sh
 
 New:
-- tests/test-make-targets.sh
-- docs/DEVELOPMENT.md
+- tests/test-release-coherence.sh
+- docs/RELEASE.md
+
+Release:
+- 1.8.0 prêt pour consolidation finale.
