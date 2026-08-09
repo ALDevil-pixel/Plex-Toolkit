@@ -1,2 +1,12 @@
 #!/usr/bin/env bash
-echo 'Plex verify plugin (stub)'
+# Plex verify plugin
+#
+# Plugin contract:
+#   - executable shell script
+#   - receives CLI arguments unchanged
+#   - returns a meaningful exit code
+#
+# This plugin remains a placeholder until its dedicated feature sprint.
+
+printf '[INFO] Plex verify plugin: not implemented yet\n'
+exit 0

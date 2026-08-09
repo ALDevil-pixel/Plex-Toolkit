@@ -1,18 +1,18 @@
 Sprint: 1.10.0
-Partie: 2
+Partie: 3
 
 Status: COMPLETE
 
 Objectif:
-- Harmoniser les bibliothèques utilitaires communes restantes.
+- Stabiliser le contrat et le chargeur de plugins.
 
 Modified:
-- lib/terminal.sh
-- lib/colors.sh
-- lib/display.sh
-- lib/filesystem.sh
-- lib/progress.sh
-- docs/Architecture.md
+- lib/plugin.sh
+- plugins/anime/audit.sh
+- plugins/anime/rename.sh
+- plugins/movies/duplicates.sh
+- plugins/plex/verify.sh
+- docs/Plugins.md
 
 New:
-- tests/test-common-libraries.sh
+- tests/test-plugins.sh

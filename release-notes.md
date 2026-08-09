@@ -1,11 +1,11 @@
-# Sprint 1.10.0 - Partie 2
+# Sprint 1.10.0 - Partie 3
 
-## Bibliothèques communes
+## Système de plugins
 
-- Centralisation des helpers TTY.
-- Centralisation de la gestion des couleurs.
-- Harmonisation de l'affichage.
-- Harmonisation des helpers filesystem.
-- Harmonisation de la barre de progression.
-- Conservation des anciens noms comme wrappers de compatibilité.
-- Ajout d'un test des bibliothèques communes.
+- Centralisation de la découverte des plugins.
+- Ajout de la résolution catégorie/nom.
+- Ajout de la liste des plugins exécutables.
+- Validation de l'existence et des permissions avant exécution.
+- Conservation des API legacy `plugin_exists` et `plugin_run`.
+- Normalisation du contrat des plugins existants.
+- Ajout d'un test du système de plugins.
