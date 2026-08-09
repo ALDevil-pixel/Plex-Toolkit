@@ -18,52 +18,46 @@ lib/plex_api.sh
 
 ## Bibliothèques
 
-La découverte des bibliothèques est centralisée dans :
-
-```text
-lib/plex_libraries.sh
-```
-
 ```bash
 ./plex-toolkit plex-libraries --config config/plex.conf
 ```
 
 ## Médias
 
-La lecture des médias d'une bibliothèque est centralisée dans :
+```bash
+./plex-toolkit plex-media --config config/plex.conf <library-key>
+```
+
+## Comparaison local ↔ Plex
+
+La comparaison est centralisée dans :
 
 ```text
-lib/plex_media.sh
+lib/plex_compare.sh
 ```
 
 Commande :
 
 ```bash
-./plex-toolkit plex-media --config config/plex.conf <library-key>
+./plex-toolkit plex-compare --config config/plex.conf <répertoire-local> <library-key>
 ```
 
-Elle interroge :
+Exemple :
+
+```bash
+./plex-toolkit plex-compare --config config/plex.conf /media/Films 1
+```
+
+Le résultat utilise trois états :
 
 ```text
-/library/sections/<library-key>/all
+MATCH
+LOCAL_ONLY
+PLEX_ONLY
 ```
 
-et affiche notamment :
+La correspondance initiale est volontairement prudente et basée sur le titre normalisé et, lorsqu'il est disponible, l'année.
 
-```text
-ratingKey
-type
-title
-year
-librarySectionID
-librarySectionTitle
-updatedAt
-```
+Cette commande ne modifie ni les fichiers locaux ni Plex.
 
-Cette commande est strictement en lecture seule.
-
-Elle ne modifie aucun élément Plex.
-
-La clé de bibliothèque est vérifiée avant l'interrogation des médias.
-
-Les prochaines parties pourront utiliser ces données pour comparer l'état Plex avec l'inventaire local.
+Elle sert de couche de diagnostic avant toute future action de synchronisation.

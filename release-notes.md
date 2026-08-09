@@ -1,12 +1,12 @@
-# Sprint 1.13.0 - Partie 4
+# Sprint 1.13.0 - Partie 5
 
-## Médias Plex
+## Comparaison local / Plex
 
-- Ajout de la lecture des médias d'une bibliothèque.
-- Ajout de `lib/plex_media.sh`.
-- Ajout de la commande `plex-media`.
-- Validation de la clé de bibliothèque.
-- Parsing JSON via `jq`.
+- Ajout de la comparaison en lecture seule.
+- Correspondance basée sur titre normalisé et année.
+- Ajout des états `MATCH`, `LOCAL_ONLY` et `PLEX_ONLY`.
+- Ajout de `lib/plex_compare.sh`.
+- Ajout de la commande `plex-compare`.
 - Ajout d'un test avec API Plex simulée.
-- Aucun changement côté serveur Plex.
-- Données exposées : ratingKey, type, titre, année, bibliothèque et date de mise à jour.
+- Aucun changement local ou Plex.
+- Cette couche prépare les futures actions de synchronisation.
