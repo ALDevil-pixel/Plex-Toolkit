@@ -1,10 +1,11 @@
-# Sprint 1.15.0 - Partie 2
+# Sprint 1.15.0 - Partie 3
 
-## Identité des fichiers
+## Comparaison d'inventaires
 
-- Normalisation des extensions en minuscules.
-- Ajout d'une identité basée sur le hash lorsqu'il est disponible.
-- Ajout d'un fallback nom + taille lorsque le hash est absent.
-- Séparation de l'identité et du chemin physique.
-- Préparation des futures comparaisons d'inventaires.
-- Aucun changement de fichier local.
+- Ajout de `inventory-compare`.
+- Comparaison basée sur l'identité des fichiers.
+- Distinction `UNCHANGED`, `CHANGED`, `ADDED` et `REMOVED`.
+- Prise en compte du hash lorsqu'il est disponible.
+- Fallback nom + taille lorsque le hash est absent.
+- Commande strictement en lecture seule.
+- Ajout d'un test dédié.

@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source "${SCRIPT_DIR}/../lib/exit_codes.sh"
+source "${SCRIPT_DIR}/../lib/cli_errors.sh"
+source "${SCRIPT_DIR}/../lib/cli_options.sh"
+source "${SCRIPT_DIR}/../lib/logger.sh"
+source "${SCRIPT_DIR}/../lib/inventory.sh"
+source "${SCRIPT_DIR}/../lib/inventory_compare.sh"
+
+cmd_inventory_compare() {
+    ptk_parse_common_options "$@" || return $?
+
+    if [[ "${#PTK_POSITIONAL[@]}" -ne 2 ]]; then
+        ptk_usage_error "Two inventory files are required."
+        local rc=$?
+        ptk_log_command_end "inventory-compare" "$rc"
+        return "$rc"
+    fi
+
+    if ptk_is_fix_enabled; then
+        ptk_usage_error "inventory-compare is read-only and does not support --fix."
+        local rc=$?
+        ptk_log_command_end "inventory-compare" "$rc"
+        return "$rc"
+    fi
+
+    local old_file="${PTK_POSITIONAL[0]}"
+    local new_file="${PTK_POSITIONAL[1]}"
+
+    ptk_log_command_start "inventory-compare"
+
+    ptk_load_plex_config "${PTK_PLEX_CONFIG:-config/plex.conf}" >/dev/null 2>&1 || true
+    ptk_inventory_load_config "${PTK_INVENTORY_CONFIG:-config/inventory.conf}" || {
+        local rc=$?
+        ptk_log_command_end "inventory-compare" "$rc"
+        return "$rc"
+    }
+
+    ptk_inventory_compare_records "$old_file" "$new_file"
+    local rc=$?
+
+    ptk_is_valid_exit_code "$rc" || rc="$PTK_EXIT_ERROR"
+    ptk_log_command_end "inventory-compare" "$rc"
+    return "$rc"
+}

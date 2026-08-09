@@ -1,16 +1,16 @@
 Sprint: 1.15.0
-Partie: 2
+Partie: 3
 
 Status: COMPLETE
 
 Objectif:
-- Préparer une identité stable des fichiers pour les futures comparaisons d'inventaires.
+- Comparer deux inventaires locaux de manière déterministe et en lecture seule.
 
 Modified:
-- lib/inventory.sh
-- lib/inventory_metadata.sh
+- plex-toolkit
 - docs/Inventory.md
 
 New:
-- lib/inventory_identity.sh
-- tests/test-inventory-identity.sh
+- lib/inventory_compare.sh
+- commands/inventory-compare
+- tests/test-inventory-compare.sh

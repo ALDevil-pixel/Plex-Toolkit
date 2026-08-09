@@ -2,7 +2,7 @@
 
 ## Sprint 1.15.0.1
 
-L'inventaire peut être configuré avec :
+L'inventaire est configurable avec :
 
 ```text
 INVENTORY_FOLLOW_SYMLINKS
@@ -11,40 +11,49 @@ INVENTORY_HASH_ENABLED
 INVENTORY_HASH_ALGORITHM
 ```
 
-Le format reste :
-
-```text
-name|extension|size|mtime|hash|path
-```
-
 ## Sprint 1.15.0.2
 
-Une identité stable est maintenant disponible pour les futures comparaisons.
-
-Si un hash est disponible :
+Une identité stable est disponible :
 
 ```text
-hash:<sha256>
+hash:<hash>
 ```
 
-est utilisé comme identité.
-
-Sans hash, le fallback est :
+ou, sans hash :
 
 ```text
 name-size:<name>|<size>
 ```
 
-Cette distinction est importante :
+## Sprint 1.15.0.3
 
-- le nom seul n'est pas considéré comme une identité fiable ;
-- le hash permet de reconnaître un fichier même si son chemin change ;
-- sans hash, la comparaison reste volontairement prudente.
+Ajout de la comparaison de deux inventaires :
+
+```bash
+./plex-toolkit inventory-compare --config config/inventory.conf old.txt new.txt
+```
+
+Résultats possibles :
+
+```text
+UNCHANGED
+CHANGED
+ADDED
+REMOVED
+```
+
+`CHANGED` peut notamment représenter :
+
+- un changement de taille ;
+- une modification de date ;
+- un changement de chemin pour une même identité.
+
+La comparaison est strictement en lecture seule.
+
+Elle ne modifie ni les inventaires, ni les fichiers locaux.
 
 Le module est :
 
 ```text
-lib/inventory_identity.sh
+lib/inventory_compare.sh
 ```
-
-Aucune modification des fichiers locaux n'est effectuée.
