@@ -1,10 +1,14 @@
-# Sprint 1.14.0 - Partie 4
+# Sprint 1.14.0 - Partie 5
 
-## Vérification post-refresh
+## Tests d'intégration
 
-- Ajout de la vérification du média après refresh.
-- Distinction entre `FOUND` et `PENDING`.
-- Gestion explicite des erreurs de vérification.
-- Prise en compte du caractère asynchrone de Plex.
-- Aucun échec artificiel si Plex n'a pas encore indexé le média.
-- Ajout de tests avec API Plex simulée.
+- Ajout d'un test de bout en bout du workflow de synchronisation.
+- Vérification du plan.
+- Vérification de la validation.
+- Vérification du dry-run.
+- Vérification de `--fix`.
+- Vérification du refresh ciblé.
+- Vérification post-refresh `FOUND`.
+- Vérification de l'absence de modification locale.
+- Vérification de l'absence de fuite du token.
+- Ajout d'un scénario d'échec du refresh Plex.

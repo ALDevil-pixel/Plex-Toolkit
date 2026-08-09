@@ -10,39 +10,46 @@
 
 ## Sprint 1.14.0.3
 
-`plex-sync-add` demande un refresh ciblé du répertoire contenant le média :
-
-```bash
-./plex-toolkit plex-sync-add   --config config/plex.conf   --fix   /media/Films/MonFilm.mkv   1
-```
-
-Le Toolkit ne copie, ne déplace, ne renomme et ne supprime aucun fichier.
+`plex-sync-add` demande un refresh ciblé du répertoire contenant le média.
 
 ## Sprint 1.14.0.4
 
-Après le refresh, Plex traite la demande de manière asynchrone.
-
-Le Toolkit distingue donc :
+Après le refresh, le Toolkit distingue :
 
 ```text
-Plex add request: OK
+FOUND
+PENDING
+ERROR
 ```
 
-de :
+## Sprint 1.14.0.5
+
+La chaîne complète peut maintenant être testée :
 
 ```text
-Plex media verification: FOUND
-Plex media verification: PENDING
+plex-sync-plan
+       ↓
+plex-sync-validate
+       ↓
+plex-sync-add
+       ↓
+Plex refresh
+       ↓
+plex-sync-verify
 ```
 
-`FOUND` signifie que le média est déjà visible dans la bibliothèque.
+Le test d'intégration utilise une API Plex simulée.
 
-`PENDING` signifie que Plex a accepté la demande mais que le média n'est pas encore visible au moment de la vérification.
+Il vérifie :
 
-Une erreur réelle du contrôle retourne un échec.
+- génération du plan ;
+- validation de la cible ;
+- dry-run ;
+- action réelle avec `--fix` ;
+- vérification `FOUND` ;
+- absence de modification locale ;
+- absence de fuite du token.
 
-Cette distinction évite de considérer un refresh asynchrone comme un échec simplement parce que l'indexation n'est pas instantanée.
+Un test d'échec vérifie également qu'un refresh Plex refusé provoque un code d'erreur et ne modifie pas le fichier local.
 
-La vérification utilise le titre et l'année extraits du nom de fichier.
-
-Aucune suppression ou modification locale n'est effectuée.
+Les tests ne nécessitent pas de serveur Plex réel.
