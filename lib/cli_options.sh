@@ -14,10 +14,18 @@ ptk_parse_common_options() {
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            --dry-run) PTK_DRY_RUN=1 ;;
-            --fix) PTK_DRY_RUN=0 ;;
-            --verbose|-v) PTK_VERBOSE=1 ;;
-            --quiet|-q) PTK_QUIET=1 ;;
+            --dry-run)
+                PTK_DRY_RUN=1
+                ;;
+            --fix)
+                PTK_DRY_RUN=0
+                ;;
+            --verbose|-v)
+                PTK_VERBOSE=1
+                ;;
+            --quiet|-q)
+                PTK_QUIET=1
+                ;;
             --)
                 shift
                 while [[ $# -gt 0 ]]; do
@@ -26,10 +34,20 @@ ptk_parse_common_options() {
                 done
                 break
                 ;;
-            *) PTK_POSITIONAL+=("$1") ;;
+            *)
+                PTK_POSITIONAL+=("$1")
+                ;;
         esac
         shift
     done
+}
+
+ptk_is_fix_enabled() {
+    [[ "$PTK_DRY_RUN" -eq 0 ]]
+}
+
+ptk_is_dry_run() {
+    [[ "$PTK_DRY_RUN" -eq 1 ]]
 }
 
 ptk_log_info() {

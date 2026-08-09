@@ -27,7 +27,7 @@ cmd_cleanup() {
     ptk_log_command_start "cleanup"
     [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Command: cleanup"
 
-    if [[ "$PTK_DRY_RUN" -eq 0 ]]; then
+    if ptk_is_fix_enabled; then
         ptk_cleanup --fix "$target"
     else
         ptk_cleanup --dry-run "$target"

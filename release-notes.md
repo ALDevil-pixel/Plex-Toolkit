@@ -1,10 +1,8 @@
-# Sprint 1.8.0 - Partie 4
+# Sprint 1.8.0 - Partie 6
 
-## Auto Fix Check
+## CLI commun
 
-- Ajout du mode `--fix` à check.
-- Suppression automatique uniquement des fichiers de 0 octet.
-- Conservation des fichiers aux extensions non conformes.
-- Les extensions invalides restent signalées pour traitement manuel.
-- Mode lecture seule conservé par défaut.
-- Ajout d'un test d'intégration.
+- Ajout des helpers communs `ptk_is_dry_run` et `ptk_is_fix_enabled`.
+- Réduction de la duplication dans les wrappers CLI.
+- Conservation du comportement existant des commandes.
+- Ajout d'un test du mode d'exécution commun.

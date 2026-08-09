@@ -1,18 +1,19 @@
 Sprint: 1.8.0
-Partie: 4
+Partie: 6
 
 Status: COMPLETE
 
 Objectif:
-- Auto Fix sécurisé pour check.
-
-New:
-- lib/check_fix.sh
-- tests/test-check-fix.sh
+- Finaliser la gestion commune du mode dry-run/fix.
 
 Modified:
-- lib/check.sh
-- lib/check_zero_size.sh
-- lib/check_extensions.sh
+- lib/cli_options.sh
 - commands/check
-- docs/CLI.md
+- commands/cleanup
+- commands/rename
+- commands/inventory
+- commands/duplicates
+- docs/CONSOLIDATION.md
+
+New:
+- tests/test-common-fix-mode.sh

@@ -1,29 +1,26 @@
-# check
+# duplicates
 
-## Modes
-
-Par défaut :
+## Options
 
 ```bash
-plex-toolkit check
+plex-toolkit duplicates [options] [directory]
 ```
 
-effectue uniquement une analyse.
+Options :
 
-Pour appliquer les corrections sûres :
+- `--dry-run` : lecture seule, comportement par défaut.
+- `--fix` : supprime les doublons identifiés.
+- `--deep` : vérifie les doublons avec SHA-256.
+- `--min-size <octets>` : ignore les fichiers plus petits.
+- `--extensions mkv,mp4,ts` : limite l'analyse aux extensions indiquées.
+- `--summary [fichier]` : affiche le résumé du rapport.
+
+### Auto Fix
+
+Pour qu'une suppression soit autorisée, `--deep` est obligatoire :
 
 ```bash
-plex-toolkit check --fix
+plex-toolkit duplicates --deep --fix /media/Movies
 ```
 
-`--dry-run` force explicitement le mode lecture seule :
-
-```bash
-plex-toolkit check --dry-run
-```
-
-### Corrections automatiques
-
-Le mode `--fix` supprime les fichiers de 0 octet.
-
-Les extensions non conformes sont uniquement signalées. Elles ne sont pas renommées ou supprimées automatiquement, car une extension incorrecte ne permet pas de déterminer de façon fiable le format réel du fichier.
+Sans `--deep`, les fichiers ne sont jamais supprimés.

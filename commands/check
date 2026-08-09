@@ -28,7 +28,7 @@ cmd_check() {
     ptk_log_command_start "check"
     [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Command: check"
 
-    if [[ "$PTK_DRY_RUN" -eq 0 ]]; then
+    if ptk_is_fix_enabled; then
         ptk_check --fix "$target"
     else
         ptk_check --dry-run "$target"

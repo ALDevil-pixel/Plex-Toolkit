@@ -11,33 +11,118 @@ source "${SCRIPT_DIR}/../lib/duplicates_summary.sh"
 cmd_duplicates() {
     ptk_parse_common_options "$@"
 
-    if [[ "$PTK_POSITIONAL" == "" ]]; then
-        :
+    local target="."
+    local deep=0
+    local min_size=0
+    local extensions=""
+    local summary=""
+
+    # Parse the options specific to duplicates while keeping
+    # the common CLI parser as the source of --dry-run/--fix/etc.
+    local -a raw=("${PTK_POSITIONAL[@]}")
+    PTK_POSITIONAL=()
+
+    while [[ "${#raw[@]}" -gt 0 ]]; do
+        case "${raw[0]}" in
+            --deep)
+                deep=1
+                ;;
+            --min-size)
+                if [[ "${#raw[@]}" -lt 2 ]]; then
+                    ptk_usage_error "--min-size requires a value."
+                    local rc=$?
+                    ptk_log_command_end "duplicates" "$rc"
+                    return "$rc"
+                fi
+                min_size="${raw[1]}"
+                raw=("${raw[@]:2}")
+                continue
+                ;;
+            --extensions)
+                if [[ "${#raw[@]}" -lt 2 ]]; then
+                    ptk_usage_error "--extensions requires a comma-separated value."
+                    local rc=$?
+                    ptk_log_command_end "duplicates" "$rc"
+                    return "$rc"
+                fi
+                extensions="${raw[1]}"
+                raw=("${raw[@]:2}")
+                continue
+                ;;
+            --summary)
+                if [[ "${#raw[@]}" -gt 1 && "${raw[1]}" != --* ]]; then
+                    summary="${raw[1]}"
+                    raw=("${raw[@]:2}")
+                    continue
+                fi
+                summary="logs/duplicates-report.txt"
+                ;;
+            --)
+                raw=("${raw[@]:1}")
+                [[ "${#raw[@]}" -gt 0 ]] && target="${raw[0]}"
+                raw=()
+                continue
+                ;;
+            -*)
+                ptk_usage_error "Unknown option: ${raw[0]}"
+                local rc=$?
+                ptk_log_command_end "duplicates" "$rc"
+                return "$rc"
+                ;;
+            *)
+                if [[ "$target" == "." ]]; then
+                    target="${raw[0]}"
+                else
+                    PTK_POSITIONAL+=("${raw[0]}")
+                fi
+                ;;
+        esac
+        raw=("${raw[@]:1}")
+    done
+
+    if [[ -n "$summary" ]]; then
+        ptk_log_command_start "duplicates --summary"
+        ptk_duplicates_summary "$summary"
+        local rc=$?
+        ptk_is_valid_exit_code "$rc" || rc="$PTK_EXIT_ERROR"
+        ptk_log_command_end "duplicates --summary" "$rc"
+        return "$rc"
     fi
 
-    if [[ "$PTK_VERBOSE" -eq 1 ]]; then
-        ptk_log_verbose "Command: duplicates"
-    fi
-
-    if [[ "${PTK_POSITIONAL[0]:-}" == "--summary" ]]; then
-        ptk_duplicates_summary "${PTK_POSITIONAL[1]:-logs/duplicates-report.txt}"
-        return $?
-    fi
-
-    if [[ "${#PTK_POSITIONAL[@]}" -gt 1 ]]; then
+    if [[ "${#PTK_POSITIONAL[@]}" -gt 0 ]]; then
         ptk_usage_error "Too many positional arguments."
-        return $?
+        local rc=$?
+        ptk_log_command_end "duplicates" "$rc"
+        return "$rc"
     fi
 
-    local target="${PTK_POSITIONAL[0]:-.}"
     if ! ptk_require_directory "$target"; then
-        return $?
+        local rc=$?
+        ptk_log_command_end "duplicates" "$rc"
+        return "$rc"
     fi
 
     ptk_log_command_start "duplicates"
+    [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Command: duplicates"
 
     local -a args=()
-    [[ "$PTK_DRY_RUN" -eq 0 ]] && args+=(--fix)
+    ptk_is_fix_enabled && args+=(--fix)
+    [[ "$deep" -eq 1 ]] && args+=(--deep)
+
+    if [[ -n "$min_size" ]]; then
+        [[ "$min_size" =~ ^[0-9]+$ ]] || {
+            ptk_usage_error "--min-size must be an integer."
+            local rc=$?
+            ptk_log_command_end "duplicates" "$rc"
+            return "$rc"
+        }
+        args+=(--min-size "$min_size")
+    fi
+
+    if [[ -n "$extensions" ]]; then
+        args+=(--extensions "$extensions")
+    fi
+
     args+=("$target")
 
     ptk_find_duplicates "${args[@]}"

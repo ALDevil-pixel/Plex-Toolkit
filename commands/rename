@@ -27,7 +27,7 @@ cmd_rename() {
     ptk_log_command_start "rename"
     [[ "$PTK_VERBOSE" -eq 1 ]] && ptk_log_verbose "Command: rename"
 
-    if [[ "$PTK_DRY_RUN" -eq 0 ]]; then
+    if ptk_is_fix_enabled; then
         ptk_rename --fix "$target"
     else
         ptk_rename --dry-run "$target"

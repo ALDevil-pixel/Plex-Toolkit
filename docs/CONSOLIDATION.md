@@ -1,26 +1,13 @@
 # Consolidation v0.2.1
 
-## Lot 8
+La base commune CLI fournit désormais aussi deux helpers :
 
-Dernier lot de consolidation avant le Sprint 1.8.0.
+- `ptk_is_dry_run`
+- `ptk_is_fix_enabled`
 
-Ajouts :
-- suite de tests commune ;
-- vérification des composants partagés ;
-- préparation de la release `0.2.1`.
+Les commandes peuvent donc tester le mode d'exécution sans dupliquer la logique sur `PTK_DRY_RUN`.
 
-Composants consolidés :
-
-- `library_runner.sh`
-- `cli_options.sh`
-- `exit_codes.sh`
-- `cli_errors.sh`
-- `logger.sh`
-
-Les commandes principales restent :
-- `rename`
-- `cleanup`
-- `check`
-- `inventory`
-
-Le Sprint 1.8.0 pourra maintenant être développé sur cette base.
+Le comportement reste inchangé :
+- mode lecture seule par défaut ;
+- `--dry-run` force la lecture seule ;
+- `--fix` active les modifications uniquement pour les commandes qui le supportent.
