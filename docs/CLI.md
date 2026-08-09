@@ -1,31 +1,24 @@
-# Commandes CLI
+# self-check
 
-## info
+## Usage
 
 ```bash
-plex-toolkit info
-plex-toolkit info /media/Movies
+plex-toolkit self-check
 ```
 
 Options communes :
-- `--dry-run`
-- `--verbose / -v`
-- `--quiet / -q`
 
-`info` est une commande de consultation et ne modifie aucun fichier.
-
-## list
-
-```bash
-plex-toolkit list
-plex-toolkit list /media/Movies
+```text
+--dry-run
+--verbose / -v
+--quiet / -q
 ```
 
-Options communes :
-- `--dry-run`
-- `--verbose / -v`
-- `--quiet / -q`
+`self-check` vérifie uniquement les dépendances minimales nécessaires au Toolkit.
+Il ne modifie aucun fichier et refuse donc `--fix`.
 
-`list` est une commande de consultation et ne modifie aucun fichier.
+Le code de retour est :
 
-Les commandes refusent `--fix` lorsqu'elles ne proposent aucune opération de modification.
+- `0` : environnement minimal disponible ;
+- `1` : une dépendance obligatoire manque ;
+- `2` : mauvais paramètre.

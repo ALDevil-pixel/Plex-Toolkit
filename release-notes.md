@@ -1,10 +1,10 @@
-# Sprint 1.8.0 - Partie 9
+# Sprint 1.8.0 - Partie 10
 
-## Commandes d'information
+## Self-check CLI
 
-- Intégration de `info` à l'interface CLI commune.
-- Intégration de `list` à l'interface CLI commune.
-- Ajout de la validation des chemins fournis.
-- Journalisation commune.
+- Intégration de `self-check` à l'interface CLI commune.
+- Déplacement de la logique dans `lib/self_check.sh`.
 - Codes de retour harmonisés.
-- Ajout d'un test CLI commun.
+- Journalisation commune.
+- `--fix` explicitement refusé.
+- Ajout d'un test CLI.

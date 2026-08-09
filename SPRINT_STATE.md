@@ -1,15 +1,15 @@
 Sprint: 1.8.0
-Partie: 9
+Partie: 10
 
 Status: COMPLETE
 
 Objectif:
-- Harmoniser les commandes d'information avec l'interface CLI commune.
+- Harmoniser self-check avec l'interface CLI commune.
 
 Modified:
-- commands/info
-- commands/list
-- docs/CLI.md
+- commands/self-check
 
 New:
-- tests/test-info-list-cli.sh
+- lib/self_check.sh
+- tests/test-self-check-cli.sh
+- docs/CLI.md
