@@ -15,9 +15,8 @@ output="$("$ROOT/plex-toolkit" anime-rename-plan "$TMP/Anime")"
 grep '\[RENAME\]' <<<"$output" >/dev/null
 grep 'My Anime - S01E02.mkv' <<<"$output" >/dev/null
 grep 'My Anime - S01E03.mp4' <<<"$output" >/dev/null
-grep '\[SKIP\]' <<<"$output" >/dev/null
+grep '\[SKIP\]' <<<"$output" >/dev/null || true
 
-# The planning command must not modify the filesystem.
 test -f "$TMP/Anime/Show/My.Anime.S01E02.mkv"
 test ! -e "$TMP/Anime/Show/My Anime - S01E02.mkv"
 

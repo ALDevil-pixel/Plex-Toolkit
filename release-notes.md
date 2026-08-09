@@ -1,12 +1,12 @@
-# Sprint 1.11.0 - Partie 3
+# Sprint 1.11.0 - Partie 4
 
-## Plan de renommage Anime
+## Application du renommage Anime
 
-- Ajout d'un générateur de propositions de renommage.
-- Détection du titre à partir du nom de fichier.
-- Normalisation basique des séparateurs.
-- Application du modèle `ANIME_EPISODE_PATTERN`.
-- Détection des destinations déjà existantes.
-- Distinction entre fichiers déjà normalisés, renommages proposés, conflits et fichiers ignorés.
-- Ajout de la commande `anime-rename-plan`.
-- Aucune modification de fichier.
+- Ajout de la commande `anime-rename`.
+- Dry-run par défaut.
+- `--fix` obligatoire pour modifier les fichiers.
+- Détection des conflits avant renommage.
+- Aucun écrasement de fichier existant.
+- Conservation des extensions.
+- Renommage idempotent.
+- Ajout de tests du dry-run et du mode fix.

@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source "${SCRIPT_DIR}/../lib/exit_codes.sh"
+source "${SCRIPT_DIR}/../lib/cli_errors.sh"
+source "${SCRIPT_DIR}/../lib/cli_options.sh"
+source "${SCRIPT_DIR}/../lib/logger.sh"
+source "${SCRIPT_DIR}/../lib/anime_config.sh"
+source "${SCRIPT_DIR}/../lib/anime_scanner.sh"
+source "${SCRIPT_DIR}/../lib/anime_rename.sh"
+
+cmd_anime_rename() {
+    ptk_parse_common_options "$@" || return $?
+
+    if [[ "${#PTK_POSITIONAL[@]}" -gt 1 ]]; then
+        ptk_usage_error "Too many positional arguments."
+        local rc=$?
+        ptk_log_command_end "anime-rename" "$rc"
+        return "$rc"
+    fi
+
+    ptk_load_anime_config "${PTK_ANIME_CONFIG:-config/anime.conf}" || {
+        local rc=$?
+        ptk_log_command_end "anime-rename" "$rc"
+        return "$rc"
+    }
+
+    local target="${PTK_POSITIONAL[0]:-${ANIME_ROOT:-}}"
+
+    if [[ -z "$target" ]]; then
+        ptk_usage_error "An Anime directory is required."
+        local rc=$?
+        ptk_log_command_end "anime-rename" "$rc"
+        return "$rc"
+    fi
+
+    if [[ ! -d "$target" ]]; then
+        ptk_error "Anime directory not found: $target"
+        ptk_log_command_end "anime-rename" "$PTK_EXIT_ERROR"
+        return "$PTK_EXIT_ERROR"
+    fi
+
+    ptk_log_command_start "anime-rename"
+
+    local rc=0
+
+    if ptk_is_dry_run; then
+        ptk_log_info "Dry-run enabled: no files will be modified."
+        ptk_anime_rename_proposals "$target"
+        rc=$?
+    else
+        ptk_log_info "Fix mode enabled: applying Anime renames."
+        ptk_anime_apply_renames "$target"
+        rc=$?
+    fi
+
+    ptk_is_valid_exit_code "$rc" || rc="$PTK_EXIT_ERROR"
+    ptk_log_command_end "anime-rename" "$rc"
+    return "$rc"
+}

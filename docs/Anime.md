@@ -28,31 +28,36 @@ Le scan est strictement en lecture seule.
 ./plex-toolkit anime-rename-plan <répertoire>
 ```
 
-Le plan de renommage analyse les fichiers vidéo détectés et propose un nom normalisé à partir de :
+Le plan génère uniquement des propositions.
 
-```text
-ANIME_EPISODE_PATTERN
+## Renommage
+
+```bash
+./plex-toolkit anime-rename <répertoire>
 ```
 
-Les formats d'épisode actuellement reconnus sont :
+Par défaut, la commande fonctionne en **dry-run** :
 
 ```text
-S01E02
-s01e02
-1x02
+--dry-run
 ```
 
-Le plan distingue :
+Aucun fichier n'est modifié.
 
-```text
-[ OK ]      fichier déjà normalisé
-[RENAME]    renommage proposé
-[WARN]      conflit de destination
-[SKIP]      informations insuffisantes
+Pour appliquer réellement les changements :
+
+```bash
+./plex-toolkit anime-rename --fix <répertoire>
 ```
 
-Cette commande est **strictement en lecture seule**.
+`--fix` est donc obligatoire pour toute modification.
 
-Elle ne renomme, ne déplace et ne supprime aucun fichier.
+La commande :
 
-L'application effective des renommages sera traitée dans une partie ultérieure du sprint.
+- détecte les destinations déjà existantes ;
+- ne remplace jamais un fichier existant ;
+- conserve l'extension du média ;
+- retourne une erreur si un renommage échoue ;
+- peut être relancée sans renommer à nouveau les fichiers déjà normalisés.
+
+Les opérations sont limitées au renommage des fichiers. Aucun déplacement ou suppression n'est effectué.

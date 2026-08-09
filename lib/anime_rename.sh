@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Anime rename proposal generator.
+# Anime rename planning and execution.
 #
-# This module NEVER renames, moves or deletes files.
-# It only produces old -> new proposals.
+# Planning is read-only. Execution is only allowed when explicitly requested
+# by the caller (--fix).
 
 ptk_anime_format_pattern() {
     local pattern="$1"
@@ -49,7 +49,6 @@ ptk_anime_build_episode_name() {
 
     local title
     title="$(ptk_anime_extract_title "$filename")"
-
     [[ -n "$title" ]] || title="Unknown"
 
     local name
@@ -59,7 +58,7 @@ ptk_anime_build_episode_name() {
     printf '%s%s\n' "$name" "$extension"
 }
 
-ptk_anime_rename_proposals() {
+ptk_anime_collect_renames() {
     local target="${1:-${ANIME_ROOT:-}}"
 
     [[ -n "$target" ]] || {
@@ -83,14 +82,21 @@ ptk_anime_rename_proposals() {
         episode_data="$(ptk_anime_extract_episode "$filename")"
         IFS='|' read -r season episode <<< "$episode_data"
 
-        if [[ -z "$season" || -z "$episode" ]]; then
-            printf '[SKIP] No episode detected: %s\n' "$file"
-            continue
-        fi
+        [[ -n "$season" && -n "$episode" ]] || continue
 
         local new_name new_path
         new_name="$(ptk_anime_build_episode_name "$file" "$season" "$episode")"
         new_path="$(dirname "$file")/$new_name"
+
+        printf '%s|%s\n' "$file" "$new_path"
+    done < <(find "$target" -type f -print0 | sort -z)
+}
+
+ptk_anime_rename_proposals() {
+    local target="${1:-${ANIME_ROOT:-}}"
+
+    while IFS='|' read -r file new_path; do
+        [[ -z "$file" ]] && continue
 
         if [[ "$file" == "$new_path" ]]; then
             printf '[ OK ] Already normalized: %s\n' "$file"
@@ -99,7 +105,46 @@ ptk_anime_rename_proposals() {
         else
             printf '[RENAME] %s -> %s\n' "$file" "$new_path"
         fi
-    done < <(find "$target" -type f -print0 | sort -z)
+    done < <(ptk_anime_collect_renames "$target")
+}
 
+ptk_anime_apply_renames() {
+    local target="${1:-${ANIME_ROOT:-}}"
+    local applied=0
+    local skipped=0
+    local conflicts=0
+    local errors=0
+
+    while IFS='|' read -r file new_path; do
+        [[ -z "$file" ]] && continue
+
+        if [[ "$file" == "$new_path" ]]; then
+            printf '[ OK ] Already normalized: %s\n' "$file"
+            skipped=$((skipped + 1))
+            continue
+        fi
+
+        if [[ -e "$new_path" ]]; then
+            printf '[WARN] Target exists, skipped: %s -> %s\n' "$file" "$new_path"
+            conflicts=$((conflicts + 1))
+            continue
+        fi
+
+        if mv -- "$file" "$new_path"; then
+            printf '[DONE] %s -> %s\n' "$file" "$new_path"
+            applied=$((applied + 1))
+        else
+            printf '[ERROR] Unable to rename: %s -> %s\n' "$file" "$new_path" >&2
+            errors=$((errors + 1))
+        fi
+    done < <(ptk_anime_collect_renames "$target")
+
+    echo
+    echo "Renamed   : $applied"
+    echo "Skipped   : $skipped"
+    echo "Conflicts : $conflicts"
+    echo "Errors    : $errors"
+
+    [[ "$errors" -eq 0 ]] || return 1
     return 0
 }
