@@ -8,8 +8,8 @@ mkdir -p "$TEST_ROOT/config" "$TEST_ROOT/reports"
 
 cat > "$TEST_ROOT/config/report.conf" <<EOF
 REPORT_DIR="$TEST_ROOT/reports"
-AUDIT_TEXT_REPORT="audit.log"
-AUDIT_JSON_REPORT="audit.json"
+AUDIT_TEXT_REPORT="custom.log"
+AUDIT_JSON_REPORT="custom.json"
 EOF
 
 (
@@ -17,14 +17,13 @@ EOF
     source "$OLDPWD/lib/report.sh"
     PTK_REPORT_CONFIG="$TEST_ROOT/config/report.conf"
 
-    ptk_report_summary 0 >/tmp/ptk-report-text.out
-    test -f "$TEST_ROOT/reports/audit.log"
-    grep "Audit completed" "$TEST_ROOT/reports/audit.log" >/dev/null
+    ptk_report_summary 0 >/dev/null
+    test -f "$TEST_ROOT/reports/custom.log"
+    test "$(cat "$TEST_ROOT/reports/custom.log")" = "Audit completed"
 
-    ptk_report_summary 1 >/tmp/ptk-report-json.out
-    test -f "$TEST_ROOT/reports/audit.json"
-    grep '"status":"ok"' "$TEST_ROOT/reports/audit.json" >/dev/null
+    ptk_report_summary 1 >/dev/null
+    test -f "$TEST_ROOT/reports/custom.json"
+    grep '"status":"ok"' "$TEST_ROOT/reports/custom.json" >/dev/null
 )
 
-rm -f /tmp/ptk-report-text.out /tmp/ptk-report-json.out
 echo OK

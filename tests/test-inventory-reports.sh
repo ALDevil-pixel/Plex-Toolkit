@@ -5,7 +5,10 @@ TEST_ROOT="$(mktemp -d)"
 trap 'rm -rf "$TEST_ROOT"' EXIT
 
 mkdir -p "$TEST_ROOT/reports"
-printf 'movie.mkv|mkv|12|2026-01-01 00:00:00|/media/movie.mkv\n' > "$TEST_ROOT/input.txt"
+printf '%s\n' \
+    'movie.mkv|mkv|12|2026-01-01 00:00:00|/media/movie.mkv' \
+    'Film "Test"|mkv|34|2026-01-02 00:00:00|/media/Film "Test".mkv' \
+    > "$TEST_ROOT/input.txt"
 
 cat > "$TEST_ROOT/inventory.conf" <<EOF
 REPORT_DIR="$TEST_ROOT/reports"
@@ -28,6 +31,9 @@ EOF
     test -f "$TEST_ROOT/reports/custom.csv"
     test -f "$TEST_ROOT/reports/custom.json"
     test -f "$TEST_ROOT/reports/custom.log"
+
+    grep '"Film ""Test"""' "$TEST_ROOT/reports/custom.csv" >/dev/null
+    grep '"name":"Film \\"Test\\""' "$TEST_ROOT/reports/custom.json" >/dev/null
 )
 
 echo OK

@@ -2,7 +2,7 @@
 # Inventory logging
 
 ptk_inventory_log() {
-    local message="$1"
+    local message="${1:-}"
     local logfile="${2:-}"
 
     if [[ -z "$logfile" ]]; then
@@ -13,6 +13,12 @@ ptk_inventory_log() {
         logfile="$PTK_REPORT_DIR/$INVENTORY_LOG"
     fi
 
-    mkdir -p "$(dirname "$logfile")" || return 1
-    printf "[%s] %s\n" "$(date '+%F %T')" "$message" >> "$logfile"
+    local directory
+    directory="$(dirname "$logfile")"
+    mkdir -p "$directory" || return 1
+
+    printf "[%s] %s\n" "$(date '+%F %T')" "$message" >> "$logfile" || {
+        echo "[ERROR] Unable to write inventory log: $logfile" >&2
+        return 1
+    }
 }

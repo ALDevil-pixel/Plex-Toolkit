@@ -21,6 +21,34 @@ ptk_report_init() {
     }
 }
 
+ptk_report_write_atomic() {
+    local target="$1"
+    local content="$2"
+    local directory
+    local tmp
+
+    directory="$(dirname "$target")"
+    mkdir -p "$directory" || return 1
+
+    tmp="$(mktemp "$directory/.ptk-report.XXXXXX")" || {
+        echo "[ERROR] Unable to create temporary report: $target" >&2
+        return 1
+    }
+
+    if ! printf '%s\n' "$content" > "$tmp"; then
+        rm -f -- "$tmp"
+        return 1
+    fi
+
+    if ! mv -f -- "$tmp" "$target"; then
+        rm -f -- "$tmp"
+        echo "[ERROR] Unable to replace report: $target" >&2
+        return 1
+    fi
+
+    return 0
+}
+
 ptk_report_summary() {
     local json="${1:-0}"
 
@@ -28,12 +56,13 @@ ptk_report_summary() {
 
     if [[ "$json" == "1" ]]; then
         local target="$REPORT_DIR/$AUDIT_JSON_REPORT"
-        cat > "$target" <<'EOF'
-{"status":"ok","message":"Audit completed"}
-EOF
+        local content='{"status":"ok","message":"Audit completed"}'
+
+        ptk_report_write_atomic "$target" "$content" || return 1
         cat "$target"
     else
         local target="$REPORT_DIR/$AUDIT_TEXT_REPORT"
-        printf '%s\n' "Audit completed" | tee "$target"
+        ptk_report_write_atomic "$target" "Audit completed" || return 1
+        cat "$target"
     fi
 }

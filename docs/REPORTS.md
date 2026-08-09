@@ -1,34 +1,22 @@
 # Reports
 
-Les rapports sont configurés dans les fichiers `config/`.
+Les rapports utilisent les configurations présentes dans `config/`.
 
-## Audit
+## Fiabilité des écritures
 
-```text
-config/report.conf
-```
+Les rapports sont écrits dans un fichier temporaire puis remplacés avec `mv`.
+Cela évite de laisser un rapport partiellement écrit en cas d'échec pendant la génération.
 
-Paramètres :
+## CSV
 
-```text
-REPORT_DIR
-AUDIT_TEXT_REPORT
-AUDIT_JSON_REPORT
-```
+Les champs CSV sont systématiquement entourés de guillemets et les guillemets internes sont doublés conformément au format CSV.
 
-## Inventory
+## JSON
 
-```text
-config/inventory.conf
-```
+Les caractères spéciaux utilisés dans les noms et chemins sont échappés avant génération du JSON.
 
-Paramètres :
+La taille des entrées Inventory doit être un entier positif ou nul.
 
-```text
-REPORT_DIR
-INVENTORY_CSV_REPORT
-INVENTORY_JSON_REPORT
-INVENTORY_LOG
-```
+## Logs Inventory
 
-Aucun chemin de rapport ne doit être codé en dur dans les modules.
+Les erreurs d'écriture du log sont maintenant retournées au caller.

@@ -1,10 +1,11 @@
-# Sprint 1.9.0 - Partie 3
+# Sprint 1.9.0 - Partie 4
 
-## Configuration centralisée
+## Fiabilisation des rapports
 
-- Ajout de `config/defaults.conf`.
-- Ajout du chargeur commun `lib/config.sh`.
-- Centralisation des répertoires logs/reports et des valeurs communes.
-- Les configurations spécialisées peuvent surcharger les valeurs par défaut.
-- Adaptation du logger, du reporting, du contrôle des extensions et d'Inventory.
-- Ajout d'un test du système de configuration.
+- Écritures de rapports effectuées via fichier temporaire puis remplacement atomique.
+- Validation des fichiers d'entrée Inventory.
+- Échappement correct des champs CSV.
+- Échappement des caractères spéciaux JSON.
+- Validation de la taille des entrées JSON.
+- Les erreurs d'écriture des logs Inventory sont maintenant remontées.
+- Tests étendus avec noms contenant des guillemets.
