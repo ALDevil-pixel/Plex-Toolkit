@@ -1,14 +1,11 @@
-# Sprint 1.10.0 - Partie 6
+# Sprint 1.11.0 - Partie 1
 
-## Vérification finale
+## Configuration Anime
 
-- Ajout du contrôle de cohérence spécifique au Sprint 1.10.0.
-- Ajout d'un contrôle de readiness avant release.
-- Vérification de l'architecture commune.
-- Vérification du système de plugins.
-- Vérification du CLI et des tests d'intégration/non-régression.
-- Documentation de la procédure de consolidation.
-
-## Statut
-
-Le Sprint 1.10.0 est terminé et prêt pour consolidation finale.
+- Ajout d'une configuration dédiée Anime.
+- Ajout du chargeur et validateur Anime.
+- Validation des modèles de nommage.
+- Validation des extensions vidéo Anime.
+- Validation des paramètres booléens.
+- Ajout de tests dédiés.
+- Aucune modification de média n'est effectuée dans cette partie.

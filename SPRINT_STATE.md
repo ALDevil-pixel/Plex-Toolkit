@@ -1,17 +1,16 @@
-Sprint: 1.10.0
-Partie: 6
+Sprint: 1.11.0
+Partie: 1
 
 Status: COMPLETE
 
 Objectif:
-- Vérification finale du Sprint 1.10.0 et préparation de consolidation.
+- Poser la configuration et la validation communes aux fonctionnalités Anime.
 
 Modified:
-- docs/RELEASE.md
+- aucun fichier fonctionnel existant supprimé.
 
 New:
-- tests/test-sprint-1.10.sh
-- tests/test-release-ready.sh
-
-Release:
-- Sprint 1.10.0 prêt pour consolidation finale.
+- config/anime.conf
+- lib/anime_config.sh
+- tests/test-anime-config.sh
+- docs/Anime.md
