@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 # Metadata collection for inventory.
-# Output format remains pipe-delimited for compatibility.
+# Output format: name|extension|size|mtime|hash|path
+
+ptk_inventory_normalize_extension() {
+    local name="$1"
+    if [[ "$name" == *.* && "${name##*.}" != "$name" ]]; then
+        printf '%s\n' "${name##*.}" | tr '[:upper:]' '[:lower:]'
+    else
+        printf '%s\n' ""
+    fi
+}
 
 ptk_inventory_hash_file() {
     local file="$1"
@@ -29,8 +38,8 @@ ptk_inventory_metadata() {
     [[ -f "$file" ]] || return 1
 
     local name ext size mtime hash
-    name="$(basename "$file")"
-    ext="${name##*.}"
+    name="$(basename -- "$file")"
+    ext="$(ptk_inventory_normalize_extension "$name")"
     size="$(stat -c %s -- "$file" 2>/dev/null)" || return 1
     mtime="$(stat -c %y -- "$file" 2>/dev/null | cut -d'.' -f1)" || return 1
     hash="$(ptk_inventory_hash_file "$file")" || return $?

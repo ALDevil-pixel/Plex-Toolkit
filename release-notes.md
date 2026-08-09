@@ -1,12 +1,10 @@
-# Sprint 1.15.0 - Partie 1
+# Sprint 1.15.0 - Partie 2
 
-## Inventaire local
+## Identité des fichiers
 
-- Ajout de paramètres de configuration pour l'inventaire.
-- Gestion explicite des liens symboliques.
-- Gestion configurable des fichiers cachés.
-- Hash optionnel des fichiers.
-- SHA-256 supporté par défaut.
-- Conservation du mode lecture seule.
-- Extension du format interne avec le champ hash.
-- Ajout d'un test d'inventaire dédié.
+- Normalisation des extensions en minuscules.
+- Ajout d'une identité basée sur le hash lorsqu'il est disponible.
+- Ajout d'un fallback nom + taille lorsque le hash est absent.
+- Séparation de l'identité et du chemin physique.
+- Préparation des futures comparaisons d'inventaires.
+- Aucun changement de fichier local.

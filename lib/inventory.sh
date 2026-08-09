@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 source "$(dirname "${BASH_SOURCE[0]}")/inventory_metadata.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/inventory_identity.sh"
 source "$(dirname "${BASH_SOURCE[0]}")/inventory_csv.sh"
 source "$(dirname "${BASH_SOURCE[0]}")/inventory_json.sh"
 source "$(dirname "${BASH_SOURCE[0]}")/inventory_stats.sh"
