@@ -1,9 +1,9 @@
-# Sprint 1.8.0 - Partie 2
+# Sprint 1.8.0 - Partie 3
 
-## Auto Fix Rename
+## Auto Fix Duplicates
 
-- Intégration complète du mode `--fix` pour rename.
-- Conservation du mode lecture seule par défaut.
-- Protection contre l'écrasement de fichiers existants.
-- Gestion améliorée des conflits avec suffixes.
+- Ajout du mode `--fix` pour les doublons.
+- Suppression uniquement après vérification SHA-256 avec `--deep`.
+- Conservation du premier fichier rencontré.
+- Mode lecture seule par défaut.
 - Ajout d'un test d'intégration.

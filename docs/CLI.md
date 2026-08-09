@@ -1,24 +1,19 @@
-# rename
+# duplicates
 
-## Modes
+## Auto Fix
 
-Par défaut, `rename` fonctionne en lecture seule :
-
-```bash
-plex-toolkit rename
-```
-
-Pour appliquer réellement les renommages :
+La recherche de doublons reste non destructive par défaut.
 
 ```bash
-plex-toolkit rename --fix
+plex-toolkit duplicates --deep /media/Movies
 ```
 
-`--dry-run` force explicitement le mode lecture seule :
+Pour supprimer automatiquement les doublons réellement identifiés par SHA-256 :
 
 ```bash
-plex-toolkit rename --dry-run
+plex-toolkit duplicates --deep --fix /media/Movies
 ```
 
-Les conflits de destination sont ignorés afin d'éviter tout écrasement de fichier existant.
-Les renommages réellement effectués sont journalisés.
+Le premier fichier rencontré est conservé et les suivants ayant exactement le même SHA-256 sont proposés/supprimés.
+
+Sans `--deep`, aucun fichier n'est supprimé.

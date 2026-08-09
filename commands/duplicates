@@ -1,12 +1,49 @@
 #!/usr/bin/env bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source "${SCRIPT_DIR}/../lib/exit_codes.sh"
+source "${SCRIPT_DIR}/../lib/cli_errors.sh"
+source "${SCRIPT_DIR}/../lib/cli_options.sh"
+source "${SCRIPT_DIR}/../lib/logger.sh"
 source "${SCRIPT_DIR}/../lib/duplicates.sh"
 source "${SCRIPT_DIR}/../lib/duplicates_summary.sh"
 
 cmd_duplicates() {
-    if [[ "$1" == "--summary" ]]; then
-        ptk_duplicates_summary "${2:-logs/duplicates-report.txt}"
-        return
+    ptk_parse_common_options "$@"
+
+    if [[ "$PTK_POSITIONAL" == "" ]]; then
+        :
     fi
-    ptk_find_duplicates "$@"
+
+    if [[ "$PTK_VERBOSE" -eq 1 ]]; then
+        ptk_log_verbose "Command: duplicates"
+    fi
+
+    if [[ "${PTK_POSITIONAL[0]:-}" == "--summary" ]]; then
+        ptk_duplicates_summary "${PTK_POSITIONAL[1]:-logs/duplicates-report.txt}"
+        return $?
+    fi
+
+    if [[ "${#PTK_POSITIONAL[@]}" -gt 1 ]]; then
+        ptk_usage_error "Too many positional arguments."
+        return $?
+    fi
+
+    local target="${PTK_POSITIONAL[0]:-.}"
+    if ! ptk_require_directory "$target"; then
+        return $?
+    fi
+
+    ptk_log_command_start "duplicates"
+
+    local -a args=()
+    [[ "$PTK_DRY_RUN" -eq 0 ]] && args+=(--fix)
+    args+=("$target")
+
+    ptk_find_duplicates "${args[@]}"
+    local rc=$?
+
+    ptk_is_valid_exit_code "$rc" || rc="$PTK_EXIT_ERROR"
+    ptk_log_command_end "duplicates" "$rc"
+    return "$rc"
 }

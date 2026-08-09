@@ -1,16 +1,16 @@
 Sprint: 1.8.0
-Partie: 2
+Partie: 3
 
 Status: COMPLETE
 
 Objectif:
-- Auto Fix du renommage.
-
-Modified:
-- lib/rename.sh
-- lib/rename_conflicts.sh
-- commands/rename
-- docs/CLI.md
+- Auto Fix des doublons avec vérification SHA-256.
 
 New:
-- tests/test-rename-fix-integration.sh
+- lib/duplicates_fix.sh
+- tests/test-duplicates-fix.sh
+
+Modified:
+- lib/duplicates.sh
+- commands/duplicates
+- docs/CLI.md
