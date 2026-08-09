@@ -1,14 +1,11 @@
 Release: 0.2.1
-Lot: 2
+Lot: 3
 
 Status: COMPLETE
 
 New:
-- lib/library_runner.sh
-- tests/test-library-runner.sh
+- lib/cli_options.sh
+- tests/test-cli-options.sh
 
 Modified:
-- lib/check.sh
-- lib/cleanup.sh
-- lib/inventory.sh
 - docs/CONSOLIDATION.md

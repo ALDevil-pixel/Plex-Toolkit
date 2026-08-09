@@ -1,11 +1,13 @@
 # Consolidation v0.2.1
 
-## Lot 2
+## Lot 3
 
-Ajout de `lib/library_runner.sh` pour centraliser le parcours des bibliothèques.
+Ajout de `lib/cli_options.sh` pour préparer la gestion commune des options CLI.
 
-Les commandes concernées conservent leur comportement existant :
-- une cible passée en argument traite uniquement cette cible ;
-- sans cible, les bibliothèques de `config/library.conf` sont parcourues.
+Options communes :
+- `--dry-run`
+- `--fix`
+- `--verbose` / `-v`
+- `--quiet` / `-q`
 
-Le runner reçoit un callback et transmet le nom et le chemin de chaque bibliothèque.
+Le module ne remplace pas encore les parseurs propres aux commandes. Il sert de base commune pour les prochaines intégrations.

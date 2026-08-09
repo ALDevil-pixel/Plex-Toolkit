@@ -1,6 +1,5 @@
-# Consolidation 0.2.1 - Lot 2
+# Consolidation 0.2.1 - Lot 3
 
-- Ajout du runner commun de bibliothèques.
-- Réduction de la logique de parcours dupliquée.
-- Check, cleanup et inventory utilisent désormais une structure homogène.
-- Aucun changement volontaire du comportement fonctionnel.
+- Ajout du module commun de gestion des options CLI.
+- Préparation de --dry-run, --fix, --verbose et --quiet.
+- Aucun changement de comportement des commandes existantes dans ce lot.
