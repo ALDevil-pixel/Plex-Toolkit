@@ -1,19 +1,16 @@
 Sprint: 1.9.0
-Partie: 4
+Partie: 5
 
 Status: COMPLETE
 
 Objectif:
-- Fiabiliser les écritures de rapports et exports.
+- Valider les configurations avant leur utilisation.
 
 Modified:
-- lib/report.sh
-- lib/inventory_csv.sh
-- lib/inventory_json.sh
-- lib/inventory_logger.sh
-- tests/test-report.sh
-- tests/test-inventory-reports.sh
-- docs/REPORTS.md
+- lib/config.sh
+- config/defaults.conf
+- tests/test-config.sh
+- docs/CONFIG.md
 
 New:
-- aucun
+- tests/test-config-validation.sh

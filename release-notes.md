@@ -1,11 +1,10 @@
-# Sprint 1.9.0 - Partie 4
+# Sprint 1.9.0 - Partie 5
 
-## Fiabilisation des rapports
+## Validation de configuration
 
-- Écritures de rapports effectuées via fichier temporaire puis remplacement atomique.
-- Validation des fichiers d'entrée Inventory.
-- Échappement correct des champs CSV.
-- Échappement des caractères spéciaux JSON.
-- Validation de la taille des entrées JSON.
-- Les erreurs d'écriture des logs Inventory sont maintenant remontées.
-- Tests étendus avec noms contenant des guillemets.
+- Ajout d'une validation systématique après chargement.
+- Validation des booléens communs.
+- Validation des chemins communs.
+- Validation de la présence des extensions vidéo.
+- Les configurations invalides sont maintenant refusées.
+- Ajout de tests dédiés aux erreurs de configuration.

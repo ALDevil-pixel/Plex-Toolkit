@@ -6,7 +6,7 @@ Les valeurs communes sont centralisées dans :
 config/defaults.conf
 ```
 
-Les fichiers de configuration spécialisés peuvent surcharger ces valeurs.
+Les fichiers spécialisés peuvent surcharger ces valeurs.
 
 Exemples :
 
@@ -17,20 +17,25 @@ config/report.conf
 config/inventory.conf
 ```
 
-Le chargement commun est assuré par :
+## Validation
+
+Le chargement passe par :
 
 ```text
 lib/config.sh
 ```
 
-Ordre de chargement :
+Après chargement, les paramètres communs sont validés.
+
+Les booléens acceptent :
 
 ```text
-defaults.conf
-      ↓
-configuration spécialisée
-      ↓
-valeurs spécialisées
+true / false
+yes / no
+1 / 0
+on / off
 ```
 
-Une configuration spécialisée peut donc modifier une valeur commune sans dupliquer toute la configuration par défaut.
+Les chemins configurés ne doivent pas contenir de retour à la ligne.
+
+Une configuration invalide fait échouer le chargement avec un code différent de `0`.
