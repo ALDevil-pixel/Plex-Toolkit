@@ -1,22 +1,72 @@
 #!/usr/bin/env bash
 set -euo pipefail
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")"&&pwd)"
-for f in constants colors errors logger config args display version;do
-# shellcheck source=/dev/null
-source "$ROOT/lib/$f.sh"
-done
-parse_args "$@"
-load_config
-set -- "${POSITIONAL[@]}"
-[[ $# -eq 0 ]]&&exec "$ROOT/commands/help"
-case "${1:-} ${2:-}" in
-"anime rename") exec "$ROOT/plugins/anime/rename.sh" "${@:3}";;
-"anime audit") exec "$ROOT/plugins/anime/audit.sh" "${@:3}";;
-"movies duplicates") exec "$ROOT/plugins/movies/duplicates.sh" "${@:3}";;
-"plex verify") exec "$ROOT/plugins/plex/verify.sh" "${@:3}";;
-"help "*) exec "$ROOT/commands/help";;
-"list "*) exec "$ROOT/commands/list";;
-"version "*) exec "$ROOT/commands/version";;
-"self-check "*) exec "$ROOT/commands/self-check";;
-*) echo "Unknown command"; exec "$ROOT/commands/help";;
-esac
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+run_command() {
+    local command="$1"
+    shift
+
+    case "$command" in
+        audit)
+            source "$ROOT/commands/audit"
+            cmd_audit "$@"
+            ;;
+        check)
+            source "$ROOT/commands/check"
+            cmd_check "$@"
+            ;;
+        cleanup)
+            source "$ROOT/commands/cleanup"
+            cmd_cleanup "$@"
+            ;;
+        doctor)
+            source "$ROOT/commands/doctor"
+            cmd_doctor "$@"
+            ;;
+        duplicates)
+            source "$ROOT/commands/duplicates"
+            cmd_duplicates "$@"
+            ;;
+        help)
+            source "$ROOT/commands/help"
+            cmd_help "$@"
+            ;;
+        info)
+            source "$ROOT/commands/info"
+            cmd_info "$@"
+            ;;
+        inventory)
+            source "$ROOT/commands/inventory"
+            cmd_inventory "$@"
+            ;;
+        list)
+            source "$ROOT/commands/list"
+            cmd_list "$@"
+            ;;
+        rename)
+            source "$ROOT/commands/rename"
+            cmd_rename "$@"
+            ;;
+        self-check)
+            source "$ROOT/commands/self-check"
+            cmd_self_check "$@"
+            ;;
+        version)
+            source "$ROOT/commands/version"
+            cmd_version "$@"
+            ;;
+        *)
+            echo "[ERROR] Unknown command: $command" >&2
+            echo "Use 'plex-toolkit help' to see available commands." >&2
+            return 2
+            ;;
+    esac
+}
+
+if [[ $# -eq 0 ]]; then
+    run_command help
+    exit $?
+fi
+
+run_command "$@"

@@ -1,14 +1,14 @@
 Sprint: 1.8.0
-Partie: 12
+Partie: 13
 
 Status: COMPLETE
 
 Objectif:
-- Finaliser la suite de tests du Toolkit.
+- Finaliser le point d'entrée CLI principal.
 
 Modified:
-- tests/run.sh
-- tests/test-suite.sh
+- plex-toolkit
 
 New:
-- docs/TESTS.md
+- tests/test-dispatcher.sh
+- docs/CLI.md

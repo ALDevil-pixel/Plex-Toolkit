@@ -1,29 +1,30 @@
-# Commandes CLI
+# CLI
 
-## help
-
-```bash
-plex-toolkit help
-plex-toolkit help <command>
-```
-
-`help` est strictement en lecture seule.
-
-## version
+Le point d'entrée du Toolkit est :
 
 ```bash
-plex-toolkit version
+./plex-toolkit <commande> [options]
 ```
 
-`version` lit le fichier `VERSION` et affiche sa première ligne.
-Il est strictement en lecture seule.
-
-Options communes disponibles pour ces commandes :
+Commandes disponibles :
 
 ```text
---dry-run
---verbose / -v
---quiet / -q
+audit
+check
+cleanup
+doctor
+duplicates
+help
+info
+inventory
+list
+rename
+self-check
+version
 ```
 
-`--fix` est refusé pour les commandes qui ne proposent aucune modification.
+Sans commande, `plex-toolkit` affiche l'aide.
+
+Une commande inconnue retourne `2` et affiche une indication pour utiliser `help`.
+
+Les commandes restent responsables de leurs propres options et de leur logique métier.

@@ -1,10 +1,10 @@
-# Sprint 1.8.0 - Partie 12
+# Sprint 1.8.0 - Partie 13
 
-## Suite de tests
+## Point d'entrée CLI
 
-- Le runner de tests découvre automatiquement les `test-*.sh`.
-- Chaque test est exécuté séparément.
-- Les erreurs d'un test n'empêchent pas les suivants de s'exécuter.
-- Un résumé final est affiché.
-- Le code de sortie global est `0` si tout passe, sinon `1`.
-- Ajout de la documentation simple de la suite de tests.
+- Le script `plex-toolkit` distribue maintenant vers toutes les commandes consolidées.
+- Les fonctions `cmd_*` sont appelées directement.
+- Les options restent gérées par chaque commande.
+- Une commande inconnue retourne `2`.
+- Sans argument, l'aide est affichée.
+- Ajout d'un test du dispatcher.
