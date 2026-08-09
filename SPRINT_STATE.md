@@ -1,15 +1,17 @@
 Sprint: 1.8.0
-Partie: 10
+Partie: 11
 
 Status: COMPLETE
 
 Objectif:
-- Harmoniser self-check avec l'interface CLI commune.
+- Harmoniser les commandes utilitaires help et version.
 
 Modified:
-- commands/self-check
+- commands/help
+- commands/version
+- docs/CLI.md
 
 New:
-- lib/self_check.sh
-- tests/test-self-check-cli.sh
-- docs/CLI.md
+- lib/help.sh
+- lib/version.sh
+- tests/test-help-version-cli.sh

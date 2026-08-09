@@ -1,12 +1,24 @@
-# self-check
+# Commandes CLI
 
-## Usage
+## help
 
 ```bash
-plex-toolkit self-check
+plex-toolkit help
+plex-toolkit help <command>
 ```
 
-Options communes :
+`help` est strictement en lecture seule.
+
+## version
+
+```bash
+plex-toolkit version
+```
+
+`version` lit le fichier `VERSION` et affiche sa première ligne.
+Il est strictement en lecture seule.
+
+Options communes disponibles pour ces commandes :
 
 ```text
 --dry-run
@@ -14,11 +26,4 @@ Options communes :
 --quiet / -q
 ```
 
-`self-check` vérifie uniquement les dépendances minimales nécessaires au Toolkit.
-Il ne modifie aucun fichier et refuse donc `--fix`.
-
-Le code de retour est :
-
-- `0` : environnement minimal disponible ;
-- `1` : une dépendance obligatoire manque ;
-- `2` : mauvais paramètre.
+`--fix` est refusé pour les commandes qui ne proposent aucune modification.

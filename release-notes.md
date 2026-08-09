@@ -1,10 +1,10 @@
-# Sprint 1.8.0 - Partie 10
+# Sprint 1.8.0 - Partie 11
 
-## Self-check CLI
+## Commandes utilitaires
 
-- Intégration de `self-check` à l'interface CLI commune.
-- Déplacement de la logique dans `lib/self_check.sh`.
+- Intégration de `help` à l'interface CLI commune.
+- Intégration de `version` à l'interface CLI commune.
+- Déplacement de la logique dans `lib/`.
 - Codes de retour harmonisés.
 - Journalisation commune.
-- `--fix` explicitement refusé.
 - Ajout d'un test CLI.
