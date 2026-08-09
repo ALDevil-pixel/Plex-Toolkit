@@ -27,9 +27,6 @@ do
     test -f "$f"
 done
 
-grep -q 'Sprint: 1.13.0' SPRINT_STATE.md
-grep -q 'Partie: 7' SPRINT_STATE.md
-
 grep -q 'ptk_plex_request' lib/plex_api.sh
 grep -q 'ptk_plex_list_libraries' lib/plex_libraries.sh
 grep -q 'ptk_plex_list_media' lib/plex_media.sh

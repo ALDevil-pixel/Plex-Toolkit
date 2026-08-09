@@ -15,9 +15,6 @@ test -f lib/config.sh
 test -f lib/report.sh
 test -f lib/logger.sh
 
-grep -q "Sprint: 1.9.0" SPRINT_STATE.md
-grep -q "Partie: 6" SPRINT_STATE.md
-
 # Ensure the common configuration layer is actually used by the
 # modules modified during the sprint.
 grep -q 'ptk_load_config' lib/report.sh

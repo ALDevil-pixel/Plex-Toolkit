@@ -23,9 +23,6 @@ do
     test -f "$f"
 done
 
-grep -q 'Sprint: 1.14.0' SPRINT_STATE.md
-grep -q 'Partie: 6' SPRINT_STATE.md
-
 grep -q 'ptk_plex_sync_plan' lib/plex_sync_plan.sh
 grep -q 'ptk_plex_sync_validate_file' lib/plex_sync_validate.sh
 grep -q 'ptk_plex_sync_add' lib/plex_sync_add.sh

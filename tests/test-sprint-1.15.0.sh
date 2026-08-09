@@ -26,9 +26,6 @@ for file in "${required_files[@]}"; do
   test -f "$file"
 done
 
-grep -q 'Sprint: 1.15.0' SPRINT_STATE.md
-grep -q 'Partie: 6' SPRINT_STATE.md
-
 grep -q 'inventory-compare' plex-toolkit
 grep -q 'inventory-plex-compare' plex-toolkit
 grep -q 'inventory-plex-report' plex-toolkit

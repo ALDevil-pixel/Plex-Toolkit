@@ -1,5 +1,5 @@
 Correction Release
-Partie: 4
+Partie: 5
 
 Status: COMPLETE
 
@@ -24,3 +24,5 @@ Fichiers restaurés depuis Git:
 Correction 3 validée : comparaison d'inventaires et tests associés OK.
 
 Partie 4 validée : options spécifiques conservées par le parser commun et traitées par la commande.
+
+Partie 5 validée : tests historiques rendus indépendants de SPRINT_STATE.md.

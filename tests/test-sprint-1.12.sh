@@ -19,9 +19,6 @@ do
     test -f "$f"
 done
 
-grep -q 'Sprint: 1.12.0' SPRINT_STATE.md
-grep -q 'Partie: 5' SPRINT_STATE.md
-
 grep -q 'ptk_load_movie_config' commands/movie-scan
 grep -q 'ptk_load_movie_config' commands/movie-duplicates
 grep -q 'ptk_movie_scan' commands/movie-scan

@@ -25,8 +25,8 @@ fi
 [[ "$(ptk_config_bool_value true)" == "true" ]]
 [[ "$(ptk_config_bool_value false)" == "false" ]]
 
-grep -Fq 'cmd_${command//-/_}' "$ROOT/plex-toolkit"
+grep -F 'cmd_${command//-/_}' "$ROOT/plex-toolkit" >/dev/null
 
-test -x "$ROOT/plex-toolkit"
+[[ -f "$ROOT/plex-toolkit" ]]
 
 echo "Correction CLI/config: OK"

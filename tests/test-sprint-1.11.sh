@@ -17,9 +17,6 @@ test -f tests/test-anime-rename-plan.sh
 test -f tests/test-anime-rename.sh
 test -f tests/test-anime-edge-cases.sh
 
-grep -q 'Sprint: 1.11.0' SPRINT_STATE.md
-grep -q 'Partie: 6' SPRINT_STATE.md
-
 grep -q 'ptk_load_anime_config' commands/anime-scan
 grep -q 'ptk_load_anime_config' commands/anime-rename-plan
 grep -q 'ptk_load_anime_config' commands/anime-rename

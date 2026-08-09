@@ -1,10 +1,6 @@
-# Release de correction - Partie 4
+# Release de correction - Partie 5
 
-## Options CLI spécifiques
-
-- Le parser commun ne consomme plus les options propres aux commandes.
-- `--deep` et `--summary` sont transmis tels quels.
-- `--min-size <valeur>` et `--extensions <valeur>` conservent leur valeur.
-- `duplicates` traite ses options métier dans son propre parser.
-- Le dispatcher convertit les noms `commande-avec-tirets` en `cmd_commande_avec_tirets`.
-- Ajout de tests de non-régression du parsing et de `duplicates`.
+- Suppression des dépendances artificielles des tests historiques à `SPRINT_STATE.md`.
+- Ajout du runner `tests/test-historical-sprints.sh`.
+- Ajout du contrôle `tests/test-sprint-state-independent.sh`.
+- Conservation du bit exécutable du lanceur `plex-toolkit`.
