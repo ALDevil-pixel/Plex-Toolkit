@@ -1,5 +1,14 @@
-Sprint: 1.7.0
-Partie: 6
+Release: 0.2.1
+Lot: 2
 
 Status: COMPLETE
-Version: 0.2.0
+
+New:
+- lib/library_runner.sh
+- tests/test-library-runner.sh
+
+Modified:
+- lib/check.sh
+- lib/cleanup.sh
+- lib/inventory.sh
+- docs/CONSOLIDATION.md
