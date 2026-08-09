@@ -1,6 +1,6 @@
-# Consolidation 0.2.1 - Lot 4
+# Consolidation 0.2.1 - Lot 5
 
-- Intégration du parseur d'options commun dans les commandes principales.
-- Support homogène de --dry-run, --fix, --verbose et --quiet au niveau CLI.
-- Conservation des arguments positionnels.
-- Ajout d'un test du parseur CLI.
+- Ajout des codes de sortie communs.
+- Ajout de la gestion commune des erreurs CLI.
+- Ajout des contrôles de répertoire.
+- Aucun changement volontaire du comportement métier.

@@ -1,19 +1,16 @@
 # Consolidation v0.2.1
 
-## Lot 4
+## Lot 5
 
-Les commandes principales utilisent maintenant le parseur commun :
+Ajout des codes de sortie et de la gestion commune des erreurs CLI.
 
-- `rename`
-- `cleanup`
-- `check`
-- `inventory`
+Codes :
+- `0` : succès
+- `1` : erreur d'exécution
+- `2` : erreur d'utilisation / paramètres
 
-Options communes :
-- `--dry-run`
-- `--fix`
-- `--verbose` / `-v`
-- `--quiet` / `-q`
+Nouveaux modules :
+- `lib/exit_codes.sh`
+- `lib/cli_errors.sh`
 
-Les arguments positionnels sont conservés pour cibler une bibliothèque.
-La logique métier reste dans `lib/`.
+Ce lot prépare l'harmonisation des commandes sans modifier leur logique métier.
