@@ -1,12 +1,20 @@
-# Release de correction - Partie 9
+# Release de correction — Partie 9 bis
 
-## Résultat
+Cette release corrige uniquement les problèmes de cohérence constatés dans
+l'archive fournie, sans supprimer ni remplacer les parties fonctionnelles
+existantes.
 
-- `VERSION` restauré et synchronisé avec `version`.
+## Corrections
+
+- `VERSION` restauré depuis `version`.
 - Permissions exécutables restaurées.
-- Test de dispatcher obsolète corrigé.
-- Suite historique : 8/8.
-- Suite globale : 119/119.
-- `make test` : PASS.
-- ZIP final extrait avec `unzip` puis `make test` : PASS.
-- Rapport final : `docs/FINAL-VALIDATION.md`.
+- Test CLI obsolète corrigé.
+- Runner de tests stabilisé.
+- Rapport de validation régénéré après réussite des tests.
+
+## Validation
+
+- Suite globale : 119/119
+- Suite historique : 8/8
+- `make test` : PASS
+- Syntaxe Bash : PASS

@@ -16,7 +16,6 @@ for test_file in "$TEST_DIR"/test-*.sh; do
     [[ -f "$test_file" ]] || continue
     name="$(basename "$test_file")"
 
-    # Helpers/wrappers are not independent tests.
     [[ "$name" == "test-suite.sh" ]] && continue
     [[ "$name" == "test-historical-sprints.sh" ]] && continue
 

@@ -1,5 +1,5 @@
 Correction Release
-Partie: 9
+Partie: 9 bis
 
 Status: COMPLETE
 
@@ -34,3 +34,5 @@ Partie 7 validée : documentation consolidée et cohérence de version vérifié
 
 
 Partie 9 validée : dépôt et archive finale validés après extraction Linux.
+
+Correction 9 bis : restauration de VERSION, permissions et validation de l'archive.
