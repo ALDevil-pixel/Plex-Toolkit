@@ -1,18 +1,18 @@
 Sprint: 1.10.0
-Partie: 1
+Partie: 2
 
 Status: COMPLETE
 
 Objectif:
-- Nettoyer les anciennes couches communes sans casser la compatibilité.
+- Harmoniser les bibliothèques utilitaires communes restantes.
 
 Modified:
-- lib/common.sh
-- lib/args.sh
-- lib/cli.sh
-- lib/errors.sh
-- lib/validation.sh
+- lib/terminal.sh
+- lib/colors.sh
+- lib/display.sh
+- lib/filesystem.sh
+- lib/progress.sh
 - docs/Architecture.md
 
 New:
-- tests/test-legacy-compatibility.sh
+- tests/test-common-libraries.sh

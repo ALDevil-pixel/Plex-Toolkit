@@ -12,25 +12,28 @@ lib/
     ├── cli_errors.sh
     ├── exit_codes.sh
     ├── logger.sh
-    └── config.sh
+    ├── config.sh
+    ├── terminal.sh
+    ├── colors.sh
+    ├── display.sh
+    └── filesystem.sh
 ```
 
-Les commandes récentes utilisent directement ces modules communs.
+Les fonctions communes doivent être centralisées dans `lib/`.
 
 ## Compatibilité legacy
 
-Les fichiers suivants restent temporairement présents pour compatibilité avec d'anciens appels :
+Les anciens noms restent disponibles lorsqu'une API historique les utilise :
 
 ```text
-lib/common.sh
-lib/args.sh
-lib/cli.sh
-lib/errors.sh
-lib/validation.sh
+is_tty
+require_dir
+safe_remove
+progress
 ```
 
-Ils ne constituent plus la nouvelle API interne.
+Ils délèguent vers les fonctions `ptk_*`.
 
-Ils servent uniquement de couche de compatibilité et doivent déléguer vers les conventions actuelles lorsqu'une fonction commune existe.
+`common.sh`, `args.sh`, `cli.sh`, `errors.sh` et `validation.sh` restent des couches legacy traitées dans la Partie 1.
 
-Aucune nouvelle commande ne doit dépendre de ces fichiers.
+Aucune nouvelle commande ne doit introduire une seconde implémentation d'une fonction déjà présente dans `lib/`.

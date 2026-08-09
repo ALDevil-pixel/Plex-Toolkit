@@ -1,11 +1,11 @@
-# Sprint 1.10.0 - Partie 1
+# Sprint 1.10.0 - Partie 2
 
-## Nettoyage architectural
+## Bibliothèques communes
 
-- Identification des anciennes couches communes.
-- Conservation des anciens fichiers pour compatibilité.
-- Normalisation de leur comportement.
-- Ajout d'une indication claire sur leur statut legacy.
-- Suppression des comportements dangereux comme `exit` depuis les fonctions de bibliothèque.
-- Harmonisation des codes de retour.
-- Ajout d'un test de compatibilité legacy.
+- Centralisation des helpers TTY.
+- Centralisation de la gestion des couleurs.
+- Harmonisation de l'affichage.
+- Harmonisation des helpers filesystem.
+- Harmonisation de la barre de progression.
+- Conservation des anciens noms comme wrappers de compatibilité.
+- Ajout d'un test des bibliothèques communes.
