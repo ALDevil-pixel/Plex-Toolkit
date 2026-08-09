@@ -16,21 +16,25 @@ lib/anime_config.sh
 
 ## Scan
 
-Le scanner est :
-
-```text
-lib/anime_scanner.sh
-```
-
-Il est accessible via :
-
 ```bash
 ./plex-toolkit anime-scan <répertoire>
 ```
 
-Le scan est **strictement en lecture seule**.
+Le scan est strictement en lecture seule.
 
-Il recherche les formats vidéo configurés et tente de détecter :
+## Plan de renommage
+
+```bash
+./plex-toolkit anime-rename-plan <répertoire>
+```
+
+Le plan de renommage analyse les fichiers vidéo détectés et propose un nom normalisé à partir de :
+
+```text
+ANIME_EPISODE_PATTERN
+```
+
+Les formats d'épisode actuellement reconnus sont :
 
 ```text
 S01E02
@@ -38,12 +42,17 @@ s01e02
 1x02
 ```
 
-Pour chaque fichier vidéo, il indique la saison et l'épisode détectés lorsqu'ils sont disponibles.
+Le plan distingue :
 
-Les fichiers dont l'extension n'est pas autorisée sont signalés.
+```text
+[ OK ]      fichier déjà normalisé
+[RENAME]    renommage proposé
+[WARN]      conflit de destination
+[SKIP]      informations insuffisantes
+```
 
-Aucun fichier n'est renommé, déplacé ou supprimé.
+Cette commande est **strictement en lecture seule**.
 
-## Suite du développement
+Elle ne renomme, ne déplace et ne supprime aucun fichier.
 
-Le scanner constitue la base des prochaines étapes de détection et de proposition de renommage.
+L'application effective des renommages sera traitée dans une partie ultérieure du sprint.
