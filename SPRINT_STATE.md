@@ -1,14 +1,17 @@
 Sprint: 1.14.0
-Partie: 5
+Partie: 6
 
 Status: COMPLETE
 
 Objectif:
-- Valider la chaîne complète de synchronisation local-vers-Plex et les principaux scénarios d'échec.
+- Validation finale du Sprint 1.14.0 et préparation de consolidation.
 
 Modified:
 - docs/Plex-Sync.md
 
 New:
-- tests/test-plex-sync-integration.sh
-- tests/test-plex-sync-failure.sh
+- tests/test-sprint-1.14.sh
+- tests/test-plex-sync-safety.sh
+
+Release:
+- Sprint 1.14.0 prêt pour consolidation finale.

@@ -1,30 +1,8 @@
 # Synchronisation Plex
 
-## Sprint 1.14.0.1
+## Sprint 1.14.0
 
-`plex-sync-plan` prépare les actions sans modifier Plex.
-
-## Sprint 1.14.0.2
-
-`plex-sync-validate` vérifie les cibles avant action.
-
-## Sprint 1.14.0.3
-
-`plex-sync-add` demande un refresh ciblé du répertoire contenant le média.
-
-## Sprint 1.14.0.4
-
-Après le refresh, le Toolkit distingue :
-
-```text
-FOUND
-PENDING
-ERROR
-```
-
-## Sprint 1.14.0.5
-
-La chaîne complète peut maintenant être testée :
+Le sprint introduit une chaîne de synchronisation locale vers Plex progressive :
 
 ```text
 plex-sync-plan
@@ -33,23 +11,62 @@ plex-sync-validate
        ↓
 plex-sync-add
        ↓
-Plex refresh
+refresh Plex ciblé
        ↓
-plex-sync-verify
+vérification
 ```
 
-Le test d'intégration utilise une API Plex simulée.
+### Sécurité
 
-Il vérifie :
+Toutes les actions sont en lecture seule par défaut.
 
-- génération du plan ;
-- validation de la cible ;
-- dry-run ;
-- action réelle avec `--fix` ;
-- vérification `FOUND` ;
-- absence de modification locale ;
-- absence de fuite du token.
+Une action réelle nécessite explicitement :
 
-Un test d'échec vérifie également qu'un refresh Plex refusé provoque un code d'erreur et ne modifie pas le fichier local.
+```text
+--fix
+```
 
-Les tests ne nécessitent pas de serveur Plex réel.
+Les protections suivantes sont appliquées :
+
+- extension média autorisée ;
+- fichier existant et lisible ;
+- refus des liens symboliques ;
+- racines locales autorisées ;
+- bibliothèque Plex existante ;
+- type `movie` ;
+- fichier situé dans une `Location` Plex de la bibliothèque ;
+- refresh limité au répertoire contenant le média ;
+- aucune copie, suppression, déplacement ou renommage local.
+
+### Vérification asynchrone
+
+Après le refresh :
+
+```text
+FOUND
+```
+
+signifie que Plex voit déjà le média.
+
+```text
+PENDING
+```
+
+signifie que Plex a accepté la demande mais que l'indexation n'est pas encore visible.
+
+### Tests
+
+Les tests spécifiques peuvent être exécutés avec :
+
+```bash
+bash tests/test-sprint-1.14.sh
+bash tests/test-plex-sync-safety.sh
+bash tests/test-plex-sync-integration.sh
+bash tests/test-plex-sync-failure.sh
+```
+
+Les tests utilisent une API Plex simulée.
+
+Aucun serveur Plex réel n'est requis.
+
+Le Sprint 1.14.0 est prêt pour consolidation.

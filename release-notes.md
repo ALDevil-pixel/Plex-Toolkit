@@ -1,14 +1,12 @@
-# Sprint 1.14.0 - Partie 5
+# Sprint 1.14.0 - Partie 6
 
-## Tests d'intégration
+## Validation finale
 
-- Ajout d'un test de bout en bout du workflow de synchronisation.
-- Vérification du plan.
-- Vérification de la validation.
-- Vérification du dry-run.
-- Vérification de `--fix`.
-- Vérification du refresh ciblé.
-- Vérification post-refresh `FOUND`.
+- Ajout du contrôle de cohérence du sprint.
+- Ajout de tests de sécurité supplémentaires.
+- Vérification des racines autorisées.
+- Vérification du refus des liens symboliques.
+- Vérification des extensions non supportées.
 - Vérification de l'absence de modification locale.
-- Vérification de l'absence de fuite du token.
-- Ajout d'un scénario d'échec du refresh Plex.
+- Documentation finale de la chaîne de synchronisation.
+- Sprint 1.14.0 prêt pour consolidation.
