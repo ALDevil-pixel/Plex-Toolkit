@@ -1,10 +1,10 @@
-# Sprint 1.8.0 - Partie 4
+# Sprint 1.8.0 - Partie 5
 
-## Auto Fix Check
+## Duplicates CLI
 
-- Ajout du mode `--fix` à check.
-- Suppression automatique uniquement des fichiers de 0 octet.
-- Conservation des fichiers aux extensions non conformes.
-- Les extensions invalides restent signalées pour traitement manuel.
-- Mode lecture seule conservé par défaut.
-- Ajout d'un test d'intégration.
+- Intégration correcte de `--deep` dans le wrapper de commande.
+- Conservation de `--fix` et `--dry-run`.
+- Support CLI de `--min-size` et `--extensions`.
+- Validation de `--min-size`.
+- Ajout d'un test d'intégration du wrapper CLI.
+- Aucun changement du principe de sécurité : `--fix` nécessite `--deep`.

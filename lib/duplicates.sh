@@ -60,13 +60,18 @@ ptk_find_duplicates() {
         shift
     done
 
+    [[ "$minsize" =~ ^[0-9]+$ ]] || {
+        echo "[ERROR] Invalid minimum size: $minsize" >&2
+        return 2
+    }
+
     [[ -d "$rootdir" ]] || {
         echo "[ERROR] Directory not found: $rootdir" >&2
         return 1
     }
 
     local tmp
-    tmp="$(mktemp)"
+    tmp="$(mktemp)" || return 1
 
     while IFS= read -r -d '' file; do
         ptk_match_extension "$file" "${exts[@]}" || continue
