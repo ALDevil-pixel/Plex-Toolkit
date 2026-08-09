@@ -1,6 +1,9 @@
-# Release de correction - Partie 6
+# Release de correction - Partie 7
 
-- Diagnostic de l'échec restant de `test-sprint-1.10.sh`.
-- Restauration du bit exécutable des quatre plugins concernés et du lanceur.
-- Ajout de `tests/test-plugin-permissions.sh`.
-- Le runner historique n'exécute plus les helpers de contrôle comme des anciens sprints.
+## Documentation et versions
+
+- README obsolète remplacé par la documentation du projet consolidé.
+- Version applicative conservée à `0.2.1`.
+- Ajout de `tests/test-version-consistency.sh`.
+- Vérification de la cohérence entre `VERSION`, `version`, `CHANGELOG.md` et `README.md`.
+- Les numéros des parties de correction sont explicitement séparés des versions applicatives.

@@ -1,5 +1,5 @@
 Correction Release
-Partie: 6
+Partie: 7
 
 Status: COMPLETE
 
@@ -28,3 +28,5 @@ Partie 4 validée : options spécifiques conservées par le parser commun et tra
 Partie 5 validée : tests historiques rendus indépendants de SPRINT_STATE.md.
 
 Partie 6 validée : permissions des entry points/plugins restaurées et testées.
+
+Partie 7 validée : documentation consolidée et cohérence de version vérifiée.
