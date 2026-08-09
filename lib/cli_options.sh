@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Options CLI communes
+# Options CLI communes.
 
 PTK_DRY_RUN=1
 PTK_VERBOSE=0
@@ -33,6 +33,10 @@ ptk_parse_common_options() {
                     shift
                 done
                 break
+                ;;
+            -*)
+                ptk_usage_error "Unknown option: $1"
+                return $?
                 ;;
             *)
                 PTK_POSITIONAL+=("$1")

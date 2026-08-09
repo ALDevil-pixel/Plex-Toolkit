@@ -1,11 +1,9 @@
-# Sprint 1.10.0 - Partie 3
+# Sprint 1.10.0 - Partie 4
 
-## Système de plugins
+## CLI et erreurs
 
-- Centralisation de la découverte des plugins.
-- Ajout de la résolution catégorie/nom.
-- Ajout de la liste des plugins exécutables.
-- Validation de l'existence et des permissions avant exécution.
-- Conservation des API legacy `plugin_exists` et `plugin_run`.
-- Normalisation du contrat des plugins existants.
-- Ajout d'un test du système de plugins.
+- Les options inconnues sont désormais rejetées par le parser commun.
+- Ajout d'une validation générique des valeurs d'options.
+- Simplification du dispatcher principal.
+- Conservation des codes de sortie `0/1/2`.
+- Ajout de tests dédiés au parser et au dispatcher.

@@ -4,62 +4,25 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 run_command() {
-    local command="$1"
-    shift
+    local command="${1:-}"
+    shift || true
+
+    if [[ -z "$command" ]]; then
+        source "$ROOT/commands/help"
+        cmd_help
+        return $?
+    fi
 
     case "$command" in
-        audit)
-            source "$ROOT/commands/audit"
-            cmd_audit "$@"
-            ;;
-        check)
-            source "$ROOT/commands/check"
-            cmd_check "$@"
-            ;;
-        cleanup)
-            source "$ROOT/commands/cleanup"
-            cmd_cleanup "$@"
-            ;;
-        doctor)
-            source "$ROOT/commands/doctor"
-            cmd_doctor "$@"
-            ;;
-        duplicates)
-            source "$ROOT/commands/duplicates"
-            cmd_duplicates "$@"
-            ;;
-        help)
-            source "$ROOT/commands/help"
-            cmd_help "$@"
-            ;;
-        info)
-            source "$ROOT/commands/info"
-            cmd_info "$@"
-            ;;
-        inventory)
-            source "$ROOT/commands/inventory"
-            cmd_inventory "$@"
-            ;;
-        list)
-            source "$ROOT/commands/list"
-            cmd_list "$@"
-            ;;
-        rename)
-            source "$ROOT/commands/rename"
-            cmd_rename "$@"
-            ;;
-        self-check)
-            source "$ROOT/commands/self-check"
-            cmd_self_check "$@"
-            ;;
-        version)
-            source "$ROOT/commands/version"
-            cmd_version "$@"
+        audit|check|cleanup|doctor|duplicates|help|info|inventory|list|rename|self-check|version)
+            source "$ROOT/commands/$command"
+            "cmd_$command" "$@"
+            return $?
             ;;
         *)
             echo "[ERROR] Unknown command: $command" >&2
             echo "Use 'plex-toolkit help' to see available commands." >&2
-            return 2
+            return "${PTK_EXIT_USAGE:-2}"
             ;;
     esac
 }
