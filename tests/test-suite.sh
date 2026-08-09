@@ -1,20 +1,44 @@
 #!/usr/bin/env bash
-set -e
+set -u
 
-echo "== Plex Toolkit consolidation tests =="
+TEST_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$(dirname "$TEST_DIR")"
 
-tests=(
-  tests/test-library-runner.sh
-  tests/test-cli-options.sh
-  tests/test-exit-codes.sh
-  tests/test-cli-errors.sh
-  tests/test-command-errors.sh
-  tests/test-logger.sh
-)
+passed=0
+failed=0
+skipped=0
 
-for test_file in "${tests[@]}"; do
-    echo "[TEST] $test_file"
-    bash "$test_file"
+echo "== Plex Toolkit test suite =="
+echo
+
+for test_file in "$TEST_DIR"/test-*.sh; do
+    [[ -f "$test_file" ]] || continue
+
+    name="$(basename "$test_file")"
+    printf "[TEST] %-40s " "$name"
+
+    if bash "$test_file" >/tmp/plex-toolkit-test.out 2>&1; then
+        echo "OK"
+        passed=$((passed + 1))
+    else
+        rc=$?
+        echo "FAILED (exit=$rc)"
+        cat /tmp/plex-toolkit-test.out
+        failed=$((failed + 1))
+    fi
 done
 
-echo "== All tests passed =="
+rm -f /tmp/plex-toolkit-test.out
+
+echo
+echo "== Summary =="
+echo "Passed : $passed"
+echo "Failed : $failed"
+echo "Skipped: $skipped"
+
+if [[ "$failed" -ne 0 ]]; then
+    exit 1
+fi
+
+echo "All tests passed."
+exit 0

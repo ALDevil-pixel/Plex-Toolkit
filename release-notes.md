@@ -1,10 +1,10 @@
-# Sprint 1.8.0 - Partie 11
+# Sprint 1.8.0 - Partie 12
 
-## Commandes utilitaires
+## Suite de tests
 
-- Intégration de `help` à l'interface CLI commune.
-- Intégration de `version` à l'interface CLI commune.
-- Déplacement de la logique dans `lib/`.
-- Codes de retour harmonisés.
-- Journalisation commune.
-- Ajout d'un test CLI.
+- Le runner de tests découvre automatiquement les `test-*.sh`.
+- Chaque test est exécuté séparément.
+- Les erreurs d'un test n'empêchent pas les suivants de s'exécuter.
+- Un résumé final est affiché.
+- Le code de sortie global est `0` si tout passe, sinon `1`.
+- Ajout de la documentation simple de la suite de tests.

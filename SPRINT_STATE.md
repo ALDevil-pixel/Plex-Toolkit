@@ -1,17 +1,14 @@
 Sprint: 1.8.0
-Partie: 11
+Partie: 12
 
 Status: COMPLETE
 
 Objectif:
-- Harmoniser les commandes utilitaires help et version.
+- Finaliser la suite de tests du Toolkit.
 
 Modified:
-- commands/help
-- commands/version
-- docs/CLI.md
+- tests/run.sh
+- tests/test-suite.sh
 
 New:
-- lib/help.sh
-- lib/version.sh
-- tests/test-help-version-cli.sh
+- docs/TESTS.md
