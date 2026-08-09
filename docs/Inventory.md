@@ -1,39 +1,47 @@
 # Inventaire
 
-## Sprint 1.15.0.1
+## Sprint 1.15.0
 
-L'inventaire est configurable avec :
-
-```text
-INVENTORY_FOLLOW_SYMLINKS
-INVENTORY_INCLUDE_HIDDEN
-INVENTORY_HASH_ENABLED
-INVENTORY_HASH_ALGORITHM
-```
-
-## Sprint 1.15.0.2
-
-Une identité stable est disponible :
+Le Sprint 1.15.0 ajoute une chaîne d'inventaire et de rapprochement local/Plex :
 
 ```text
-hash:<hash>
+inventory
+   ↓
+identité
+   ↓
+inventory-compare
+   ↓
+inventory-plex-compare
+   ↓
+inventory-plex-report
 ```
 
-ou, sans hash :
+### Inventaire
+
+Configuration :
 
 ```text
-name-size:<name>|<size>
+INVENTORY_FOLLOW_SYMLINKS=false
+INVENTORY_INCLUDE_HIDDEN=true
+INVENTORY_HASH_ENABLED=false
+INVENTORY_HASH_ALGORITHM="sha256"
 ```
 
-## Sprint 1.15.0.3
+Le hash est désactivé par défaut.
 
-Ajout de la comparaison de deux inventaires locaux :
+Le format interne est :
+
+```text
+name|extension|size|mtime|hash|path
+```
+
+### Comparaison locale
 
 ```bash
-./plex-toolkit inventory-compare --config config/inventory.conf old.txt new.txt
+./plex-toolkit inventory-compare   --config config/inventory.conf   old.txt new.txt
 ```
 
-Résultats :
+États :
 
 ```text
 UNCHANGED
@@ -42,37 +50,38 @@ ADDED
 REMOVED
 ```
 
-## Sprint 1.15.0.4
-
-Ajout du rapprochement entre un inventaire local et Plex :
+### Rapprochement Plex
 
 ```bash
 ./plex-toolkit inventory-plex-compare   --config config/plex.conf   inventory.txt   <library-key>
 ```
 
-Résultats :
+États :
 
 ```text
 MATCH
 LOCAL_ONLY
 ```
 
-## Sprint 1.15.0.5
-
-Ajout de la génération persistante d'un rapport local/Plex :
+### Rapport
 
 ```bash
 ./plex-toolkit inventory-plex-report   --config config/plex.conf   inventory.txt   <library-key>   reports/plex-compare.txt
 ```
 
-Le rapport contient :
+Le rapport est écrit via un fichier temporaire puis déplacé vers sa destination.
 
-```text
-Status|Local path|Local name|Plex title|Year|Plex ratingKey
-```
+### Sécurité
 
-Le fichier est écrit de manière atomique : les données sont générées dans un fichier temporaire puis déplacées vers la destination.
+Les commandes d'inventaire et de comparaison sont en lecture seule.
 
-La commande reste strictement en lecture seule et refuse `--fix`.
+`--fix` est refusé par les commandes de comparaison.
 
-Aucun fichier média n'est modifié.
+Par défaut :
+
+- les liens symboliques ne sont pas suivis ;
+- aucun média n'est modifié ;
+- aucun fichier source n'est supprimé ou déplacé ;
+- le token Plex n'est pas écrit dans les rapports.
+
+Le Sprint 1.15.0 est prêt pour consolidation.

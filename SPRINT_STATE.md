@@ -1,16 +1,17 @@
 Sprint: 1.15.0
-Partie: 5
+Partie: 6
 
 Status: COMPLETE
 
 Objectif:
-- Transformer le rapprochement local/Plex en rapport persistant et sûr.
+- Validation finale du Sprint 1.15.0 et préparation de la consolidation.
 
 Modified:
-- plex-toolkit
-- lib/inventory_plex_compare.sh
 - docs/Inventory.md
 
 New:
-- commands/inventory-plex-report
-- tests/test-inventory-plex-report.sh
+- tests/test-sprint-1.15.0.sh
+- tests/test-inventory-safety.sh
+
+Release:
+- Sprint 1.15.0 prêt pour consolidation.
